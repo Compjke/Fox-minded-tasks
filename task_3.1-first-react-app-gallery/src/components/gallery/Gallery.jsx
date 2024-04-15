@@ -1,21 +1,19 @@
-import { useEffect, useState } from 'react';
-import { Spinner } from '../spinner/Spinner';
-import cl from './galerry.module.scss';
-import Photos from './Photos';
+import cl from './Galerry.module.scss';
 import data from '../../assets/data/data.json';
+import { PhotoCard } from '../PhotoCard/PhotoCard';
 
-function Gallery() {
-	const [gallery, setGallery] = useState([]);
+export const Gallery = () => {
+	const { hits } = data;
 
-	useEffect(() => {
-		const { hits } = data;
-		setGallery(hits);
-	}, []);
 	return (
 		<div className={cl.gallery}>
-			{gallery.length > 0 ? <Photos photoArr={gallery} /> : <Spinner />}
+			{
+				<ul className={cl.gallery__list}>
+					{hits.map((card) => (
+						<PhotoCard cardData={card} key={card.id} />
+					))}
+				</ul>
+			}
 		</div>
 	);
-}
-
-export default Gallery;
+};

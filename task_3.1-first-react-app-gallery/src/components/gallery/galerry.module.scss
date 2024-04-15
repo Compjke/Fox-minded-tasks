@@ -1,35 +1,12 @@
 .gallery {
-	background-color: rgb(255, 255, 255);
+	max-width: 95%;
+	margin: 0 auto;
+   padding-block: 10px;
 	&__list {
+      list-style-type: none;
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		justify-content: center;
+		gap: 5px;
 		justify-items: center;
-		list-style-type: none;
-		gap: 10px;
-		&__item {
-			display: flex;
-			align-items: center;
-			&__imgWrapper {
-				position: relative;
-				text-align: center;
-				font-weight: 500;
-				font-size: 14px;
-				color: #fff;
-				&::after {
-					position: absolute;
-					content: attr(data-name);
-					bottom: 4px;
-					left: 0;
-					width: 100%;
-					padding-block: 20px;
-					background: rgba(0, 0, 0, 0.5);
-				}
-			}
-			img {
-				max-width: 100%;
-				object-fit: cover;
-			}
-		}
 	}
 }

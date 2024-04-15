@@ -1,13 +1,8 @@
-import Gallery from './components/gallery/Gallery';
-import Header from './components/header/Header';
-import './index.scss'
+import { Gallery } from './components/Gallery';
+import './index.scss';
+
 function App() {
-	return (
-		<>
-			<Header />
-			<Gallery />
-		</>
-	);
+	return <Gallery />;
 }
 
 export default App;
