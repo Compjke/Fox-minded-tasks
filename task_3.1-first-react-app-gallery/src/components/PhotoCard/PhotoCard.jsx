@@ -7,7 +7,7 @@ export const PhotoCard = ({ cardData }) => {
 	return (
 		<li className={style.card}>
 			<div className={style.cardImgWrapper} data-text={tags}>
-				<img src={webformatURL} alt='' />
+				<img className={style.cardImg} src={webformatURL} alt='' />
 			</div>
 		</li>
 	);
