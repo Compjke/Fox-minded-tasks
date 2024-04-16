@@ -1,12 +1,13 @@
 .gallery {
 	max-width: 95%;
 	margin: 0 auto;
-   padding-block: 10px;
-	&__list {
-      list-style-type: none;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 5px;
-		justify-items: center;
-	}
+	padding-block: 10px;
+}
+
+.galleryList {
+	list-style-type: none;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 5px;
+	justify-items: center;
 }

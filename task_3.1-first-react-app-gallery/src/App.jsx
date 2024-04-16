@@ -2,7 +2,11 @@ import { Gallery } from './components/Gallery';
 import './index.scss';
 
 function App() {
-	return <Gallery />;
+	return (
+		<>
+			<Gallery />
+		</>
+	);
 }
 
 export default App;
