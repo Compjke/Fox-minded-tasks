@@ -1,15 +1,17 @@
-import { memo, useCallback, useEffect, useRef } from 'react';
-import { MyButton } from '../ui';
+import { FC, memo, useRef } from 'react';
+import { ProffesionalButton } from '../ui-kit';
 import style from './Actions.module.css';
-import { IActions } from '../../interfaces/timer';
 
-const ActionsC = ({ isRunning, onPlayPause, onResetTime }: IActions) => {
+interface IProps {
+	isRunning: boolean;
+	onPlayPause: (arg: boolean) => void;
+	onResetTime: (arg: number) => void;
+}
+
+const ActionsC: FC<IProps> = ({ isRunning, onPlayPause, onResetTime }) => {
 	// console.log('Actions');
 	const actionRef = useRef(0);
-	
-	useEffect(() => {
-		actionRef.current += 1;
-	}, [isRunning]);
+	actionRef.current += 1;
 
 	const handleClickPlay = () => {
 		onPlayPause(true);
@@ -24,13 +26,17 @@ const ActionsC = ({ isRunning, onPlayPause, onResetTime }: IActions) => {
 
 	return (
 		<div className={style.actions}>
-			<MyButton
+			<ProffesionalButton
 				onClick={isRunning ? handleClickPause : handleClickPlay}
 				kindOf={isRunning ? 'pause' : 'play'}
 				text={isRunning ? 'pause' : 'play'}
 			/>
 			{isRunning && (
-				<MyButton onClick={handleClickReset} kindOf='reset' text='Reset' />
+				<ProffesionalButton
+					onClick={handleClickReset}
+					kindOf='reset'
+					text='Reset'
+				/>
 			)}
 
 			<div>Number of action component renders: {actionRef.current}</div>
