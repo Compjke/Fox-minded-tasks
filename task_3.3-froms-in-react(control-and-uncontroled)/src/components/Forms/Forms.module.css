@@ -1,0 +1,19 @@
+.formWrapper {
+	padding: 38px 50px;
+	background-color: #454545;
+	min-width: 400px;
+	border: 1px solid #454545;
+	border-radius: 8px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	row-gap: 32px;
+}
+
+/* @media (prefers-color-scheme: light) {
+	.formWrapper {
+      background-color: #a5a0a0;
+	}
+} */
