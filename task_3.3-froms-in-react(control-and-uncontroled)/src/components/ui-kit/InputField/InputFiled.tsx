@@ -1,13 +1,13 @@
 import {
 	ChangeEventHandler,
-	ForwardedRef,
 	InputHTMLAttributes,
 	forwardRef,
 	useState,
 } from 'react';
 import style from './InputField.module.css';
-import { EyeButton } from '../EyeButton/EyeButton';
+
 import clsx from 'clsx';
+import { EyeButton } from '../EyeButton';
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	label: string;
 	type?: string;
@@ -21,10 +21,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	checked?: boolean;
 	error?: string;
 	required?: boolean;
-	ref?: ForwardedRef<HTMLInputElement> | null;
+	ref?: HTMLInputElement | null;
 }
 
-export const InputFiled = forwardRef(
+export const InputFieled = forwardRef(
 	(
 		{
 			hasIconBtn,
@@ -53,6 +53,7 @@ export const InputFiled = forwardRef(
 					{label}
 					<input
 						required={required}
+						//!
 						ref={ref}
 						className={clsx(className, style.input, error && style.invalid)}
 						type={typeState}

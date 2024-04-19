@@ -1,7 +1,10 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { InputFiled, SubmitButton } from '../../ui-kit';
-import style from '../Forms.module.css';
-import { useFormValidator } from '../../../hooks/useFormValidate';
+
+import style from './Forms.module.css';
+import { useFormValidator } from '../../hooks/useFormValidate';
+
+import { SubmitButton } from '../ui-kit/SubmitButton';
+import { InputFieled } from '../ui-kit/InputField';
 
 export const ControledForm = () => {
 	const [readyToSubmit, setreadyToSubmit] = useState(false);
@@ -30,7 +33,7 @@ export const ControledForm = () => {
 
 	useEffect(() => {
 		console.log(errors);
-		if (Object.entries(errors).every((er) => er[1] === '') && readyToSubmit) {
+		if (Object.values(errors).every((e) => e === '') && readyToSubmit) {
 			console.log('SUBMIT');
 			alert(JSON.stringify(formState, null, 2));
 		}
@@ -39,24 +42,24 @@ export const ControledForm = () => {
 		<div className={style.formWrapper}>
 			<h2>Controled Form</h2>
 			<form className={style.form} onSubmit={handleSubmitFrom}>
-				<InputFiled
+				<InputFieled
 					onChange={handleChangeField}
 					value={formState.name}
 					id='name'
 					label='Username*'
 					placeholder='Enter your username'
-					error={errors.name ?? ''}
+					error={errors?.name}
 				/>
-				<InputFiled
+				<InputFieled
 					onChange={handleChangeField}
 					value={formState.email}
 					id='email'
 					label='Email*'
 					placeholder='Enter your email'
-					error={errors.email}
+					error={errors?.email}
 				/>
 
-				<InputFiled
+				<InputFieled
 					onChange={handleChangeField}
 					value={formState.password}
 					id='password'
@@ -66,7 +69,7 @@ export const ControledForm = () => {
 					hasIconBtn
 					error={errors.password}
 				/>
-				<InputFiled
+				<InputFieled
 					onChange={handleChangeField}
 					value={formState['confirm-password']}
 					id='confirm-password'
@@ -76,7 +79,7 @@ export const ControledForm = () => {
 					hasIconBtn
 					error={errors['confirm-password']}
 				/>
-				<InputFiled
+				<InputFieled
 					onChange={handleChangeField}
 					checked={formState.checkbox}
 					id='checkbox'

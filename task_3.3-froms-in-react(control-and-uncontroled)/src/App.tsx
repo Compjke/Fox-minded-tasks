@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import style from './App.module.css';
-import { ControledForm, UncontroledForm } from './components/Forms';
+import { ControledForm } from './components/ControledForm';
+import { UncontroledForm } from './components/UncontroledForm';
 
 function App() {
 	return (

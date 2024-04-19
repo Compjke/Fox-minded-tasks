@@ -12,7 +12,7 @@ const img = {
 };
 
 export const EyeButton = ({ onChangeType, currentType }: Props) => {
-	const [showPasswors, setShowPassword] = useState<boolean>(false);
+	const [showPasswors, setShowPassword] = useState(false);
 
 	const handleClick = () => {
 		const type = currentType === 'text' ? 'password' : 'text';
