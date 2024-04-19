@@ -5,11 +5,11 @@ import { SubmitButton } from '../ui-kit/SubmitButton';
 import { useFormValidator } from '../../hooks/useFormValidate';
 
 export const UncontroledForm = () => {
-	const nameRef = useRef<HTMLInputElement | null>(null);
-	const emailRef = useRef<HTMLInputElement | null>(null);
-	const passwordRef = useRef<HTMLInputElement | null>(null);
-	const passWordConfirmRef = useRef<HTMLInputElement | null>(null);
-	const checkboxRef = useRef<HTMLInputElement | null>(null);
+	// const nameRef = useRef<HTMLInputElement | null>(null);
+	// const emailRef = useRef<HTMLInputElement | null>(null);
+	// const passwordRef = useRef<HTMLInputElement | null>(null);
+	// const passWordConfirmRef = useRef<HTMLInputElement | null>(null);
+	// const checkboxRef = useRef<HTMLInputElement | null>(null);
 
 	const { errors, setErrors, validate } = useFormValidator({
 		name: '',
@@ -19,30 +19,27 @@ export const UncontroledForm = () => {
 	});
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// const formElement = e.target as HTMLFormElement;
-
-		// const firsInvalidField = formElement.querySelector(
-		// 	':invalid'
-		// ) as HTMLInputElement;
-		// firsInvalidField?.focus();
-		const name = nameRef.current?.value;
-		const email = emailRef.current?.value;
-		const password = passwordRef.current?.value;
-		const confirmPassword = passWordConfirmRef.current?.value;
+		const formElement = e.target as HTMLFormElement;
+		const formData = new FormData(formElement);
+		const formObj = Object.fromEntries(formData);
+		const { name2, email2, password2, confirm_password } = formObj;
 		setErrors(
 			validate({
-				name,
-				email,
-				password,
-				'confirm-password': confirmPassword,
+				name: name2 as string,
+				email: email2 as string,
+				password: password2 as string,
+				'confirm-password': confirm_password as string,
 			})
 		);
 	};
 
 	useEffect(() => {
 		console.log(errors);
-		if (Object.values(errors).every((e) => e === '')) {
-			console.log('SUBMIT');
+		if (
+			Object.values(errors).length &&
+			Object.values(errors).every((e) => e === '')
+		) {
+			alert('SUBMIT');
 		}
 	}, [errors]);
 	return (
@@ -50,45 +47,42 @@ export const UncontroledForm = () => {
 			<h2>Uncontroled Form</h2>
 			<form className={style.form} onSubmit={handleSubmit}>
 				<InputFieled
-					ref={nameRef}
-					id='name-2'
+					// ref={nameRef}
+					id='name2'
 					label='Username*'
 					placeholder='Enter your username'
-					required
 					error={errors.name}
 				/>
 				<InputFieled
-					ref={emailRef}
-					required
-					id='email-2'
+					// ref={emailRef}
+
+					id='email2'
 					label='Email*'
 					placeholder='Enter your email'
 					error={errors.email}
 				/>
 
 				<InputFieled
-					required
 					error={errors.password}
-					ref={passwordRef}
-					id='password-2'
+					// ref={passwordRef}
+					id='password2'
 					label='Password*'
 					type='password'
 					placeholder='Enter your password'
 					hasIconBtn
 				/>
 				<InputFieled
-					required
 					error={errors['confirm-password']}
-					ref={passWordConfirmRef}
-					id='confirm-password-2'
+					// ref={passWordConfirmRef}
+					id='confirm_password'
 					label='Confirm password*'
 					type='password'
 					placeholder='Confirm your password'
 					hasIconBtn
 				/>
 				<InputFieled
-					ref={checkboxRef}
-					id='checkbox-2'
+					// ref={checkboxRef}
+					id='checkbox2'
 					label='I agree to the terms and conditions.'
 					type='checkbox'
 					placeholder='Confirm your password'

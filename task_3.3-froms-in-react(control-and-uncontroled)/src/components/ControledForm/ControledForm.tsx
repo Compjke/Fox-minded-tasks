@@ -32,7 +32,7 @@ export const ControledForm = () => {
 	};
 
 	useEffect(() => {
-		console.log(errors);
+		// console.log(errors);
 		if (Object.values(errors).every((e) => e === '') && readyToSubmit) {
 			console.log('SUBMIT');
 			alert(JSON.stringify(formState, null, 2));
