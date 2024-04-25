@@ -2,6 +2,7 @@ export function computeWinner(cells: Array<string | null>) {
 	// ['x' , 'x' , 'x' , ....]
 	let winnerSymbol;
 	let winnerRow;
+	let isDraw;
 	const lines = [
 		[0, 1, 2], // 3
 		[3, 4, 5], // 12
@@ -20,5 +21,11 @@ export function computeWinner(cells: Array<string | null>) {
 			return { winnerSymbol, winnerRow };
 		}
 	}
+
+	const isCellsEnd = cells.every((c) => c !== null);
+	if (isCellsEnd && !winnerRow) {
+		return { winnerSymbol: 'draw', winnerRow: null };
+	}
+	console.log(isDraw);
 	return null;
 }

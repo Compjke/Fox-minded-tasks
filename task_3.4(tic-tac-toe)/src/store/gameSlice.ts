@@ -59,7 +59,7 @@ const gameSLice = createSlice({
 			const winner = computeWinner(state.cells);
 			if (winner) {
 				const { winnerRow, winnerSymbol } = winner;
-
+				
 				state.winner = {
 					winnerSymbol,
 					winnerRow,

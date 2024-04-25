@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { Selector, useDispatch, useSelector } from 'react-redux';
 import { Chat } from '../Chat';
 import { GameCell } from '../GameCell';
 import { useCallback, useEffect } from 'react';
-import { cellClick, startNewGame } from '../../store/gameSlice';
+import { GameState, cellClick, startNewGame } from '../../store/gameSlice';
 import { WinnerLineIcon } from '../ui-kit/icons';
 
 import style from './GameBoard.module.scss';

@@ -3,6 +3,12 @@ import { GAME_SYMBOLS, PLAYERS } from '../constants';
 export const getStatusMoves = (currentMove: string, isWinner: unknown) => {
 	if (isWinner) {
 		const { winnerSymbol } = isWinner;
+		if (winnerSymbol === 'draw') {
+			return {
+				cross: 'Draw',
+				circle: 'Draw',
+			};
+		}
 		const winnerPlayer = PLAYERS.find(
 			(player) => player.symbol === winnerSymbol
 		);
