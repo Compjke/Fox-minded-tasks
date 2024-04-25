@@ -1,0 +1,21 @@
+.gameHeader {
+	border-bottom: 1px solid #454545;
+}
+
+.gameHeaderInner {
+	margin: 0 auto;
+	max-width: 780px;
+	padding-block: 45px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.gameScore {
+	display: flex;
+	column-gap: 32px;
+	align-items: center;
+	font-weight: 500;
+	font-size: 32px;
+	letter-spacing: -0.01em;
+	color: #fff;
+}

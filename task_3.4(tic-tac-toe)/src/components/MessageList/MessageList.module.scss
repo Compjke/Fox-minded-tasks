@@ -1,0 +1,20 @@
+.chatMessages {
+	padding: 60px 20px 25px 20px;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	row-gap: 24px;
+	// z-index: -1;
+	max-height: 150px;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar-track {
+		width: 2px;
+		height: 2px;
+	}
+	&::-webkit-scrollbar-thumb {
+		width: 2px;
+		color: red;
+		background-color: green;
+	}
+}

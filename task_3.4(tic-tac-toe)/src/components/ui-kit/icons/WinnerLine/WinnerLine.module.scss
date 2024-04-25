@@ -1,0 +1,57 @@
+// '012': 'TopHorizontal',
+// '345': 'CenterHorizontal',
+// '678': 'BottomHorizontal',
+// '036': 'LeftVertical',
+// '147': 'CenterVertical',
+// '258': 'RigthVertical',
+// '048': 'LeftRightDiagonal',
+// '246': 'RightLeftDiagonal',
+
+.CenterHorizontal,
+.BottomHorizontal,
+.TopHorizontal {
+	left: 17%;
+	rotate: 45deg;
+}
+
+.TopHorizontal {
+	top: -20%;
+}
+
+.CenterHorizontal {
+	top: 7%;
+}
+
+.BottomHorizontal {
+	top: 35%;
+}
+
+.LeftVertical,
+.CenterVertical,
+.RigthVertical {
+	rotate: 135deg;
+	top: 7%;
+}
+
+.LeftVertical {
+	left: -12%;
+}
+
+.CenterVertical {
+	left: 18%;
+}
+
+.RigthVertical {
+	left: 48%;
+}
+
+.LeftRightDiagonal {
+	rotate: 269deg;
+	top: 9%;
+	left: 20%;
+}
+.RightLeftDiagonal {
+	rotate: 2deg;
+	top: 6%;
+	left: 20%;
+}

@@ -1,0 +1,18 @@
+.message {
+	border-radius: 12px;
+	padding: 4px 12px;
+   max-width: fit-content;
+   &:last-child{
+      margin-bottom: 10px;
+   }
+}
+
+.messageMine {
+	background: #00ae1c;
+	align-self: flex-start;
+}
+
+.messageInterlocutor {
+	align-self: flex-end;
+	background: #737373;
+}
