@@ -1,12 +1,15 @@
-import { Selector, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Chat } from '../Chat';
-import { GameCell } from '../GameCell';
+
 import { useCallback, useEffect } from 'react';
-import { GameState, cellClick, startNewGame } from '../../store/gameSlice';
-import { WinnerLineIcon } from '../ui-kit/icons';
 
 import style from './GameBoard.module.scss';
 import clsx from 'clsx';
+
+import { RootStore } from 'src/store/store';
+import { GameCell } from '../GameCell';
+import { cellClick, startNewGame } from 'src/store/gameSlice';
+import { WinnerLineIcon } from 'src/ui-kit/icons';
 
 interface Props {
 	statusMessage: string;
@@ -14,8 +17,10 @@ interface Props {
 }
 
 export const GameBoard = ({ statusMessage, player }: Props) => {
-	const { cells, currentMove } = useSelector((state) => state.game);
-	const { winnerSymbol, winnerRow } = useSelector((s) => s.game.winner);
+	const { cells, currentMove } = useSelector((state: RootStore) => state.game);
+	const { winnerSymbol, winnerRow } = useSelector(
+		(s: RootStore) => s.game.winner
+	);
 	const dispatch = useDispatch();
 	const handleCellClick = useCallback(
 		(ind: number) => dispatch(cellClick(ind)),
@@ -48,7 +53,6 @@ export const GameBoard = ({ statusMessage, player }: Props) => {
 						onClick={handleCellClick}
 						index={ind}
 						key={ind}
-						className
 						disabled={!!winnerSymbol || player.symbol !== currentMove}
 						isWinner={winnerRow?.includes(ind)}
 						symbol={cell}

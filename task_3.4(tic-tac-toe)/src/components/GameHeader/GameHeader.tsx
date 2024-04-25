@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
-import { ResetButton } from '../ui-kit/ResetButton/ResetButton';
+import { ResetButton } from 'src/ui-kit/ResetButton/ResetButton';
 import style from './GameHeade.module.scss';
-import { GAME_SYMBOLS, PLAYERS } from '../../constants';
+import { GAME_SYMBOLS, PLAYERS } from 'src/constants';
+import { RootStore } from 'src/store/store';
 
 export const GameHeader = () => {
-	const totalScore = useSelector((s) => s.game.totalScore);
+	const totalScore = useSelector((s: RootStore) => s.game.totalScore);
 	return (
 		<header className={style.gameHeader}>
 			<div className={style.gameHeaderInner}>

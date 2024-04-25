@@ -1,11 +1,13 @@
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
-import { ChatInput } from '../ui-kit/ChatInput';
+import { ChatInput } from 'src/ui-kit/ChatInput';
 import { GameSymbol } from '../GameSymbol';
 import style from './Chat.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMessage } from '../../store/chatSlice';
-import { SendButton } from '../ui-kit/icons';
+
+import { SendButton } from 'src/ui-kit/icons';
 import { MessageList } from '../MessageList';
+import { addMessage } from 'src/store/chatSlice';
+import { RootStore } from 'src/store/store';
 
 interface Props {
 	playerName: string;
@@ -14,7 +16,7 @@ interface Props {
 
 export const Chat = ({ playerName, playerSymbol }: Props) => {
 	const [message, setMessage] = useState('');
-	const allMessages = useSelector((s) => s.chat.messages);
+	const allMessages = useSelector((s: RootStore) => s.chat.messages);
 
 	const dispatch = useDispatch();
 	const handleChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {

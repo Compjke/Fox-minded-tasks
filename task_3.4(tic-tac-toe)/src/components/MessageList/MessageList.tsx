@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
-import { Message } from '../Message/Message';
+
 import style from './MessageList.module.scss';
+import { Message } from '../Message/Message';
 
 interface Props {
 	messages: object[];

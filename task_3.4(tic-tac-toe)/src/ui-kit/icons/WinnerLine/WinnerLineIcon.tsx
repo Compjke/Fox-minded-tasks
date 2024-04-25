@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { computeWinnerLineStyle } from '../../../../utils/computeLineStyle';
+import { computeWinnerLineStyle } from 'src/utils/computeLineStyle';
 import styles from './WinnerLine.module.scss';
 interface Props {
 	className?: string;

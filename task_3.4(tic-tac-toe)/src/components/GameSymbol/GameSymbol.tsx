@@ -1,5 +1,5 @@
-import { CircleIcon, CrossIcon } from '../ui-kit/icons';
-import { GAME_SYMBOLS } from '../../constants';
+import { CircleIcon, CrossIcon } from 'src/ui-kit/icons';
+import { GAME_SYMBOLS } from 'src/constants';
 
 interface Props {
 	symbol: string;

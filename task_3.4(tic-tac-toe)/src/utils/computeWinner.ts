@@ -1,8 +1,7 @@
 export function computeWinner(cells: Array<string | null>) {
 	// ['x' , 'x' , 'x' , ....]
-	let winnerSymbol;
-	let winnerRow;
-	let isDraw;
+	let winnerSymbol = '';
+	let winnerRow = null;
 	const lines = [
 		[0, 1, 2], // 3
 		[3, 4, 5], // 12
@@ -16,16 +15,15 @@ export function computeWinner(cells: Array<string | null>) {
 	for (let i = 0; i < lines.length; i++) {
 		const [a, b, c] = lines[i];
 		if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
-			winnerSymbol = cells[a];
+			winnerSymbol = cells[a]!;
 			winnerRow = lines[i];
-			return { winnerSymbol, winnerRow };
 		}
 	}
 
 	const isCellsEnd = cells.every((c) => c !== null);
-	if (isCellsEnd && !winnerRow) {
-		return { winnerSymbol: 'draw', winnerRow: null };
+	if (isCellsEnd && !winnerRow?.length) {
+		return { winnerSymbol: 'draw', winnerRow };
 	}
-	console.log(isDraw);
-	return null;
+
+	return { winnerSymbol, winnerRow };
 }

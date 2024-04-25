@@ -1,7 +1,8 @@
 import { GAME_SYMBOLS, PLAYERS } from '../constants';
 
-export const getStatusMoves = (currentMove: string, isWinner: unknown) => {
-	if (isWinner) {
+export const getStatusMoves = (currentMove: string, isWinner: { winnerSymbol: string; winnerRow?: number[] | null; }) => {
+	console.log(isWinner)
+	if (isWinner.winnerSymbol) {
 		const { winnerSymbol } = isWinner;
 		if (winnerSymbol === 'draw') {
 			return {

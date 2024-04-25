@@ -59,11 +59,12 @@ const gameSLice = createSlice({
 			const winner = computeWinner(state.cells);
 			if (winner) {
 				const { winnerRow, winnerSymbol } = winner;
-				
 				state.winner = {
 					winnerSymbol,
 					winnerRow,
 				};
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-expect-error
 				state.totalScore[winnerSymbol]++;
 			}
 
@@ -82,6 +83,7 @@ const gameSLice = createSlice({
 			};
 		},
 		resetGame: (state) => {
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			return (state = init);
 		},
 	},

@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import { resetGame } from '../../../store/gameSlice';
-import { clearChat } from '../../../store/chatSlice';
+import { resetGame } from 'src/store/gameSlice';
+import { clearChat } from 'src/store/chatSlice';
+
 
 import { ButtonHTMLAttributes } from 'react';
 import style from './ResetButton.module.scss';
@@ -20,6 +21,7 @@ export const ResetButton = ({ className }: Props) => {
 			className={clsx(style.resetButton, className)}
 		>
 			Reset
+			
 		</button>
 	);
 };
