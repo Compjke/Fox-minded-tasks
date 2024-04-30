@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+:root {
+	font-family: "Overpass", sans-serif;;
+	line-height: 1.5;
+	font-weight: 400;
+
+	color-scheme: light dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #888888;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+	/* height: 100vh; */
+}
+
+h1,
+h2,
+h3,
+p {
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	margin: 0;
+	font-size: 16px;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+button {
+	border: none;
+}
+
+input,select {
+	outline: none;
+	border: none;
+}
+
+
+.container {
+	max-width: 1350px;
+	margin: 0 auto;
+	padding-inline: 15px;
+}
+.container-2 {
+	max-width: 970px;
+	margin: 0 auto;
+	padding-inline: 15px;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color: #213547;
+		background-color: #f2f5f7;
+	}
+	a:hover {
+		color: #747bff;
+	}
+	button {
+		background-color: #f9f9f9;
+	}
+}

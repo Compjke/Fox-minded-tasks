@@ -1,0 +1,13 @@
+.form {
+	
+}
+
+.fields {
+   margin-block: 30px;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+	background: #fff;
+	padding: 32px;
+   display: grid;
+   grid-template-columns: repeat(2, 300px);
+   gap: 32px 44px;
+}

@@ -1,0 +1,33 @@
+$gapNavLinks: 40px;
+.breadCrumps {
+	padding: 0;
+	display: flex;
+	gap: $gapNavLinks;
+}
+
+.navLink {
+	position: relative;
+	display: inline-block;
+	font-size: 16px;
+	letter-spacing: -0.02em;
+	transition: all 0.3s ease;
+	&:hover {
+		text-decoration: underline;
+	}
+	&:not(:last-child)::after {
+		position: absolute;
+		content: '>';
+		right: calc($gapNavLinks / 1.5 * -1);
+	}
+}
+
+.navLink:visited {
+	color: #243573;
+}
+
+.pending {
+	color: #243573;
+}
+.navLink.active {
+	color: #00ae1c;
+}

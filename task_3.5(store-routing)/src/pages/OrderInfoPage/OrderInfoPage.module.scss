@@ -1,0 +1,34 @@
+.page {
+	padding-top: 32px;
+	padding-bottom: 68px;
+}
+
+.infoText {
+	color: #243573;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+	h2 {
+		font-size: 32px;
+	}
+}
+
+.orderStatus {
+	font-weight: 700;
+}
+
+.orderDate {
+	color: #737373;
+}
+
+.personalInfo {
+	display: flex;
+	gap: 30px;
+	margin-top: 40px;
+}
+
+.btn {
+	margin-top: 32px;
+}

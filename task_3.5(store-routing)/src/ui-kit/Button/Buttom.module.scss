@@ -1,0 +1,43 @@
+.button {
+	box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+	background: #00ae1c;
+	border-radius: 8px;
+	padding-block: 12px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 5px;
+	transition: all 0.3s ease;
+	cursor: pointer;
+
+	&:hover {
+		background: #00a51b;
+	}
+	&:active {
+		background: #0cd52b;
+	}
+
+	&:disabled {
+		background: #187727;
+	}
+}
+
+.basketBtn {
+	position: relative;
+	&::after {
+		position: absolute;
+		content: attr(datatype);
+		top: -5px;
+		right: -8px;
+		font-size: 11px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #000;
+		background-color: #e9ed08;
+		border-radius: 50%;
+		width: 16px;
+		aspect-ratio: 1;
+	}
+}
