@@ -21,24 +21,24 @@ export const BasketPage = () => {
 	// 	when: ({ currentLocation, nextLocation }) =>
 	// 		value !== '' && currentLocation.pathname !== nextLocation.pathname,
 	// });
-	const blocker = useBlocker(
-		({ currentLocation, historyAction, nextLocation }) => {
-			// console.log('curLocation: ', currentLocation);
-			// console.log('historyActon: ', historyAction);
-			// console.log('nextLocation: ', nextLocation);
-			if (
-				historyAction === 'POP' ||
-				historyAction === 'REPLACE' ||
-				nextLocation.pathname === '/'
-			) {
-				return false;
-			}
-			return (
-				prodInBasket.length < 1 ||
-				nextLocation.pathname === '/info/shipment-info'
-			);
-		}
-	);
+	// const blocker = useBlocker(
+	// 	({ currentLocation, historyAction, nextLocation }) => {
+	// 		// console.log('curLocation: ', currentLocation);
+	// 		// console.log('historyActon: ', historyAction);
+	// 		// console.log('nextLocation: ', nextLocation);
+	// 		if (
+	// 			historyAction === 'POP' ||
+	// 			historyAction === 'REPLACE' ||
+	// 			nextLocation.pathname === '/'
+	// 		) {
+	// 			return false;
+	// 		}
+	// 		return (
+	// 			prodInBasket.length < 1 ||
+	// 			nextLocation.pathname === '/info/shipment-info'
+	// 		);
+	// 	}
+	// );
 	// console.log(blocker);
 	const navigate = useNavigate();
 	const countTotal = useMemo(
@@ -58,32 +58,32 @@ export const BasketPage = () => {
 		dispatch(orderInfoActions.updateTotalPrice(countTotal));
 	}, [countTotal, dispatch]);
 
-	useEffect(() => {
-		if (
-			blocker.state === 'blocked' &&
-			blocker.location.pathname === '/info/contact-info'
-		) {
-			// Notification.requestPermission()
-			// .then(permission => {
-			// 	if(permission === 'granted'){
-			// 		new Notification('ne mojesh')
-			// 	}
-			// })
-			alert('Need to add something to proceed to checkout');
-		}
-		if (
-			blocker.state === 'blocked' &&
-			blocker.location.pathname === '/info/shipment-info'
-		) {
-			// Notification.requestPermission()
-			// .then(permission => {
-			// 	if(permission === 'granted'){
-			// 		new Notification('ne mojesh')
-			// 	}
-			// })
-			alert('Fill previous step');
-		}
-	}, [blocker, prodInBasket.length]);
+	// useEffect(() => {
+	// 	if (
+	// 		blocker.state === 'blocked' &&
+	// 		blocker.location.pathname === '/info/contact-info'
+	// 	) {
+	// 		// Notification.requestPermission()
+	// 		// .then(permission => {
+	// 		// 	if(permission === 'granted'){
+	// 		// 		new Notification('ne mojesh')
+	// 		// 	}
+	// 		// })
+	// 		alert('Need to add something to proceed to checkout');
+	// 	}
+	// 	if (
+	// 		blocker.state === 'blocked' &&
+	// 		blocker.location.pathname === '/info/shipment-info'
+	// 	) {
+	// 		// Notification.requestPermission()
+	// 		// .then(permission => {
+	// 		// 	if(permission === 'granted'){
+	// 		// 		new Notification('ne mojesh')
+	// 		// 	}
+	// 		// })
+	// 		alert('Fill previous step');
+	// 	}
+	// }, [blocker, prodInBasket.length]);
 
 	const renderProdInBasket = (prodInBasket: ProductProps[]) => {
 		if (!prodInBasket.length) {

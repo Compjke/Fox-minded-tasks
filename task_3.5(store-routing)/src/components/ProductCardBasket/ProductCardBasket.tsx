@@ -24,7 +24,7 @@ export const ProductCardBasket = ({
 	id,
 }: IProps) => {
 	const dispatch = useAppDispatch();
-
+	
 	const handleIncrementProduct = (id) => {};
 
 	return (

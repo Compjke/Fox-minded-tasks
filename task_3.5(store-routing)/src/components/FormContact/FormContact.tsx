@@ -7,7 +7,7 @@ import * as yup from 'yup';
 // import { Form, useLoaderData } from 'react-router-dom';
 import { orderInfoActions } from '@/store/slices/orderInfoSlice';
 import { useAppDispatch, useStateSelector } from '@/store';
-import { Blocker, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line no-useless-escape
 const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
@@ -31,11 +31,13 @@ export interface IFormContactValues {
 	phone: string;
 }
 
-export const FormContact = ({ blocker }: { blocker: Blocker }) => {
+export const FormContact = () => {
 	// const actions = useActionCreators(orderInfoActions)
-	
-	const {email,firstName,lastName,phone} = useStateSelector((s) => s.orderInfo.contactInfo);
-   // console.log(blocker)
+
+	const { email, firstName, lastName, phone } = useStateSelector(
+		(s) => s.orderInfo.contactInfo
+	);
+	// console.log(blocker)
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const {

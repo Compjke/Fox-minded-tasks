@@ -19,7 +19,14 @@ $gapNavLinks: 40px;
 		content: '>';
 		right: calc($gapNavLinks / 1.5 * -1);
 	}
+	&.disabled {
+		pointer-events: none;
+	}
 }
+
+
+
+
 
 .navLink:visited {
 	color: #243573;
