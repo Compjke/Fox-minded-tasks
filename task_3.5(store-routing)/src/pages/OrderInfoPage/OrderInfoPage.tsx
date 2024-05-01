@@ -11,6 +11,7 @@ import { OrderInfoCard } from '@/components/OrderInfoCard';
 import { OrderSummaryCard } from '@/components/OrderSummaryCard';
 import { Button } from '@/ui-kit/Button';
 import clsx from 'clsx';
+import { ROUTES } from '@/routes/routes';
 export const OrderInfoPage = () => {
 	const { isOrderReady, contactInfo, shipmentInfo } = useStateSelector(
 		(s) => s.orderInfo
@@ -53,7 +54,7 @@ export const OrderInfoPage = () => {
 			<Button
 				text='Continue shopping'
 				className={style.btn}
-				onClick={() => navigate('/')}
+				onClick={() => navigate(ROUTES.Root)}
 			/>
 		</div>
 	);

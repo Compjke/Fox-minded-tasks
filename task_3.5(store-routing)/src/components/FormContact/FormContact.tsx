@@ -99,7 +99,7 @@ export const FormContact = () => {
 					error={errors.phone}
 				/>
 			</div>
-			<Button onClick={() => {}} text='Next Step' type='submit' />
+			<Button text='Next Step' type='submit' />
 		</form>
 	);
 };

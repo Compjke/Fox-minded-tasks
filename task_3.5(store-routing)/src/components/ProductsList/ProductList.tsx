@@ -1,4 +1,4 @@
-import { ProductsEntity, useStateSelector } from '@/store';
+import { useStateSelector } from '@/store';
 import style from './ProductList.module.scss';
 import { ProductItem } from '../ProductCard';
 import clsx from 'clsx';

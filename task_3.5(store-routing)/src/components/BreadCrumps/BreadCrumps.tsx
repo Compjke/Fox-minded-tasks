@@ -1,15 +1,16 @@
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import style from './BreadCrumps.module.scss';
 import clsx from 'clsx';
 import { useStateSelector } from '@/store';
 import { MouseEventHandler } from 'react';
+import { ROUTES } from '@/routes/routes';
 export const BreadCrumps = () => {
 	// const location = useLocation()
 	const contactInfo = useStateSelector((s) => s.orderInfo.contactInfo);
 	const isSomeThingInBAsket =
 		useStateSelector((s) => s.products.basket).length > 0;
 
-	const handleClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
+	const handleClick: MouseEventHandler<HTMLAnchorElement> = (e): void => {
 		const path = e.target.pathname.split('/')[2];
 		console.log(path);
 
@@ -40,27 +41,19 @@ export const BreadCrumps = () => {
 				<NavLink
 					onClick={handleClick}
 					replace
-					to={`card`}
-					className={({ isActive, isPending }) =>
-						isActive
-							? clsx(style.active, style.navLink)
-							: isPending
-							? style.navLink
-							: style.navLink
+					to={ROUTES.CardInfo}
+					className={({ isActive }) =>
+						clsx(style.navLink, isActive && style.active)
 					}
 				>
 					Cart
 				</NavLink>
 				<NavLink
 					replace
-					to={`contact-info`}
+					to={ROUTES.ContactInfo}
 					onClick={handleClick}
-					className={({ isActive, isPending }) =>
-						isActive
-							? clsx(style.active, style.navLink)
-							: isPending
-							? style.navLink
-							: style.navLink
+					className={({ isActive }) =>
+						clsx(style.navLink, isActive && style.active)
 					}
 				>
 					Contact information
@@ -68,13 +61,9 @@ export const BreadCrumps = () => {
 				<NavLink
 					replace
 					onClick={handleClick}
-					to={`shipment-info`}
-					className={({ isActive, isPending }) =>
-						isActive
-							? clsx(style.active, style.navLink)
-							: isPending
-							? style.navLink
-							: style.navLink
+					to={ROUTES.ShipmentInfo}
+					className={({ isActive }) =>
+						clsx(style.navLink, isActive && style.active)
 					}
 				>
 					Shipment information

@@ -1,45 +1,21 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { PageTitle } from '@/ui-kit/PageTitle';
 import { ProductCardBasket } from '@/components/ProductCardBasket';
 import {
 	orderInfoActions,
-	productsActions,
 	useAppDispatch,
 	useStateSelector,
 } from '@/store';
 import type { ProductCardBasket as ProductProps } from '@/store';
 import { Button } from '@/ui-kit/Button';
 import style from './BasketPage.module.scss';
-import { unstable_usePrompt, useBlocker, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/routes/routes';
 
 export const BasketPage = () => {
 	const prodInBasket = useStateSelector((s) => s.products.basket);
 	const dispatch = useAppDispatch();
-	// Block navigating elsewhere when data has been entered into the input
-	// unstable_usePrompt({
-	// 	message: 'Are you sure?',
-	// 	when: ({ currentLocation, nextLocation }) =>
-	// 		value !== '' && currentLocation.pathname !== nextLocation.pathname,
-	// });
-	// const blocker = useBlocker(
-	// 	({ currentLocation, historyAction, nextLocation }) => {
-	// 		// console.log('curLocation: ', currentLocation);
-	// 		// console.log('historyActon: ', historyAction);
-	// 		// console.log('nextLocation: ', nextLocation);
-	// 		if (
-	// 			historyAction === 'POP' ||
-	// 			historyAction === 'REPLACE' ||
-	// 			nextLocation.pathname === '/'
-	// 		) {
-	// 			return false;
-	// 		}
-	// 		return (
-	// 			prodInBasket.length < 1 ||
-	// 			nextLocation.pathname === '/info/shipment-info'
-	// 		);
-	// 	}
-	// );
-	// console.log(blocker);
+
 	const navigate = useNavigate();
 	const countTotal = useMemo(
 		() =>
@@ -58,38 +34,14 @@ export const BasketPage = () => {
 		dispatch(orderInfoActions.updateTotalPrice(countTotal));
 	}, [countTotal, dispatch]);
 
-	// useEffect(() => {
-	// 	if (
-	// 		blocker.state === 'blocked' &&
-	// 		blocker.location.pathname === '/info/contact-info'
-	// 	) {
-	// 		// Notification.requestPermission()
-	// 		// .then(permission => {
-	// 		// 	if(permission === 'granted'){
-	// 		// 		new Notification('ne mojesh')
-	// 		// 	}
-	// 		// })
-	// 		alert('Need to add something to proceed to checkout');
-	// 	}
-	// 	if (
-	// 		blocker.state === 'blocked' &&
-	// 		blocker.location.pathname === '/info/shipment-info'
-	// 	) {
-	// 		// Notification.requestPermission()
-	// 		// .then(permission => {
-	// 		// 	if(permission === 'granted'){
-	// 		// 		new Notification('ne mojesh')
-	// 		// 	}
-	// 		// })
-	// 		alert('Fill previous step');
-	// 	}
-	// }, [blocker, prodInBasket.length]);
 
-	const renderProdInBasket = (prodInBasket: ProductProps[]) => {
-		if (!prodInBasket.length) {
-			return <div style={{ textAlign: 'center' }}>Your basket is empty 🧺</div>;
-		}
-		return (
+	if (!prodInBasket.length) {
+		return <div style={{ textAlign: 'center' }}>Your basket is empty 🧺</div>;
+	}
+
+	return (
+		<div className={style.cardPage}>
+			<PageTitle text='Card' />
 			<ul className={style.productList}>
 				{prodInBasket.map(
 					({
@@ -113,13 +65,6 @@ export const BasketPage = () => {
 					)
 				)}
 			</ul>
-		);
-	};
-
-	return (
-		<div className={style.cardPage}>
-			<PageTitle text='Card' />
-			{renderProdInBasket(prodInBasket)}
 			<div className={style.total}>
 				<p>
 					Together:{' '}
@@ -134,7 +79,7 @@ export const BasketPage = () => {
 			</div>
 			{countTotal.totalCount > 0 && (
 				<Button
-					onClick={() => navigate('/info/contact-info')}
+					onClick={() => navigate(ROUTES.ContactInfo)}
 					className={style.btnNextStep}
 					text='Next Step'
 				/>

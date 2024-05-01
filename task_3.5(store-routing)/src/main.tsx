@@ -16,11 +16,12 @@ import { BreadCrumps } from './components/BreadCrumps';
 import { ContactInfoForm } from '@/pages/ContactInfoFormpPage';
 import { ShipmentFormPage } from './pages/ShipmentFormPape';
 import { OrderInfoPage } from './pages/OrderInfoPage';
+import { ROUTES } from './routes/routes';
 // import {action as FormContactAction} from '@/components/FormContact'
 // import { getProducts_1 as loadProducts } from '@/components/HomePage';
 const router = createBrowserRouter([
 	{
-		path: '/',
+		path: ROUTES.Root,
 		element: (
 			<MainLayout>
 				<HomePage />
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
 		// loader: loadProducts,
 	},
 	{
-		path: '/info',
+		path: ROUTES.Info,
 		element: (
 			<MainLayout>
 				<BreadCrumps />
@@ -39,22 +40,22 @@ const router = createBrowserRouter([
 		),
 		children: [
 			{
-				path: '/info/card',
+				path: ROUTES.CardInfo,
 				index: true,
 				element: <BasketPage />,
 			},
 			{
-				path: '/info/contact-info',
+				path: ROUTES.ContactInfo,
 				element: <ContactInfoForm />,
 				// action : FormContactAction,
 			},
 			{
-				path: '/info/shipment-info',
+				path: ROUTES.ShipmentInfo,
 				element: <ShipmentFormPage />,
 			},
 		],
 	},
-	{ path: '/order-info', element: <OrderInfoPage /> },
+	{ path: ROUTES.OrderPage, element: <OrderInfoPage /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
