@@ -1,0 +1,22 @@
+import { ThemeContext } from '@/context/ThemeContext';
+import { useContext } from 'react';
+import styles from './toggleThemeSwitche.module.scss';
+
+export const ToggleThemeSwitcher = () => {
+	const [theme, setTheme] = useContext(ThemeContext);
+	const handleChangeTheme = () => {
+		console.log('toggle')
+		setTheme(theme === 'dark' ? 'light' : 'dark');
+	};
+	return (
+		<div className={styles.toggleContainer}>
+			<input
+				type='checkbox'
+				id='toggleTheme'
+				onChange={handleChangeTheme}
+				className={styles.toggle}
+			/>
+			<label htmlFor='toggleTheme'>{theme}</label>
+		</div>
+	);
+};
