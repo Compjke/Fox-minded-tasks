@@ -7,7 +7,7 @@ interface ILink extends AnchorHTMLAttributes<HTMLAnchorElement> {
 	href: string;
 	className?: string;
 	disabled?: boolean;
-	onClick: () => void;
+	onClick: (e: unknown) => void;
 }
 
 export const Link = ({
@@ -16,17 +16,18 @@ export const Link = ({
 	className,
 	disabled = false,
 	onClick,
+	...props
 }: ILink) => {
 	const handleClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
-		e.preventDefault();
-      console.log('click')
-		onClick && onClick();
+		console.log('click');
+		onClick && onClick(e);
 	};
 	return (
 		<a
 			onClick={handleClick}
 			className={clsx(className, style.link, disabled && style.disabled)}
 			href={href}
+			{...props}
 		>
 			{label}
 		</a>

@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Select } from './Select';
 
-
 const meta = {
 	title: 'Select',
 	component: Select,
@@ -14,15 +13,17 @@ type Story = StoryObj<typeof meta>;
 
 export const SelectDefault: Story = {
 	args: {
-		isOpen : false,
-      label : 'Time'
-      
+		label: 'Time',
+		onSelect: () => {},
 	},
 };
 export const SelectOpened: Story = {
 	args: {
-		isOpen : true,
-      label : 'Time'
+		label: 'Time',
+		onSelect: () => {},
+	},
 
+	parameters: {
+		pseudo: { hover: true },
 	},
 };

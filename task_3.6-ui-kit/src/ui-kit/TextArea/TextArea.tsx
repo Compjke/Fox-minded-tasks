@@ -5,31 +5,30 @@ import clsx from 'clsx';
 interface iTextArea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	label: string;
 	placeholder?: string;
-	value?: string;
+	testValue?: string;
 }
 
 export const TextArea = ({
 	label,
 	placeholder = 'Type your description....',
-	value = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+	testValue = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
 }: iTextArea) => {
-	const [isFocus, setisFocus] = useState(false);
-	const [testValue, setTestValue] = useState(value);
+
+	const [value, setValue] = useState(testValue);
 	return (
 		<div className={style.container}>
 			<label className={style.label} htmlFor='textarea'>
 				<span
-					onClick={() => setisFocus((prev) => !prev)}
 					className={style.labelText}
 				>
 					{label}
 				</span>
 				<textarea
 					placeholder={placeholder}
-					className={clsx(style.textArea, isFocus && style.wide)}
+					className={clsx(style.textArea)}
 					id='textarea'
-					value={testValue}
-					onChange={(e) => setTestValue(e.target.value)}
+					value={value}
+					onChange={(e) => setValue(e.target.value)}
 				></textarea>
 			</label>
 		</div>

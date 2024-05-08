@@ -1,17 +1,9 @@
 import { InputHTMLAttributes, useState } from 'react';
-// import { Path, UseFormRegister, ErrorOption } from 'react-hook-form';
+
 import style from './input.module.scss';
 import { HidePasswordIcon, ShowPasswordIcon } from '../icons';
-// import { IForm } from '../Form/Form';
-import clsx from 'clsx';
 
-// interface IInput extends InputHTMLAttributes<HTMLInputElement> {
-// 	label: Path<IForm>;
-// 	register: UseFormRegister<IForm>;
-// 	error: ErrorOption | undefined ;
-// 	labelText: string;
-// 	id: string;
-// }
+import clsx from 'clsx';
 
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
 	labelText: string;
@@ -24,15 +16,14 @@ interface IInput extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = ({
 	type,
-	// label,
 	placeholder,
 	required,
-	// register,
 	error,
 	labelText,
 	disabled,
 	id,
 	value,
+	...props
 }: IInput) => {
 	const [showPassword, setShowPassword] = useState(true);
 	const [currentType, setType] = useState(type);
@@ -56,7 +47,7 @@ export const Input = ({
 				placeholder={placeholder}
 				type={currentType}
 				className={clsx(style.input, error && style.errorBorder)}
-				// {...register(label)}
+				{...props}
 			/>
 			{type === 'password' ? (
 				showPassword ? (

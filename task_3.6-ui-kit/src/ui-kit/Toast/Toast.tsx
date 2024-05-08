@@ -16,13 +16,7 @@ export const Toast = ({ message, onClose, type = 'info' }: IToast) => {
 		onClose();
 	}, 5000);
 
-	// useEffect(() => {
-	// 	const timeId = setTimeout(() => {
-	// 		onClose();
-	// 	}, 5000);
 
-	// 	return () => clearTimeout(timeId);
-	// }, []);
 	return (
 		<div className={clsx(style.toast, style[type])}>
 			<p className={style.toastMessage}>{message}</p>

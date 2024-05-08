@@ -13,5 +13,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const DatePickerDefault: Story = {
-
+	args: {
+		disableHighlightToday: false,
+		canPickToday: false,
+		pickTodayByDefault: true,
+	},
 };

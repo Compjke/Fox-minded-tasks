@@ -4,11 +4,11 @@ import style from './checkbox.module.scss';
 
 interface ICheckBox extends InputHTMLAttributes<HTMLInputElement> {
 	label?: string;
-	isCheckedFromProps?: boolean;
+	defaultState: boolean;
 }
 
-export const CheckBox = ({ label, isCheckedFromProps = false }: ICheckBox) => {
-	const [isChecked, setIsChecked] = useState(false || isCheckedFromProps);
+export const CheckBox = ({ label, defaultState = false ,...props}: ICheckBox) => {
+	const [isChecked, setIsChecked] = useState(defaultState);
 
 	console.log(isChecked);
 	const handleClick = () => {
@@ -22,6 +22,7 @@ export const CheckBox = ({ label, isCheckedFromProps = false }: ICheckBox) => {
 				checked={isChecked}
 				onChange={handleClick}
 				type='checkbox'
+				{...props}
 				// id='checkbox'
 			/>
 			{isChecked ? (

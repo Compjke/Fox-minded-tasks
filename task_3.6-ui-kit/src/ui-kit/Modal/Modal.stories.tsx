@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 export const ModalOpen: Story = {
 	args: {
 		title: 'Title',
-		text: 'Some modal test text',
+		children : <p >Test modal text</p>,
 		isOpen: true,
 		onClose: () => console.log('close'),
 	},

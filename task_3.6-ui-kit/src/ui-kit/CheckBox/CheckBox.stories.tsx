@@ -15,13 +15,14 @@ type Story = StoryObj<typeof meta>;
 export const CheckBoxWithLabelNotChecked: Story = {
 	args: {
 		label: 'Test label not cheked',
+		defaultState: false,
 	},
 };
 export const CheckBoxWithLabelChecked: Story = {
 	args: {
 		label: 'Test label cheked',
 
-		isCheckedFromProps: true,
+		defaultState: true,
 	},
 
 	// play: async ({ canvasElement }) => {
@@ -33,9 +34,11 @@ export const CheckBoxWithLabelChecked: Story = {
 };
 export const CheckBoxNoLabelChecked: Story = {
 	args: {
-		isCheckedFromProps: true,
+		defaultState: true,
 	},
 };
 export const CheckBoxNoLabelNotChecked: Story = {
-	args: {},
+	args: {
+		defaultState: false,
+	},
 };

@@ -1,2 +1,2 @@
 export { ThemeContextProvider } from './ThemeContext';
-export { ToastProvider } from './ToastContext';
+export { ToastProvider } from '../ui-kit/Toast/ToastContext';

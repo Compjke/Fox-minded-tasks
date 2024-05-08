@@ -17,11 +17,13 @@
 
 .textArea {
 	border: none;
-   background: transparent;
-   color: var(--main-color);
+	background: transparent;
+	color: var(--main-color);
 	resize: vertical;
 	padding: 0;
-	min-height: fit-content;
+	height: auto;
+	max-height: 20px;
+	overflow: hidden;
 	outline: none;
 	font-weight: 400;
 	font-size: 15px;
@@ -29,7 +31,8 @@
 	border-bottom: 1px solid var(--input-border-color);
 	transition: all 0.3s ease;
 	scrollbar-width: thin;
-}
-.wide {
-	height: 150px;
+	transition: max-height 1.5s;
+	&:focus {
+		max-height: 1000px;
+	}
 }

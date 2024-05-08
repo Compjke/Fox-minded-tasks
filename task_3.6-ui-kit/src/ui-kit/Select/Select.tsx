@@ -6,31 +6,36 @@ import dayjs from 'dayjs';
 
 interface ISelect {
 	className?: string;
-	isOpen: boolean;
 	label: string;
+	onSelect: (item: string) => void;
 	// children: ReactNode;
+	options: string[];
+	defaultValue: string;
 }
 
 export const Select = ({
 	className,
-	isOpen = false,
 	label = 'Time',
+	onSelect,
+	options = getTimesArr(),
+	defaultValue = dayjs().format('HH:mm a'),
 }: ISelect) => {
-	const [open, setOpen] = useState(isOpen);
+	const [open, setOpen] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
-	const [selectedTime, setSelectedTime] = useState(dayjs().format('HH:mm a'));
+	const [selectedValue, setSelectedValue] = useState(defaultValue);
 
 	const handleClick = (value: SetStateAction<string>) => {
-		setSelectedTime(value);
+		setSelectedValue(value);
+		onSelect(selectedValue);
 		// setOpen(false);
 	};
 
 	useEffect(() => {
-		inputRef.current.value = selectedTime;
-	}, [selectedTime]);
+		inputRef.current.value = selectedValue;
+	}, [selectedValue]);
 	// console.log('render')
 	return (
-		<div className={clsx(className, style.select)}>
+		<div className={clsx(style.select, className)}>
 			<label className={style.selectLabel}>
 				{label}
 				<input
@@ -46,13 +51,13 @@ export const Select = ({
 						className={style.selectContent}
 						onMouseLeave={() => setOpen(false)}
 					>
-						{getTimesArr().map((item) => (
+						{options.map((item) => (
 							<div
 								onClick={() => handleClick(item)}
 								key={item}
 								className={clsx(
 									style.selectItem,
-									selectedTime === item && style.selected
+									selectedValue === item && style.selected
 								)}
 							>
 								{item}

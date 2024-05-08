@@ -6,13 +6,24 @@ import { MouseEventHandler, useState } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from '../icons';
 
 const DAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-const currentDate = dayjs();
+const currentDay = dayjs();
+interface IDatePicker {
+	disableHighlightToday: boolean;
+	canPickToday?: boolean;
+	pickTodayByDefault?: boolean;
+}
 
-export const DatePicker = () => {
-	const [date, setDate] = useState(currentDate);
-	const [selectedDate, setSelectedDate] = useState(currentDate);
+export const DatePicker = ({
+	disableHighlightToday = false,
+	canPickToday = false,
+	pickTodayByDefault = false,
+}: IDatePicker) => {
+	const [date, setDate] = useState(currentDay);
+	const [selectedDate, setSelectedDate] = useState(
+		pickTodayByDefault ? currentDay : null
+	);
 
-	console.log(selectedDate.toDate().toDateString());
+	console.log(selectedDate?.toDate().toDateString());
 
 	const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
 		const action = e.currentTarget.attributes.datatype.value;
@@ -37,12 +48,17 @@ export const DatePicker = () => {
 					>
 						<ArrowLeftIcon className={style.arrow} />
 					</button>
-					<button
-						className={style.todayBtn}
-						onClick={() => {setDate(currentDate) ; setSelectedDate(currentDate)}}
-					>
-						Today
-					</button>
+					{canPickToday && (
+						<button
+							className={style.todayBtn}
+							onClick={() => {
+								setDate(currentDay);
+								setSelectedDate(currentDay);
+							}}
+						>
+							Today
+						</button>
+					)}
 					<button
 						type='button'
 						onClick={handleClick}
@@ -68,8 +84,9 @@ export const DatePicker = () => {
 								className={clsx(
 									style.date,
 									!currentMonth && style.illuminated,
-									today && style.today,
-									selectedDate.toDate().toDateString() ===
+									!disableHighlightToday && today && style.today,
+
+									selectedDate?.toDate().toDateString() ===
 										date.toDate().toDateString() && style.selected
 								)}
 							>

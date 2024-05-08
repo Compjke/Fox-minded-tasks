@@ -1,8 +1,8 @@
-import { Toast } from '@/ui-kit/Toast';
-import { IToast } from '@/ui-kit/Toast/Toast';
+
 import dayjs from 'dayjs';
 import { ReactNode, createContext, useMemo, useState } from 'react';
-import styles from '@/ui-kit/Toast/toast.module.scss';
+import styles from './toast.module.scss';
+import { IToast, Toast } from './Toast';
 interface ToastContextValue {
 	showToast: (message: string, type?: string) => void;
 	hideToast: (id: number | string) => void;
