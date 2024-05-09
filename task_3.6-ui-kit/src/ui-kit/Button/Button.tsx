@@ -3,16 +3,16 @@ import { ButtonHTMLAttributes } from 'react';
 import clsx from 'clsx';
 
 import { Icon } from '../Icon';
-import { ICONS } from '@/constans/iconConstans';
 
-type Keys = keyof typeof ICONS;
+import { IconName } from '../Icon/Icon';
+
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	label: string;
 	appereance: 'primary' | 'secondary';
 	onClick?: () => void;
 	disabled?: boolean;
 	bgColor?: string;
-	icon?: (typeof ICONS)[Keys];
+	icon?: IconName;
 }
 
 export const Button = ({
