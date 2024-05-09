@@ -1,4 +1,4 @@
-import { ICONS } from '@/constans/iconConstans';
+import { ICONS } from '@/ui-kit/Icon/constans/iconConstans';
 import { PLayIcon, PauseIcon } from '../icons';
 
 const ICON_MAP = {
