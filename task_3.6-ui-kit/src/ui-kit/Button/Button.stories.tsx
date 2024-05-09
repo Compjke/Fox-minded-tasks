@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { Button } from '@/ui-kit/Button';
-import { Icon } from '../Icon';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -35,7 +34,7 @@ export const WithIconPrimary: Story = {
 	args: {
 		appereance: 'primary',
 		label: 'Primary',
-		icon: <Icon name='play' />,
+		icon: 'play',
 	},
 };
 
@@ -50,6 +49,6 @@ export const WithIconSecondary: Story = {
 	args: {
 		appereance: 'secondary',
 		label: 'Secondary',
-		icon: <Icon name='pause' />,
+		icon: 'pause',
 	},
 };
