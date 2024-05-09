@@ -2,15 +2,15 @@ import style from './Button.module.scss';
 import { ButtonHTMLAttributes } from 'react';
 import clsx from 'clsx';
 
+import { Icon } from '../Icon';
+
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	label: string;
 	appereance: 'primary' | 'secondary';
 	onClick?: () => void;
 	disabled?: boolean;
 	bgColor?: string;
-	isPlay?: boolean;
-	icon?: JSX.Element;
-	icon_2?: JSX.Element;
+	icon?: ReturnType<typeof Icon>;
 }
 
 export const Button = ({
@@ -19,9 +19,7 @@ export const Button = ({
 	disabled = false,
 	onClick,
 	bgColor,
-	isPlay,
 	icon,
-	icon_2,
 	...props
 }: IProps) => {
 	return (
@@ -32,8 +30,7 @@ export const Button = ({
 			className={clsx(style.button, style[appereance])}
 			{...props}
 		>
-			{icon && isPlay && icon}
-			{icon_2 && !isPlay && icon_2}
+			{icon && icon}
 			{label}
 		</button>
 	);

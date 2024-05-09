@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import style from './toast.module.scss';
 import { CloseIcon } from '../icons';
 import { useTimeout } from '@/hooks/useTimeout';
-import { useEffect } from 'react';
+
 
 export interface IToast {
 	id: number | string;

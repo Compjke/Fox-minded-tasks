@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { Button } from '@/ui-kit/Button';
-import { PLayIcon, PauseIcon } from '../icons';
+import { Icon } from '../Icon';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -17,7 +17,7 @@ const meta = {
 		bgColor: { control: 'color' },
 	},
 	// Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-	args: { onClick: fn(), isPlay: false },
+	args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -28,7 +28,6 @@ export const NoIconPrimary: Story = {
 	args: {
 		appereance: 'primary',
 		label: 'Primary',
-		isPlay: true,
 	},
 };
 
@@ -36,9 +35,7 @@ export const WithIconPrimary: Story = {
 	args: {
 		appereance: 'primary',
 		label: 'Primary',
-		icon : <PLayIcon/>,
-		icon_2: <PauseIcon/>,
-		isPlay: true,
+		icon: <Icon name='play' />,
 	},
 };
 
@@ -53,7 +50,6 @@ export const WithIconSecondary: Story = {
 	args: {
 		appereance: 'secondary',
 		label: 'Secondary',
-		icon : <PLayIcon/>,
-		icon_2: <PauseIcon/>
+		icon: <Icon name='pause' />,
 	},
 };
