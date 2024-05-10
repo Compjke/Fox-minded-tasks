@@ -1,9 +1,9 @@
 import { InputHTMLAttributes, useState } from 'react';
 
 import style from './input.module.scss';
-import { HidePasswordIcon, ShowPasswordIcon } from '../icons';
 
 import clsx from 'clsx';
+import { Icon } from '../Icon';
 
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
 	labelText: string;
@@ -56,7 +56,7 @@ export const Input = ({
 						onClick={handleClick}
 						className={style.icon}
 					>
-						<HidePasswordIcon />
+						<Icon name='hide-password' />
 					</button>
 				) : (
 					<button
@@ -64,7 +64,7 @@ export const Input = ({
 						onClick={handleClick}
 						className={style.icon}
 					>
-						<ShowPasswordIcon />
+						<Icon name='show-password' />
 					</button>
 				)
 			) : null}

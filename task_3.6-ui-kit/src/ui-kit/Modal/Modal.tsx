@@ -1,6 +1,7 @@
 import { MouseEventHandler, ReactNode } from 'react';
-import { CloseIcon } from '../icons';
+
 import style from './modal.module.scss';
+import { Icon } from '../Icon';
 
 interface IModal {
 	title: string;
@@ -25,7 +26,7 @@ export const Modal = ({ children, title, isOpen = false, onClose }: IModal) => {
 					<div className={style.modalTop}>
 						<h3 className={style.modaltitle}>{title}</h3>
 						<button className={style.modalCloseBtn} onClick={onClose}>
-							<CloseIcon />
+							<Icon name='close' />
 						</button>
 					</div>
 					<div className={style.content}>{children}</div>

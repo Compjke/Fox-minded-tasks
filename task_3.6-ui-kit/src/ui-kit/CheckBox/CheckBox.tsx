@@ -1,13 +1,18 @@
 import { InputHTMLAttributes, useState } from 'react';
-import { CheckBoxEmpty, CheckBoxFilled } from '@/ui-kit/icons';
+
 import style from './checkbox.module.scss';
+import { Icon } from '../Icon';
 
 interface ICheckBox extends InputHTMLAttributes<HTMLInputElement> {
 	label?: string;
 	defaultState: boolean;
 }
 
-export const CheckBox = ({ label, defaultState = false ,...props}: ICheckBox) => {
+export const CheckBox = ({
+	label,
+	defaultState = false,
+	...props
+}: ICheckBox) => {
 	const [isChecked, setIsChecked] = useState(defaultState);
 
 	console.log(isChecked);
@@ -27,11 +32,11 @@ export const CheckBox = ({ label, defaultState = false ,...props}: ICheckBox) =>
 			/>
 			{isChecked ? (
 				<span className={style.filled}>
-					<CheckBoxFilled />
+					<Icon name='checkbox-filled' />
 				</span>
 			) : (
 				<span className={style.empty}>
-					<CheckBoxEmpty />
+					<Icon name='checkbox-empty' />
 				</span>
 			)}
 			{label}

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { MouseEventHandler, useState } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from '../icons';
+import { Icon } from '../Icon';
 
 const DAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 const currentDay = dayjs();
@@ -46,7 +47,7 @@ export const DatePicker = ({
 						datatype='prev'
 						className={style.panelBtn}
 					>
-						<ArrowLeftIcon className={style.arrow} />
+						<Icon name='arrow-left' className={style.arrow} />
 					</button>
 					{canPickToday && (
 						<button
@@ -65,7 +66,7 @@ export const DatePicker = ({
 						datatype='next'
 						className={style.panelBtn}
 					>
-						<ArrowRightIcon className={style.arrow} />
+						<Icon name='arrow-right' className={style.arrow} />
 					</button>
 				</div>
 			</div>

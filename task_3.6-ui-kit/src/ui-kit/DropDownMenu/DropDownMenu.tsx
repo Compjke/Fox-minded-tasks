@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { DropDownMenuIcon } from '../icons';
 import style from './drop-down-menu.module.scss';
 import clsx from 'clsx';
+import { Icon } from '../Icon';
 
 interface IDropDownMenu {
 	// label : string;
@@ -27,7 +27,7 @@ export const DropDownMenu = ({
 					className={style.dropDownBtn}
 					onClick={() => setIsOpen((prev) => !prev)}
 				>
-					<DropDownMenuIcon />
+					<Icon name='drop-down-menu' />
 				</button>
 			</div>
 			{isOpen && (

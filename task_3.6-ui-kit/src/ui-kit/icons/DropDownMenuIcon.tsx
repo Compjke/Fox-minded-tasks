@@ -1,6 +1,5 @@
-import { SVGAttributes } from 'react';
 
-interface IIcon extends SVGAttributes<HTMLOrSVGElement> {
+interface IIcon {
 	className?: string;
 }
 
