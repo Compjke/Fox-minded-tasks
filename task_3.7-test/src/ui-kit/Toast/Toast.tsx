@@ -3,11 +3,13 @@ import style from './toast.module.scss';
 import { useTimeout } from '@/hooks/useTimeout';
 import { Icon } from '../Icon';
 
+
+export type ToastType = 'info' | 'success' | 'error'
 export interface IToast {
 	id: number;
 	message: string;
 	onClose: () => void;
-	type?: string;
+	type?: ToastType;
 }
 
 export const Toast = ({ message, onClose, type = 'info' }: IToast) => {

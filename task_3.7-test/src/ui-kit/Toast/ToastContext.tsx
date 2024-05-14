@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 import { ReactNode, createContext, useMemo, useState } from 'react';
 import styles from './toast.module.scss';
-import { IToast, Toast } from './Toast';
+import { IToast, Toast, ToastType } from './Toast';
 interface ToastContextValue {
-	showToast: (message: string, type: string) => void;
+	showToast: (message: string, type: ToastType) => void;
 	hideToast: (id: number) => void;
 }
 
@@ -12,7 +12,7 @@ export const ToastContext = createContext<ToastContextValue | null>(null);
 export const ToastProvider = ({ children }: { children: ReactNode }) => {
 	const [toast, setToast] = useState<IToast[]>([]);
 
-	const showToast = (message: string, type: string) => {
+	const showToast = (message: string, type: ToastType) => {
 		const newToast = {
 			id: dayjs().millisecond(),
 			message,

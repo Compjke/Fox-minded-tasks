@@ -9,6 +9,6 @@ export const useLocalStorage = (key: string, defaultData: string) => {
 		localStorage.setItem(key, state);
 	}, [key, state]);
 
-	return [state, setState];
+	return {state, setState};
 };
 

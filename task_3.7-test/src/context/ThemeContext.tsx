@@ -1,16 +1,19 @@
 import { useLocalStorage } from '@/hooks';
 import { ReactNode, createContext, useEffect } from 'react';
 
-// interface IThemeContext {
-// 	theme?: string;
-// 	setTheme?: (theme: string) => void;
-// }
+export interface IThemeContext {
+	theme?: string;
+	setTheme?: React.Dispatch<React.SetStateAction<string>>;
+}
 
-export const ThemeContext = createContext([]);
+export const ThemeContext = createContext<IThemeContext>({});
 
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
 	// const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
-	const [theme, setTheme] = useLocalStorage('theme', 'light');
+	const { theme, setTheme } = useLocalStorage(
+		'theme',
+		'light'
+	) as IThemeContext;
 
 	useEffect(() => {
 		const root = document.querySelector(':root');
@@ -18,7 +21,7 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
 		else root?.classList.remove('dark');
 	});
 	return (
-		<ThemeContext.Provider value={[theme, setTheme]}>
+		<ThemeContext.Provider value={{ theme, setTheme }}>
 			{children}
 		</ThemeContext.Provider>
 	);

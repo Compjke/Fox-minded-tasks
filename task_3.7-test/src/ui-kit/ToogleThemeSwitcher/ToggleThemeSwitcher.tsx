@@ -3,10 +3,9 @@ import { useContext } from 'react';
 import styles from './toggleThemeSwitche.module.scss';
 
 export const ToggleThemeSwitcher = () => {
-	const [theme, setTheme] = useContext(ThemeContext);
+	const { theme, setTheme } = useContext(ThemeContext);
 	const handleChangeTheme = () => {
-		console.log('toggle')
-		setTheme(theme === 'dark' ? 'light' : 'dark');
+		setTheme?.(theme === 'dark' ? 'light' : 'dark');
 	};
 	return (
 		<div className={styles.toggleContainer}>
