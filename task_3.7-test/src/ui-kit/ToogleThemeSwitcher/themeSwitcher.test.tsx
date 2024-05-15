@@ -1,14 +1,14 @@
-import { screen, render } from '@testing-library/react';
-
-import { ThemeContext, ThemeContextProvider } from '@/context/ThemeContext';
+import { screen, render, findByTestId } from '@testing-library/react';
+import { ThemeContext } from '@/context/ThemeContext';
 import { useContext } from 'react';
-
+import { vi } from 'vitest';
+import { userEvent } from '@storybook/test';
+import { c } from 'node_modules/vite/dist/node/types.d-aGj9QkWt';
 
 const TestSwitcher = () => {
 	const { theme, setTheme } = useContext(ThemeContext);
 	// let theme = 'lgiht';
 	// const setTheme = () => {};
-	console.log(theme, 'theme', setTheme);
 	const handleChangeTheme = () => {
 		setTheme?.(theme === 'dark' ? 'light' : 'dark');
 	};
@@ -21,17 +21,35 @@ const TestSwitcher = () => {
 };
 
 describe('Theme provider component', () => {
-	it('should render correct & allow to change theme', async () => {
-		render(
-			<ThemeContextProvider>
-				<TestSwitcher />
-			</ThemeContextProvider>
+	it('renders with the correct initial theme', () => {
+		const { getByText } = render(
+			<ThemeContext.Consumer>
+				{({ theme }) => <p data-testid='current-theme'>{theme}</p>}
+			</ThemeContext.Consumer>
 		);
 
-		const button = screen.getByRole('button');
+		expect(getByText(/light/i)).toBeInTheDocument();
+	});
+	it('toggles the theme when toggleTheme is called', async () => {
+		const setTheme = vi.fn((theme) => {
+			console.log(theme);
+			// return theme === 'dark' ? 'light' : 'dark';
+		});
+		const { getByTestId, getByRole, findByTestId } = render(
+			<ThemeContext.Provider value={{ theme: 'dark', setTheme }}>
+				<TestSwitcher />
+			</ThemeContext.Provider>
+		);
+		const button = getByRole('button');
+		const currentTheme = getByTestId('current-theme');
 		expect(button).toBeInTheDocument();
-		const currentTheme = screen.getByTestId('current-theme');
-		screen.debug();
-		// expect(currentTheme).toHaveTextContent('light');
+		expect(currentTheme).toHaveTextContent('dark');
+
+		await userEvent.click(button);
+		expect(setTheme).toHaveBeenCalled();
+
+		// expect(await findByTestId('current-theme')).toHaveTextContent('light');
+
+		// screen.debug();
 	});
 });

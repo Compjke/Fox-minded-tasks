@@ -1,18 +1,19 @@
 import { useLocalStorage } from '@/hooks';
-import { ReactNode, createContext, useEffect } from 'react';
+import React, { ReactNode, createContext, useEffect } from 'react';
 
 export interface IThemeContext {
 	theme?: string;
 	setTheme?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const ThemeContext = createContext<IThemeContext>({});
+export const ThemeContext = createContext<IThemeContext>({
+	theme: 'light',
+});
 
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
 	// const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
 	const { theme, setTheme } = useLocalStorage(
-		'theme',
-		'light'
+			'theme',
 	) as IThemeContext;
 
 	useEffect(() => {
