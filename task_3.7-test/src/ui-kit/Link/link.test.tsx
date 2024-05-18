@@ -7,7 +7,7 @@ import { userEvent } from '@storybook/test';
 
 describe('Link component', () => {
 	const onCLick = vi.fn();
-	it('should render link', () => {
+	it('should render link', async () => {
 		render(<Link href='/test' label='Link' onClick={onCLick} />);
 		const link = screen.getByRole('link');
 
@@ -15,7 +15,7 @@ describe('Link component', () => {
 		expect(link).toHaveAttribute('href', '/test');
 		expect(link).toHaveTextContent('Link');
 
-		userEvent.click(link);
+		await userEvent.click(link);
 
 		expect(onCLick).toHaveBeenCalledTimes(1);
 	});

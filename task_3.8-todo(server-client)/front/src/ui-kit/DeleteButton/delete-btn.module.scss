@@ -1,0 +1,10 @@
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	cursor: pointer;
+	&:hover {
+		scale: 1.2;
+	}
+}

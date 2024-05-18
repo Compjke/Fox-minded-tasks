@@ -1,0 +1,31 @@
+.todoList {
+	padding: 16px;
+	background: #fff;
+	margin-top: 2px;
+}
+
+.btn {
+	box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+	background: #fff;
+	margin: 40px auto 0;
+	border: 1px solid #dedfe5;
+	border-radius: 8px;
+	padding-block: 10px;
+	width: 30%;
+}
+
+.empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-block: 15px;
+	background-color: #fff;
+	box-shadow: inset 0px 0px 10px 10px rgba($color: #00000000, $alpha: .1);
+}
+
+
+
+.tempItem {
+	opacity: .5;
+	background-color: #333333;
+}
