@@ -1,4 +1,4 @@
-import { getTodos } from '@/utils/fetchTodos';
+import { getTodos } from '@/api/getAllTodos';
 import { useQuery } from '@tanstack/react-query';
 
 export const useTodosQuery = () => {

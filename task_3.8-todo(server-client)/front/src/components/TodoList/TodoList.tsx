@@ -3,24 +3,15 @@ import { DeleteButton } from '@/ui-kit/DeleteButton';
 import { ITodoItem } from '../TodoItem/TodoItem';
 
 import { useTodosQuery } from '@/hooks/useTodosQuery';
-import {
-	useMutation,
-	useMutationState,
-	useQueryClient,
-} from '@tanstack/react-query';
+import { useMutationState } from '@tanstack/react-query';
 import { useId } from 'react';
 import style from './todo-list.module.scss';
-import { deleteAllTodo } from '@/utils/fetchTodos';
+import { deleteAllTodo } from '@/api/deleteAllTodos';
+import { useMutationDelete } from '@/hooks/useMutationDelete';
 
 export const TodoList = () => {
 	const { error, isSuccess, data: todos, isLoading } = useTodosQuery();
-	const client = useQueryClient();
-	const { mutate: deleteAll } = useMutation({
-		mutationFn: deleteAllTodo,
-		onSuccess: () => {
-			client.invalidateQueries({ queryKey: ['todos'] });
-		},
-	});
+	const { mutate: deleteAll } = useMutationDelete(deleteAllTodo);
 	const tempId = useId();
 	// ! USE MUTATION
 	const variables = useMutationState({

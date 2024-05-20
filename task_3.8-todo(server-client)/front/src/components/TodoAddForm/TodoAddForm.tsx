@@ -1,10 +1,10 @@
 import { Plus } from '@/ui-kit/icons';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addNewTodo } from '@/utils/fetchTodos';
+import { addNewTodo } from '@/api/addNewTodo';
 import { FormEventHandler, useEffect, useRef, useState } from 'react';
 // import { FormEventHandler, useRef} from 'react';
-import { ITodoItem } from '../TodoItem/TodoItem';
+
 import style from './todo-add-form.module.scss';
+import { useMutaionAdd } from '@/hooks/useMutationAddTodo';
 
 // interface IProps {}
 // type ResponseNewTodo = {
@@ -13,8 +13,6 @@ import style from './todo-add-form.module.scss';
 // 	status: number;
 // };
 export const TodoAddForm = () => {
-	const queryClient = useQueryClient();
-
 	const inputRef = useRef<HTMLInputElement | null>(null);
 	const [message, setMessage] = useState('');
 	const {
@@ -26,20 +24,7 @@ export const TodoAddForm = () => {
 		data,
 		error,
 		variables,
-	} = useMutation({
-		mutationFn: addNewTodo,
-		mutationKey: ['addTodo'],
-		onSuccess: ({ data: newTodo }) => {
-			// const qd = queryClient.getQueryData(['todos'])
-			queryClient.setQueriesData<ITodoItem[]>(
-				{ queryKey: ['todos'] },
-				(prevTodos) => {
-					console.log(prevTodos)
-					return [newTodo, ...(prevTodos || [])];
-				}
-			);
-		},
-	});
+	} = useMutaionAdd(addNewTodo, 'addTodo');
 
 	useEffect(() => {
 		let timeout: string | number | NodeJS.Timeout | undefined;

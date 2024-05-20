@@ -1,11 +1,13 @@
-import { Checkbox } from '@/ui-kit/CheckBox';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { DeleteButton } from '@/ui-kit/DeleteButton';
-import { EditButton } from '@/ui-kit/EditButton';
+import { useMutationDelete } from '@/hooks/useMutationDelete';
+import { useMutationUpdate } from '@/hooks/useMutationUpdate';
+import { updateTodo } from '@/api/updateTodo';
+import { deleteTodo } from '@/api/deleteTodoById';
 import { ConfirmEditButton } from '@/ui-kit/ConfirmEditButton';
+import { Checkbox } from '@/ui-kit/CheckBox';
+import { EditButton } from '@/ui-kit/EditButton';
+import { DeleteButton } from '@/ui-kit/DeleteButton';
 import clsx from 'clsx';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteTodo, updateTodo } from '@/utils/fetchTodos';
 import style from './todo-item.module.scss';
 
 export interface ITodoItem {
@@ -21,33 +23,9 @@ export const TodoItem = ({ completed, _id, text, className }: ITodoItem) => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [taskText, setTaskText] = useState(text);
 	const textRef = useRef<HTMLInputElement | null>(null);
-	const queryClient = useQueryClient();
-	const { mutate: update } = useMutation({
-		mutationFn: updateTodo,
-		onMutate: async (newTodo: ITodoItem) => {
-			await queryClient.cancelQueries({ queryKey: ['todos', newTodo._id] });
-			const prevTodo = queryClient.getQueryData(['todos', newTodo._id]);
-			queryClient.setQueryData(['todos', newTodo._id], newTodo);
 
-			return { prevTodo, newTodo };
-		},
-		onError: (err, _, context) => {
-			console.log(err);
-			queryClient.setQueryData(
-				['todos', context?.newTodo._id],
-				context?.prevTodo
-			);
-		},
-		onSuccess: (newTodo: ITodoItem | undefined) => {
-			queryClient.invalidateQueries({ queryKey: ['todos', newTodo?._id] });
-		},
-	});
-	const { mutate: _delete } = useMutation({
-		mutationFn: () => deleteTodo(_id),
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['todos'] });
-		},
-	});
+	const { mutate: update } = useMutationUpdate(updateTodo);
+	const { mutate: deleteOne } = useMutationDelete(() => deleteTodo(_id));
 
 	useEffect(() => {
 		textRef.current?.focus();
@@ -63,7 +41,7 @@ export const TodoItem = ({ completed, _id, text, className }: ITodoItem) => {
 	}, [_id, isCompleted, taskText, update]);
 
 	const handleDeleteTodo = () => {
-		_delete();
+		deleteOne();
 	};
 
 	const handeEditClick = () => {
