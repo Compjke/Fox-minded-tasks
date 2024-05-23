@@ -1,0 +1,38 @@
+.container {
+	max-width: 450px;
+}
+
+.label {
+	display: flex;
+	flex-direction: column;
+	row-gap: 7px;
+
+	span {
+		font-weight: 700;
+		font-size: 10px;
+		line-height: 120%;
+		letter-spacing: -0.02em;
+	}
+}
+
+.textArea {
+	border: none;
+	background: transparent;
+	color: var(--main-color);
+	resize: vertical;
+	padding: 0;
+	height: auto;
+	max-height: 20px;
+	overflow: hidden;
+	outline: none;
+	font-weight: 400;
+	font-size: 15px;
+	letter-spacing: -0.02em;
+	border-bottom: 1px solid var(--input-border-color);
+	transition: all 0.3s ease;
+	scrollbar-width: thin;
+	transition: max-height 1.5s;
+	&:focus {
+		max-height: 1000px;
+	}
+}
