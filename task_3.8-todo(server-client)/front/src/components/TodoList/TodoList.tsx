@@ -16,7 +16,7 @@ export const TodoList = () => {
 	// ! USE MUTATION
 	const variables = useMutationState({
 		filters: { mutationKey: ['addTodo'], status: 'pending' },
-		select: (mut) => mut.state,
+		select: (mut) => mut.state.variables as ITodoItem,
 	});
 
 	if (isLoading) {
@@ -36,11 +36,11 @@ export const TodoList = () => {
 					todos.map(({ text, _id, completed }: ITodoItem) => (
 						<TodoItem key={_id} text={text} completed={completed} _id={_id} />
 					))}
-				{variables[0]?.status === 'pending' && (
+				{variables[0] && (
 					<TodoItem
 						className={style.tempItem}
 						_id={tempId}
-						text={variables[0]?.variables?.text}
+						text={variables[0].text}
 						completed={false}
 					/>
 				)}

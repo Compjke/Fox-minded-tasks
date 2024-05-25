@@ -2,7 +2,7 @@ import { Button } from '@/ui-kit/Button';
 import style from './PProductCardBasket.module.scss';
 import { DeleteIcon, MinusIcon, PlusIcon } from '@/ui-kit/icons';
 import clsx from 'clsx';
-import { productsActions, useAppDispatch, useStateSelector } from '@/store';
+import { productsActions, useAppDispatch } from '@/store';
 
 interface IProps {
 	className?: string;
@@ -25,7 +25,7 @@ export const ProductCardBasket = ({
 }: IProps) => {
 	const dispatch = useAppDispatch();
 	
-	const handleIncrementProduct = (id) => {};
+
 
 	return (
 		<li className={clsx(className, style.card)}>
