@@ -10,8 +10,6 @@ export const SignInButton = () => {
 		signInWithPopup(auth, googleAuthProvider)
 			.then(({ user }) => {
 				const { displayName, email, accessToken } = user;
-				console.log(user);
-				console.log(accessToken);
 				dispatch(setUser({ displayName, email, accessToken }));
 			})
 			.catch((err) => console.log(err));
