@@ -1,5 +1,5 @@
 import { ReactNode } from '@tanstack/react-router';
-
+import style from './layout.module.scss';
 interface LayoutSockets {
 	headerSlot: ReactNode;
 	sidebarSlot: ReactNode;
@@ -14,13 +14,13 @@ export const Layout = ({
 	sidebarSlot,
 }: LayoutSockets) => {
 	return (
-		<div>
-			<header>{headerSlot}</header>
+		<div className={style.root}>
+			{headerSlot}
 			<div>
 				{sidebarSlot}
 				{mainContentSlot}
 			</div>
-			<footer>{footerSlot}</footer>
+			{footerSlot}
 		</div>
 	);
 };

@@ -9,5 +9,5 @@ export const useLocalStorage = (key: string, defaultData: string = 'light') => {
 		localStorage.setItem(key, state);
 	}, [key, state]);
 
-	return { state, setState };
+	return [state, setState];
 };

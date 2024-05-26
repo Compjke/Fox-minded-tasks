@@ -1,0 +1,19 @@
+// @import '@/app/styles/index.scss';
+
+.root {
+	background-color: var(--main-light-color);
+}
+
+.inner {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 60px;
+}
+
+.left,
+.right {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}

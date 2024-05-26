@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ThemeContextProvider } from './providers/ThemeContext.tsx';
+import { ThemeProvider } from '@/shared/theme';
 import { ToastProvider } from '@/shared/ui-kit/Toast/ToastContext.tsx';
 
 import './styles/index.scss';
@@ -11,12 +11,12 @@ import { App } from './App.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
-		<ThemeContextProvider>
+		<ThemeProvider>
 			<ToastProvider>
 				<ReduxProvider store={store}>
-					<App/>
+					<App />
 				</ReduxProvider>
 			</ToastProvider>
-		</ThemeContextProvider>
+		</ThemeProvider>
 	</React.StrictMode>
 );

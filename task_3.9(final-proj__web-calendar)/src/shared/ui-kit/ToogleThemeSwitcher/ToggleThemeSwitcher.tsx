@@ -1,4 +1,4 @@
-import { ThemeContext } from '@/context/ThemeContext';
+import { ThemeContext } from '@/shared/theme';
 import { useContext } from 'react';
 import styles from './toggleThemeSwitche.module.scss';
 

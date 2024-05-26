@@ -10,10 +10,11 @@ export const ThemeContext = createContext<IThemeContext>({
 	theme: 'light',
 });
 
-export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 	// const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
-	const { theme, setTheme } = useLocalStorage('theme') as IThemeContext;
+	const [theme, setTheme] = useLocalStorage('theme') as IThemeContext;
 
+	console.log(theme);
 	useEffect(() => {
 		const root = document.querySelector(':root');
 		if (theme === 'dark') root?.classList.add('dark');
