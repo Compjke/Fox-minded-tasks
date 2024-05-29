@@ -3,10 +3,10 @@ import { useDate } from '@/shared/models/date/selectors';
 import clsx from 'clsx';
 
 import style from './dates-row.module.scss';
-
+import { useStateSelector } from '@/app/store';
 
 export const DatesRow = () => {
-	const { date } = useDate();
+	const date = useStateSelector((s) => s.daysOfWeekReducer.days);
 	return (
 		<div className={style.row}>
 			{getDaysBetweenCustom(date, 'next').map((date, ind) => (
