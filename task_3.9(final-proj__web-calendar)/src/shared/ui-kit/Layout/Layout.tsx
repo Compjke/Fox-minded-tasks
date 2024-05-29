@@ -16,10 +16,10 @@ export const Layout = ({
 	return (
 		<div className={style.root}>
 			{headerSlot}
-			<div>
+			<main className={style.main}>
 				{sidebarSlot}
 				{mainContentSlot}
-			</div>
+			</main>
 			{footerSlot}
 		</div>
 	);

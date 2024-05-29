@@ -1,37 +1,34 @@
 import { generateDate, months } from '@/shared/libs/calendar';
-import style from './date_picker.module.scss';
-import clsx from 'clsx';
-import dayjs from 'dayjs';
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler } from 'react';
 
+import { useAppDispatch } from '@/app/store';
+import { changeDateInSmall,setSelectedDateInSmall } from '@/shared/models';
 import { Icon } from '../Icon';
+import clsx from 'clsx';
+import style from './date_picker.module.scss';
+import { useDate } from '@/shared/models/date/selectors';
+
 
 const DAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-const currentDay = dayjs();
+
 interface IDatePicker {
 	disableHighlightToday?: boolean;
 	canPickToday?: boolean;
-	pickTodayByDefault?: boolean;
 }
 
 export const DatePicker = ({
 	disableHighlightToday = false,
 	canPickToday = false,
-	pickTodayByDefault = false,
 }: IDatePicker) => {
-	const [date, setDate] = useState(currentDay);
-	const [selectedDate, setSelectedDate] = useState(
-		pickTodayByDefault ? currentDay : null
-	);
-
-	console.log(selectedDate?.toDate().toDateString());
+	const { date, selectedDate } = useDate();
+	const dispatch = useAppDispatch();
 
 	const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
 		const action = e.currentTarget.attributes.datatype.value;
 		if (action === 'prev') {
-			setDate(date.month(date.month() - 1));
+			dispatch(changeDateInSmall(date.month(date.month() - 1)));
 		} else {
-			setDate(date.month(date.month() + 1));
+			dispatch(changeDateInSmall(date.month(date.month() + 1)));
 		}
 	};
 	return (
@@ -53,8 +50,7 @@ export const DatePicker = ({
 						<button
 							className={style.todayBtn}
 							onClick={() => {
-								setDate(currentDay);
-								setSelectedDate(currentDay);
+								dispatch(setSelectedDateInSmall(date));
 							}}
 						>
 							Today
@@ -81,7 +77,9 @@ export const DatePicker = ({
 						return (
 							<span
 								data-testid='date'
-								onClick={() => setSelectedDate(date)}
+								onClick={() => {
+									dispatch(setSelectedDateInSmall(date));
+								}}
 								key={ind}
 								className={clsx(
 									style.date,

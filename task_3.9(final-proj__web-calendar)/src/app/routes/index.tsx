@@ -4,7 +4,6 @@ import { BaseLayout } from '../layout/baseLayout';
 
 export const Route = createFileRoute('/')({
 	beforeLoad: ({ context, location }) => {
-		console.log(location);
 		if (!context.authentication) {
 			throw redirect({
 				to: '/login',

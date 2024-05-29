@@ -25,7 +25,7 @@ export const generateDate = (
 				dayjs().toDate().toDateString(),
 		});
 	}
-
+	// console.log(arrayofDates);
 	const remaining = 42 - arrayofDates.length;
 
 	for (
@@ -35,7 +35,7 @@ export const generateDate = (
 	) {
 		arrayofDates.push({ currentMonth: false, date: lastDayOfMonth.date(i) });
 	}
-	
+	// console.log(arrayofDates);
 	return arrayofDates;
 };
 

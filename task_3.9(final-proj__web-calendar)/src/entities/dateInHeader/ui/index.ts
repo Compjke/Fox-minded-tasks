@@ -1,0 +1,1 @@
+export { DateInHeader } from './DateInHeader';

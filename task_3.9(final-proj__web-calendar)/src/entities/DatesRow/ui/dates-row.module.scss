@@ -1,0 +1,14 @@
+.row {
+	display: grid;
+	grid-template-columns: repeat(7, minmax(150px, 1fr));
+	box-shadow: 0 1px 2px 0 #dedfe5;
+	background-color: var(--main-light-color);
+}
+
+.dayWeek {
+	padding: 13px 59px;
+	border-right: 1px solid #dedfe5;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
