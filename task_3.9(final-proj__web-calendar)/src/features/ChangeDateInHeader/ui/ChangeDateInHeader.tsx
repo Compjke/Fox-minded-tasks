@@ -4,13 +4,13 @@ import { Button } from '@/shared/ui-kit/Button';
 import style from './change-date-header.module.scss';
 
 export default function ChangeDateInHeader() {
-	const { date } = useDate();
+	const { selectedDate } = useDate();
 	const dispatch = useAppDispatch();
 	const handleChangeDate = (action: 'prevWeek' | 'nextWeek' | 'today') => {
 		dispatch(changeDateInHeader(action));
 	};
 
-	console.log(date);
+
 	return (
 		<div className={style.root}>
 			<Button
@@ -30,7 +30,7 @@ export default function ChangeDateInHeader() {
 					onClick={() => handleChangeDate('nextWeek')}
 				/>
 			</div>
-			<span className={style.date}>{date.format('MMMM YYYY')}</span>
+			<span className={style.date}>{selectedDate.format('MMMM YYYY')}</span>
 		</div>
 	);
 }
