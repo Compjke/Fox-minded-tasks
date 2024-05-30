@@ -7,8 +7,8 @@ import { Icon } from '../Icon';
 import { IconName } from '../Icon/Icon';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	label: string;
-	appereance: 'primary' | 'secondary';
+	label?: string;
+	appereance?: 'primary' | 'secondary';
 	onClick?: () => void;
 	disabled?: boolean;
 	bgColor?: string;
@@ -16,7 +16,7 @@ interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = ({
-	appereance = 'primary',
+	appereance,
 	label,
 	disabled = false,
 	onClick,
@@ -29,7 +29,7 @@ export const Button = ({
 			style={{ backgroundColor: bgColor }}
 			disabled={disabled}
 			onClick={onClick}
-			className={clsx(style.button, style[appereance])}
+			className={clsx(style.button, style[appereance!])}
 			{...props}
 		>
 			{icon && <Icon role='icon' name={icon} />}

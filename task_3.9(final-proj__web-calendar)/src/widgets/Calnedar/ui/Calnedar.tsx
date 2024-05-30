@@ -1,4 +1,4 @@
-import { DatesRow } from '@/entities/DatesRow/ui/DatesRow';
+import { DatesRow } from '@/entities/date-row/ui/DatesRow';
 import style from './calendar.module.scss';
 
 export default function Calnedar() {

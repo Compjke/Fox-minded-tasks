@@ -1,10 +1,10 @@
-import { DatePicker } from '@/shared/ui-kit/DatePicker';
-import React from 'react';
+import { PickDateInDatePicker } from '@/features/PickDateInDatePicker/ui';
+
 
 export const SideBar = () => {
 	return (
 		<aside>
-			<DatePicker />
+			<PickDateInDatePicker />
 		</aside>
 	);
 };

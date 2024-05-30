@@ -1,15 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { userReducer } from '@/entities/user';
-import { dateReducer } from '@/shared/models/';
+
 import { rememberReducer, rememberEnhancer } from 'redux-remember';
-import { daysOfWeekReducer } from '@/entities/DatesRow';
+import { dateReducer } from '@/entities/date';
 
 const rememberedKeys = ['userReducer'];
 
 const reducers = {
 	userReducer,
 	dateReducer,
-	daysOfWeekReducer,
 };
 
 const reducer = rememberReducer(reducers);

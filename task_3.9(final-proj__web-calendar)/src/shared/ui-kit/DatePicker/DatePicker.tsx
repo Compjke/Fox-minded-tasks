@@ -1,36 +1,30 @@
 import { generateDate, months } from '@/shared/libs/calendar';
-import { MouseEventHandler } from 'react';
-
-import { useAppDispatch } from '@/app/store';
-import { changeDateInSmall,setSelectedDateInSmall } from '@/shared/models';
 import { Icon } from '../Icon';
 import clsx from 'clsx';
 import style from './date_picker.module.scss';
-import { useDate } from '@/shared/models/date/selectors';
 
+import { Dayjs } from 'dayjs';
+import { MouseEventHandler } from 'react';
 
 const DAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 interface IDatePicker {
 	disableHighlightToday?: boolean;
 	canPickToday?: boolean;
+	date: Dayjs;
+	selectedDate: Dayjs;
+	onDateChange: MouseEventHandler<HTMLButtonElement>;
+	onDatePick: (date: Dayjs) => void;
 }
 
 export const DatePicker = ({
 	disableHighlightToday = false,
 	canPickToday = false,
+	date,
+	selectedDate,
+	onDateChange,
+	onDatePick,
 }: IDatePicker) => {
-	const { date, selectedDate } = useDate();
-	const dispatch = useAppDispatch();
-
-	const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-		const action = e.currentTarget.attributes.datatype.value;
-		if (action === 'prev') {
-			dispatch(changeDateInSmall(date.month(date.month() - 1)));
-		} else {
-			dispatch(changeDateInSmall(date.month(date.month() + 1)));
-		}
-	};
 	return (
 		<div data-testid='date-picker' className={style.container}>
 			<div className={style.panel}>
@@ -40,25 +34,20 @@ export const DatePicker = ({
 				<div className={style.panelActions}>
 					<button
 						type='button'
-						onClick={handleClick}
+						onClick={onDateChange}
 						datatype='prev'
 						className={style.panelBtn}
 					>
 						<Icon name='arrow-left' className={style.arrow} />
 					</button>
 					{canPickToday && (
-						<button
-							className={style.todayBtn}
-							onClick={() => {
-								dispatch(setSelectedDateInSmall(date));
-							}}
-						>
+						<button className={style.todayBtn} onClick={onDateChange}>
 							Today
 						</button>
 					)}
 					<button
 						type='button'
-						onClick={handleClick}
+						onClick={onDateChange}
 						datatype='next'
 						className={style.panelBtn}
 					>
@@ -77,9 +66,7 @@ export const DatePicker = ({
 						return (
 							<span
 								data-testid='date'
-								onClick={() => {
-									dispatch(setSelectedDateInSmall(date));
-								}}
+								onClick={() => onDatePick(date)}
 								key={ind}
 								className={clsx(
 									style.date,
