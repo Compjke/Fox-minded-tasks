@@ -1,8 +1,8 @@
 import { useAppDispatch } from '@/app/store';
 import { useDate, setSelectedDateInSmall } from '@/entities/date';
 import { DatePicker } from '@/shared/ui-kit/DatePicker';
-import dayjs, { Dayjs } from 'dayjs';
-import { MouseEventHandler, useState } from 'react';
+import  { Dayjs } from 'dayjs';
+
 
 export const PickDateInDatePicker = () => {
 	const { selectedDate } = useDate();

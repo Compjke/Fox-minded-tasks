@@ -44,6 +44,8 @@
 	--input-border-color-focus: #323749;
 	--input-disabled: #737373;
 
+	--current-date-bg : #dff5e2;
+
 }
 
 :root.dark {
@@ -83,6 +85,8 @@
 
 	--input-border-color: #afaeae;
 	--input-border-color-focus: #e5e5e5;
+
+	--current-date-bg : #66f379;
 }
 
 body {

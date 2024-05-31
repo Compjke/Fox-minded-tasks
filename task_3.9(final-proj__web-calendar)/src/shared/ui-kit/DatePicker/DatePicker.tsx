@@ -4,14 +4,13 @@ import clsx from 'clsx';
 import style from './date_picker.module.scss';
 
 import { Dayjs } from 'dayjs';
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler, useEffect, useLayoutEffect, useState } from 'react';
 
 const DAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 interface IDatePicker {
 	disableHighlightToday?: boolean;
 	canPickToday?: boolean;
-	date: Dayjs;
 	selectedDate: Dayjs;
 	onDatePick: (date: Dayjs) => void;
 }
@@ -23,6 +22,13 @@ export const DatePicker = ({
 	onDatePick,
 }: IDatePicker) => {
 	const [dateInDatePicker, setDateInDatePicker] = useState(selectedDate);
+
+	useLayoutEffect(() => {
+		setDateInDatePicker(selectedDate);
+	}, [selectedDate]);
+	
+	console.log('inPicker: ' + dateInDatePicker.toDate());
+	console.log('inGlobal: ' + selectedDate.toDate());
 	const handleChangheMonth: MouseEventHandler = (e) => {
 		const action = e.currentTarget.attributes.datatype.value;
 		if (action === 'prev') {
