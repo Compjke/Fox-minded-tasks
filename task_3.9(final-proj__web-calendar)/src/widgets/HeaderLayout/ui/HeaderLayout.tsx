@@ -4,8 +4,8 @@ import { Logo } from '@/shared/ui-kit/Logo/Logo';
 
 import styles from './header-layout.module.scss';
 import { ToggleThemeSwitcher } from '@/shared/ui-kit/ToogleThemeSwitcher';
-import { DateInHeader } from '@/entities/dateInHeader';
-import { ChangeDateInHeader } from '@/features/ChangeDateInHeader';
+
+import { HeaderDateSwitcher } from '@/features/HeaderDateSwitcher';
 
 export default function HeaderLayout() {
 	return (
@@ -13,7 +13,7 @@ export default function HeaderLayout() {
 			<div className={styles.inner}>
 				<div className={styles.right}>
 					<Logo />
-					<ChangeDateInHeader />
+					<HeaderDateSwitcher />
 				</div>
 				<div className={styles.left}>
 					<DropDownMenu isShown={false} items={['Week', 'Days']} />

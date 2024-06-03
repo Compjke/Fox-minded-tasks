@@ -1,10 +1,10 @@
-import { PickDateInDatePicker } from '@/features/PickDateInDatePicker/ui';
+import { DatePickerFeature } from '@/features/DatePicker/ui';
 
 
 export const SideBar = () => {
 	return (
 		<aside>
-			<PickDateInDatePicker />
+			<DatePickerFeature />
 		</aside>
 	);
 };

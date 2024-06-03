@@ -3,7 +3,7 @@ import { changeDateInHeader, useDate } from '@/entities/date';
 import { Button } from '@/shared/ui-kit/Button';
 import style from './change-date-header.module.scss';
 
-export default function ChangeDateInHeader() {
+export default function HeaderDateSwitcher() {
 	const { selectedDate } = useDate();
 	const dispatch = useAppDispatch();
 	const handleChangeDate = (action: 'prevWeek' | 'nextWeek' | 'today') => {

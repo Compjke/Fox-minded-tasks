@@ -4,7 +4,7 @@ import { DatePicker } from '@/shared/ui-kit/DatePicker';
 import  { Dayjs } from 'dayjs';
 
 
-export const PickDateInDatePicker = () => {
+export const DatePickerFeature = () => {
 	const { selectedDate } = useDate();
 	
 	const dispatch = useAppDispatch();
@@ -21,4 +21,4 @@ export const PickDateInDatePicker = () => {
 	);
 };
 
-export default PickDateInDatePicker;
+export default DatePickerFeature;
