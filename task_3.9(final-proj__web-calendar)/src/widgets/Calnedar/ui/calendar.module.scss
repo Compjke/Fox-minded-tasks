@@ -1,4 +1,22 @@
 .calendar {
-	max-width: 1050px;
 	flex: 1 1 auto;
+	display: flex;
+	align-items: center;
+	column-gap: 20px;
+
+}
+
+.times {
+	display: flex;
+	flex-direction: column;
+	margin-top: 70px;
+	row-gap: 44px;
+	width: 60px;
+}
+
+.time {
+	display: block;
+	font-size: 12px;
+	line-height: 133%;
+	letter-spacing: -0.02em;
 }

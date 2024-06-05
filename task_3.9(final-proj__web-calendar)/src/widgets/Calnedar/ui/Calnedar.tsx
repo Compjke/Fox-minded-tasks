@@ -1,10 +1,12 @@
 import { DatesRow } from '@/entities/date-row/ui/DatesRow';
 import style from './calendar.module.scss';
+import TimesCol from './TimesCol';
 
 export default function Calnedar() {
 	return (
-		<div className={style.calendar}>
+		<section className={style.calendar}>
+			<TimesCol />
 			<DatesRow />
-		</div>
+		</section>
 	);
 }

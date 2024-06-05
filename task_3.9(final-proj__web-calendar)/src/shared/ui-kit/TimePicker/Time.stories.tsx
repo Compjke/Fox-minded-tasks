@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Select } from './Select';
+import { Select } from './TimePicker';
 
 const meta = {
 	title: 'Select',

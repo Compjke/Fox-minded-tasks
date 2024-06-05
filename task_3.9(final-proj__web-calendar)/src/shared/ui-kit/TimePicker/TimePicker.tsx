@@ -1,25 +1,25 @@
 import clsx from 'clsx';
-import style from './select.module.scss';
+import style from './time.module.scss';
 import { SetStateAction, useEffect, useRef, useState } from 'react';
 import { getTimesArr } from '@/shared/libs/time';
 import dayjs from 'dayjs';
 
-interface ISelect {
+interface ITimePicker {
 	className?: string;
-	label: string;
+	label?: string;
 	onSelect: (item: string) => void;
 	// children: ReactNode;
-	options: string[];
+	options?: string[];
 	defaultValue?: string;
 }
 
-export const Select = ({
+export const TimePicker = ({
 	className,
 	label = 'Time',
 	onSelect,
 	options = getTimesArr(),
 	defaultValue = dayjs().format('HH:mm a'),
-}: ISelect) => {
+}: ITimePicker) => {
 	const [open, setOpen] = useState(false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 	const [selectedValue, setSelectedValue] = useState(defaultValue);

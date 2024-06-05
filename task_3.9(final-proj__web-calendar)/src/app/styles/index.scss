@@ -27,7 +27,7 @@
 	--toggle-bg: rgb(53, 214, 0);
 	--toggle-fg: #fff;
 	--bg-modal: #fff;
-	--main-bg-color: #f2f5f7;;
+	--main-bg-color: #f2f5f7;
 	--backdrop-bg: rgba(0, 0, 0, 0.24);
 
 	--date-picker-bg: #fff;
@@ -44,8 +44,7 @@
 	--input-border-color-focus: #323749;
 	--input-disabled: #737373;
 
-	--current-date-bg : #dff5e2;
-
+	--current-date-bg: #dff5e2;
 }
 
 :root.dark {
@@ -86,7 +85,13 @@
 	--input-border-color: #afaeae;
 	--input-border-color-focus: #e5e5e5;
 
-	--current-date-bg : #66f379;
+	--current-date-bg: #66f379;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 body {

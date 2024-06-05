@@ -1,0 +1,22 @@
+.event {
+	position: absolute;
+	z-index: 100;
+	max-width: 95%;
+	border-radius: 4px;
+}
+
+.title {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	font-size: 15px;
+	line-height: 133%;
+	letter-spacing: -0.02em;
+	font-weight: 400;
+}
+
+.time {
+	font-size: 12px;
+	line-height: 167%;
+	letter-spacing: -0.03em;
+}

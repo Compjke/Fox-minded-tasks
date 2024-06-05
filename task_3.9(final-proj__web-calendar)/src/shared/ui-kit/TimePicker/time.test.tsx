@@ -1,6 +1,6 @@
 import { screen, render } from '@testing-library/react';
 
-import { Select } from './Select';
+import { Select } from './TimePicker';
 import { vi } from 'vitest';
 import { getTimesArr } from '@/shared/libs/time';
 import dayjs from 'dayjs';

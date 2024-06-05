@@ -27,8 +27,7 @@ export const DatePicker = ({
 		setDateInDatePicker(selectedDate);
 	}, [selectedDate]);
 	
-	console.log('inPicker: ' + dateInDatePicker.toDate());
-	console.log('inGlobal: ' + selectedDate.toDate());
+	
 	const handleChangheMonth: MouseEventHandler = (e) => {
 		const action = e.currentTarget.attributes.datatype.value;
 		if (action === 'prev') {
