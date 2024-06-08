@@ -25,8 +25,13 @@ import {
 	PlusIcon,
 	ShowPasswordIcon,
 	UserIcon,
+	TextIcon,
+	ClockIcon,
+	DescriptionIcon,
+	ColorPickerIcon,
 } from '../icons';
 import { SVGAttributes } from 'react';
+import { CalendarIcon } from '../icons/CalendarIcon';
 
 const ICON_MAP = {
 	[ICONS.ARROW_UP]: ArrowUp,
@@ -54,6 +59,11 @@ const ICON_MAP = {
 	[ICONS.PLAY_IN_CIRCLE]: PlayIconInCircle,
 	[ICONS.SHOW_PASSWORD]: ShowPasswordIcon,
 	[ICONS.USER]: UserIcon,
+	[ICONS.TEXT]: TextIcon,
+	[ICONS.CLOCK]: ClockIcon,
+	[ICONS.CALENDAR]: CalendarIcon,
+	[ICONS.DESCRIPTION]: DescriptionIcon,
+	[ICONS.COLOR_PICKER]: ColorPickerIcon,
 } as const;
 
 export type IconName = keyof typeof ICON_MAP;
@@ -61,10 +71,11 @@ export type IconName = keyof typeof ICON_MAP;
 interface IIcon extends SVGAttributes<HTMLOrSVGElement> {
 	className?: string;
 	name: IconName;
+	color?: string;
 }
 
-export function Icon({ name, className }: IIcon) {
+export function Icon({ name, className, color }: IIcon) {
 	const Svg = ICON_MAP[name];
 
-	return <Svg  className={className!} />;
+	return <Svg className={className!} color={color} />;
 }

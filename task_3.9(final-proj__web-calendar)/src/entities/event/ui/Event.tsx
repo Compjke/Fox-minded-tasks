@@ -3,12 +3,16 @@ import { IEvent } from '../model/eventSlice';
 import style from './events.module.scss';
 export default function Event({
 	calendar,
-	forAllDay,
+	isForAllDay,
 	time,
 	date,
 	title,
 }: Exclude<IEvent, 'description'>) {
-	const { top, height, bgColor } = calcStyles(time.start, time.end, calendar);
+	const { top, height, bgColor } = calcStyles(
+		time.start,
+		time.end,
+		calendar
+	);
 
 	return (
 		<div

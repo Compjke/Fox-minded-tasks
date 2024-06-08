@@ -1,11 +1,10 @@
 .calendar {
-	flex: 1 1 auto;
+	// flex: 1 1 auto;
+	padding-right: 50px;
 	display: flex;
 	align-items: center;
 	column-gap: 20px;
-
 }
-
 .times {
 	display: flex;
 	flex-direction: column;
@@ -13,10 +12,59 @@
 	row-gap: 44px;
 	width: 60px;
 }
-
 .time {
 	display: block;
 	font-size: 12px;
 	line-height: 133%;
 	letter-spacing: -0.02em;
+}
+
+.row {
+	display: grid;
+	grid-template-columns: repeat(7, minmax(150px, 1fr));
+	background-color: var(--main-light-color);
+	position: relative;
+	&::after {
+		position: absolute;
+		content: '';
+		height: 2px;
+		box-shadow: 0 1px 2px 0 #dedfe5;
+		background: #dedfe5;
+		width: 109%;
+		top: 67px;
+		right: 0;
+		z-index: 200;
+	}
+}
+
+.wrapper {
+	padding: 5px 7px;
+	border-right: 1px solid #dedfe5;
+}
+
+.dayWeek {
+	padding: 13px 59px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.today {
+	border-radius: 8px;
+	background-color: var(--current-date-bg);
+}
+
+.timeCols {
+	display: flex;
+	flex-direction: column;
+}
+
+.timeCell {
+	height: 60px;
+	border: 1px solid var(--border);
+	position: relative;
+}
+
+.day {
+	font-size: 10px;
 }

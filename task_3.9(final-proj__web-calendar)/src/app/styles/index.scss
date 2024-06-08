@@ -21,6 +21,8 @@
 	--bg-button-secondary-active: #e0e0e0;
 	--bg-button-secondary-disabled: #c8c8c8;
 
+	
+
 	--checkbox-border-color: #323749;
 	--checkbox-filled-color: #323749;
 
@@ -45,12 +47,14 @@
 	--input-disabled: #737373;
 
 	--current-date-bg: #dff5e2;
+
+	--border: #dedfe5;
 }
 
 :root.dark {
 	--main-color: #fff;
 	--color-primary: #fefafa;
-	--main-light-color: #323749;
+	--main-light-color: #3e393f;
 	--main-dark-color: #7b7a7a;
 	--main-bg-color: #333333;
 	// button
@@ -73,7 +77,7 @@
 	--bg-modal: #5c5b5b;
 	// --backdrop-bg: rgba(247, 244, 244, 0.76);
 	// datepicker
-	--date-picker-bg: #b1aeae;
+	--date-picker-bg: #666666;
 	--date-picker-shadow: rgba(200, 200, 200, 0.508);
 	//dropdown
 	--drop-down-bg: #6b6767;

@@ -16,7 +16,7 @@
 .selectInput {
 	outline: none;
 	border: none;
-   padding-bottom: 7px;
+	padding-bottom: 7px;
 	background: transparent;
 	color: var(--main-color);
 	font-weight: 400;
@@ -53,4 +53,21 @@
 	&.selected {
 		background: #e3e3e3;
 	}
+
+	&.errorBorder {
+		border-color: #ff5620;
+	}
+
+	&:disabled {
+		color: var(--input-disabled);
+		border-color: var(--input-disabled);
+	}
+}
+
+.error {
+	display: block;
+	font-size: 10px;
+	line-height: 120%;
+	letter-spacing: -0.02em;
+	color: #ff5620;
 }

@@ -1,5 +1,6 @@
 import { RootStore } from '@/app/store';
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+
+import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import dayjs, { Dayjs } from 'dayjs';
 
 export interface ITimeEvent {
@@ -12,33 +13,22 @@ export interface IEvent {
 	title: string;
 	date: Dayjs;
 	time: ITimeEvent;
-	forAllDay: boolean;
+	isForAllDay: boolean;
 	calendar: any; //! Rewrite!
 	description: string;
 }
 
 const init: IEvent[] = [
 	{
-		calendar: '#9F2957',
-		date: dayjs(),
-		time: {
-			start: '00:15 am',
-			end: '01:00 am',
-		},
-		description: 'Test task text',
-		forAllDay: false,
-		title: 'Test title',
-	},
-	{
 		calendar: '#16AF6E',
 		date: dayjs().add(1, 'days'),
 		time: {
-			start: '02:30 am',
-			end: '05:00 am',
+			start: '00:00 am',
+			end: '24:00 pm',
 		},
-		description: 'Test-2 task text',
-		forAllDay: false,
-		title: 'Test-2 title',
+		description: 'Test-2 for all day',
+		isForAllDay: true,
+		title: 'for all day',
 	},
 	{
 		calendar: '#B8C42F',
@@ -48,7 +38,7 @@ const init: IEvent[] = [
 			end: '22:15 pm',
 		},
 		description: 'Test-2 task text',
-		forAllDay: false,
+		isForAllDay: false,
 		title: 'Very long very long very  long long long title',
 	},
 ];
@@ -56,10 +46,14 @@ const init: IEvent[] = [
 const eventSlice = createSlice({
 	name: 'event',
 	initialState: init,
-	reducers: {},
+	reducers: {
+		addNewEvent: (state, action: PayloadAction<IEvent>) => {
+			state.push(action.payload);
+		},
+	},
 });
 
-// export const {} = eventSlice.actions
+export const { addNewEvent } = eventSlice.actions;
 
 export const eventByDate = createSelector(
 	[(state: RootStore) => state.eventReducer, (_, date) => date],
@@ -68,7 +62,8 @@ export const eventByDate = createSelector(
 		// console.log('memoized selector ran');
 		return events.find(
 			(event) =>
-				event.date.toDate().toDateString() === date.toDate().toDateString()
+				dayjs(event.date).toDate().toDateString() ===
+				date.toDate().toDateString()
 		);
 	}
 );

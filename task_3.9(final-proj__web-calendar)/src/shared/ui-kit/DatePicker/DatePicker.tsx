@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import style from './date_picker.module.scss';
 
 import { Dayjs } from 'dayjs';
-import { MouseEventHandler, useEffect, useLayoutEffect, useState } from 'react';
+import { MouseEventHandler, useLayoutEffect, useState } from 'react';
 
 const DAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
@@ -13,6 +13,7 @@ interface IDatePicker {
 	canPickToday?: boolean;
 	selectedDate: Dayjs;
 	onDatePick: (date: Dayjs) => void;
+	className?: string;
 }
 
 export const DatePicker = ({
@@ -20,14 +21,14 @@ export const DatePicker = ({
 	canPickToday = false,
 	selectedDate,
 	onDatePick,
+	className,
 }: IDatePicker) => {
 	const [dateInDatePicker, setDateInDatePicker] = useState(selectedDate);
 
 	useLayoutEffect(() => {
 		setDateInDatePicker(selectedDate);
 	}, [selectedDate]);
-	
-	
+
 	const handleChangheMonth: MouseEventHandler = (e) => {
 		const action = e.currentTarget.attributes.datatype.value;
 		if (action === 'prev') {
@@ -37,7 +38,7 @@ export const DatePicker = ({
 		}
 	};
 	return (
-		<div data-testid='date-picker' className={style.container}>
+		<div data-testid='date-picker' className={clsx(style.container, className)}>
 			<div className={style.panel}>
 				<h3 className={style.yearAndMonth}>
 					{months[dateInDatePicker.month()]} {dateInDatePicker.year()}

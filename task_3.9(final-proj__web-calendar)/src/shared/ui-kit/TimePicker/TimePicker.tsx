@@ -1,50 +1,80 @@
-import clsx from 'clsx';
-import style from './time.module.scss';
 import { SetStateAction, useEffect, useRef, useState } from 'react';
 import { getTimesArr } from '@/shared/libs/time';
+import { IFormCreateEventValues } from '@/shared/config/types';
+import {
+	ErrorOption,
+	UseControllerProps,
+	useController,
+	useFormContext,
+} from 'react-hook-form';
 import dayjs from 'dayjs';
+import clsx from 'clsx';
+import style from './time.module.scss';
 
 interface ITimePicker {
 	className?: string;
-	label?: string;
-	onSelect: (item: string) => void;
-	// children: ReactNode;
+	labelText?: string;
+	onSelect?: (item: string) => void;
 	options?: string[];
 	defaultValue?: string;
+	disabled?: boolean;
+	required?: boolean;
+	controls: UseControllerProps<IFormCreateEventValues>;
+	error?: ErrorOption | undefined;
 }
 
-export const TimePicker = ({
+export const TestTimepicker = ({
 	className,
-	label = 'Time',
+	labelText,
 	onSelect,
 	options = getTimesArr(),
 	defaultValue = dayjs().format('HH:mm a'),
+	disabled,
+	controls,
+	error,
 }: ITimePicker) => {
+	const { field } = useController(controls);
+	const { watch, setValue } =
+		useFormContext<IFormCreateEventValues>();
 	const [open, setOpen] = useState(false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 	const [selectedValue, setSelectedValue] = useState(defaultValue);
 
 	const handleClick = (value: SetStateAction<string>) => {
 		setSelectedValue(value);
-		onSelect(selectedValue);
-		// setOpen(false);
+		field.onChange(value);
+		onSelect?.(selectedValue);
+		setOpen(false);
 	};
 
 	useEffect(() => {
-		inputRef.current.value = selectedValue;
+		if (inputRef.current) {
+			inputRef.current.value = selectedValue;
+		}
 	}, [selectedValue]);
-	// console.log('render')
+
+	useEffect(() => {
+		if (inputRef.current && watch('isForAllDay')) {
+			setValue('startTime', '00:00 am');
+			setValue('endTime', '24:00 pm');
+			setSelectedValue(field.name === 'startTime' ? '00:00 am' : '24:00 pm');
+		}
+	}, [setValue, watch('isForAllDay')]);
+
 	return (
 		<div className={clsx(style.select, className)}>
 			<label className={style.selectLabel}>
-				{label}
+				{labelText}
 				<input
 					readOnly
+					value={selectedValue}
+					disabled={disabled || watch('isForAllDay')}
 					onMouseEnter={() => setOpen((prev) => !prev)}
-					className={style.selectInput}
+					className={clsx(style.selectInput, error && style.errorBorder)}
 					ref={inputRef}
 				/>
 			</label>
+			{error && <span className={style.error}>{error.message}</span>}
 			<div className={''}>
 				{open && (
 					<ul

@@ -1,21 +1,7 @@
 import { useState } from 'react';
 import style from './color-picker.module.scss';
 import clsx from 'clsx';
-
-const colorsArr = [
-	'#9f2957',
-	'#d90056',
-	'#e25d33',
-	'#dfc45a',
-	'#b8c42f',
-	'#16af6e',
-	'#429488',
-	'#397e49',
-	'#439bdf',
-	'#4254af',
-	'#6c7ac4',
-	'#8332a4',
-];
+import { colorsArr } from '@/shared/config';
 
 interface IColorPicker {
 	colors: string[];

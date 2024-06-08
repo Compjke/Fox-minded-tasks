@@ -1,37 +1,39 @@
 import { screen, render } from '@testing-library/react';
 
-import { Select } from './TimePicker';
+import { TimePicker } from './TimePicker';
 import { vi } from 'vitest';
 import { getTimesArr } from '@/shared/libs/time';
 import dayjs from 'dayjs';
 import userEvent from '@testing-library/user-event';
 // import { InputHTMLAttributes } from 'react';
 
-describe('Select time component', () => {
+describe('TimePicker time component', () => {
 	const options = getTimesArr();
 	const onSelect = vi.fn();
 	it('should render select time component', () => {
-		render(<Select label='Test label' options={options} onSelect={() => {}} />);
+		render(
+			<TimePicker label='Test label' options={options} onSelect={() => {}} />
+		);
 
 		expect(screen.getByText(/Test label/i)).toBeInTheDocument();
 	});
 	it('should be current time in select time component by default', () => {
 		const { getByRole } = render(
-			<Select label='Test label' options={options} onSelect={() => {}} />
+			<TimePicker label='Test label' options={options} onSelect={() => {}} />
 		);
 		const input = getByRole('textbox').value;
 		expect(input).toEqual(dayjs().format('HH:mm a'));
 	});
 	it('should be hide select iptions by default', () => {
 		const { queryByRole } = render(
-			<Select label='Test label' options={options} onSelect={() => {}} />
+			<TimePicker label='Test label' options={options} onSelect={() => {}} />
 		);
 		const list = queryByRole('listbox');
 		expect(list).not.toBeInTheDocument();
 	});
 	it('should show select options when hover on select', async () => {
 		const { getByRole } = render(
-			<Select label='Test label' options={options} onSelect={onSelect} />
+			<TimePicker label='Test label' options={options} onSelect={onSelect} />
 		);
 		const input = getByRole('textbox');
 		await userEvent.hover(input, {});
@@ -40,7 +42,7 @@ describe('Select time component', () => {
 	});
 	it('should highlight selected item', async () => {
 		const { getByRole, getAllByTestId } = render(
-			<Select label='Test label' options={options} onSelect={onSelect} />
+			<TimePicker label='Test label' options={options} onSelect={onSelect} />
 		);
 		const input = getByRole('textbox');
 		await userEvent.hover(input, {});

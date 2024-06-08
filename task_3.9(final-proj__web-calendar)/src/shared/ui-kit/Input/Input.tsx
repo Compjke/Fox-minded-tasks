@@ -1,17 +1,20 @@
 import { InputHTMLAttributes, useState } from 'react';
 
-import style from './input.module.scss';
-
 import clsx from 'clsx';
 import { Icon } from '../Icon';
+import { IconName } from '../Icon/Icon';
+import { ErrorOption, Path, UseFormRegister } from 'react-hook-form';
+import { IFormCreateEventValues } from '@/shared/config/types';
+import style from './input.module.scss';
 
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
 	labelText: string;
-	error?: {
-		message: string;
-	};
 	id: string;
 	value?: string;
+	icon?: IconName;
+	register: UseFormRegister<IFormCreateEventValues>;
+	label: Path<IFormCreateEventValues>;
+	error?: ErrorOption | undefined;
 }
 
 export const Input = ({
@@ -23,6 +26,9 @@ export const Input = ({
 	disabled,
 	id,
 	value,
+	icon,
+	label,
+	register,
 	...props
 }: IInput) => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -36,41 +42,47 @@ export const Input = ({
 	};
 
 	return (
-		<div className={style.container}>
-			<label className={style.label} htmlFor={id}>
-				{labelText}
-				{required && '*'}
-			</label>
-			<input
-				value={value}
-				disabled={disabled}
-				placeholder={placeholder}
-				type={currentType}
-				className={clsx(style.input, error && style.errorBorder)}
-				{...props}
-			/>
-			{type === 'password' ? (
-				showPassword ? (
-					<button
-						data-testid='hide-password'
-						disabled={disabled}
-						onClick={handleClick}
-						className={style.icon}
-					>
-						<Icon name='hide-password' />
-					</button>
-				) : (
-					<button
-						data-testid='show-password'
-						disabled={disabled}
-						onClick={handleClick}
-						className={style.icon}
-					>
-						<Icon name='show-password' />
-					</button>
-				)
-			) : null}
-			{error && <span className={style.error}>{error.message}</span>}
+		<div className={style.inputInner}>
+			{icon && <Icon name={icon} className={style.inputIcon} />}
+			<div className={style.container}>
+				<label className={style.label} htmlFor={id}>
+					{labelText}
+					{required && '*'}
+				</label>
+				<input
+					{...register(label)}
+					value={value}
+					disabled={disabled}
+					placeholder={placeholder}
+					type={currentType}
+					className={clsx(style.input, error && style.errorBorder)}
+					{...props}
+				/>
+				{error && <span className={style.error}>{error.message}</span>}
+				{type === 'password' ? (
+					!showPassword ? (
+						<button
+							type='button'
+							data-testid='hide-password'
+							disabled={disabled}
+							onClick={handleClick}
+							className={style.icon}
+						>
+							<Icon name='hide-password' />
+						</button>
+					) : (
+						<button
+							type='button'
+							data-testid='show-password'
+							disabled={disabled}
+							onClick={handleClick}
+							className={style.icon}
+						>
+							<Icon name='show-password' />
+						</button>
+					)
+				) : null}
+			</div>
 		</div>
 	);
 };

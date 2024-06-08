@@ -3,7 +3,7 @@ import { Dayjs } from 'dayjs';
 import { useStateSelector } from '@/app/store';
 import { Event, eventByDate } from '@/entities/event';
 import { isEventExist } from '../libs/isEventExist';
-import style from './dates-view.module.scss';
+import style from './calendar.module.scss';
 
 interface TimeCelLs {
 	date: Dayjs;
@@ -11,6 +11,7 @@ interface TimeCelLs {
 
 export const TimeCells = ({ date }: TimeCelLs) => {
 	const event = useStateSelector((s) => eventByDate(s, date));
+	
 	return (
 		<div className={style.timeCols}>
 			{getTimesArr(60, 24).map((time) => (
@@ -22,6 +23,8 @@ export const TimeCells = ({ date }: TimeCelLs) => {
 									title={event.title}
 									time={event.time}
 									calendar={event.calendar}
+									isForAllDay={event.isForAllDay}
+									description={event.description}
 								/>
 							)
 						: null}

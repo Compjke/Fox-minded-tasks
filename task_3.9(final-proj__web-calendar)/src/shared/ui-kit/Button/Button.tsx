@@ -13,6 +13,7 @@ interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	disabled?: boolean;
 	bgColor?: string;
 	icon?: IconName;
+	className?: string;
 }
 
 export const Button = ({
@@ -22,6 +23,7 @@ export const Button = ({
 	onClick,
 	bgColor,
 	icon,
+	className,
 	...props
 }: IProps) => {
 	return (
@@ -29,7 +31,7 @@ export const Button = ({
 			style={{ backgroundColor: bgColor }}
 			disabled={disabled}
 			onClick={onClick}
-			className={clsx(style.button, style[appereance!])}
+			className={clsx(style.button, style[appereance!], className)}
 			{...props}
 		>
 			{icon && <Icon role='icon' name={icon} />}

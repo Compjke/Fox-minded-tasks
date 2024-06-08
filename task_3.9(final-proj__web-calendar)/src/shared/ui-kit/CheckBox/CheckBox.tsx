@@ -1,38 +1,49 @@
-import { InputHTMLAttributes, useState } from 'react';
+import { useState } from 'react';
+
+import { Icon } from '../Icon';
+import clsx from 'clsx';
 
 import style from './checkbox.module.scss';
-import { Icon } from '../Icon';
 
-interface ICheckBox extends InputHTMLAttributes<HTMLInputElement> {
+interface ICheckBox {
 	label?: string;
 	defaultState?: boolean;
+	className?: string;
+	color?: string;
 }
 
 export const CheckBox = ({
 	label,
 	defaultState = false,
+	className,
+	color,
 	...props
 }: ICheckBox) => {
+	// const { field } = useController(controls as UseControllerProps<IFormCreateEventValues>);
 	const [isChecked, setIsChecked] = useState(defaultState);
-	console.log(isChecked)
-	
+
+	const { onChange } = props;
 	const handleClick = () => {
 		setIsChecked((prev) => !prev);
+
+		onChange && onChange(!isChecked);
 	};
 
 	return (
-		<label className={style.CheckBoxContainer}>
+		<label className={clsx(style.CheckBoxContainer, className)}>
 			<input
 				className={style.input}
 				checked={isChecked}
 				onChange={handleClick}
 				type='checkbox'
-				{...props}
+				// {...props}
 				// id='checkbox'
 			/>
 			{isChecked ? (
-				<span className={style.filled}>
-					<Icon name='checkbox-filled' />
+				<span
+					className={clsx(style.filled, !color && style.filledColorDefault)}
+				>
+					<Icon color={color} name='checkbox-filled' />
 				</span>
 			) : (
 				<span className={style.empty}>

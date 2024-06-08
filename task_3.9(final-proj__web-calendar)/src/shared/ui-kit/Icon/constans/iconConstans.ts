@@ -24,6 +24,9 @@ export const ICONS = {
 	PLAY_IN_CIRCLE: 'play-circle',
 	SHOW_PASSWORD: 'show-password',
 	USER: 'user',
+	TEXT: 'text-icon',
+	CLOCK: 'clock',
+	CALENDAR: 'calendar',
+	DESCRIPTION: 'description',
+	COLOR_PICKER : 'color-picker'
 } as const;
-
-

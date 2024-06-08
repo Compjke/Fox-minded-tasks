@@ -10,7 +10,6 @@ export default function HeaderDateSwitcher() {
 		dispatch(changeDateInHeader(action));
 	};
 
-
 	return (
 		<div className={style.root}>
 			<Button

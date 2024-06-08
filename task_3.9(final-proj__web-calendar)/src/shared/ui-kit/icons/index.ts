@@ -23,3 +23,7 @@ export { ShowPasswordIcon } from './ShowPasswordIcon.tsx';
 export { ConfirmIcon } from './ConfirmIcon.tsx';
 export { InfoIcon } from './InfoIcon.tsx';
 export { UserIcon } from './UserIcon.tsx';
+export { TextIcon } from './TextIcon.tsx';
+export { default as ClockIcon } from './ClockIcon.tsx';
+export { DescriptionIcon } from './DescriptionIcon.tsx';
+export { ColorPickerIcon } from './ColorPickerIcon.tsx';

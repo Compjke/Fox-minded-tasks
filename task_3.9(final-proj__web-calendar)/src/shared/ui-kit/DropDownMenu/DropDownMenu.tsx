@@ -34,7 +34,10 @@ export const DropDownMenu = ({
 				<ul className={style.itemsList}>
 					{items.map((i) => (
 						<li
-							onClick={() => setSelectedItem(i)}
+							onClick={() => {
+								setSelectedItem(i);
+								setIsOpen((prev) => !prev);
+							}}
 							key={i}
 							className={clsx(style.item, selectedItem === i && style.selected)}
 						>

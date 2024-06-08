@@ -1,0 +1,49 @@
+.sidebar {
+	padding-left: 60px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 16px;
+}
+
+.button {
+	width: 100%;
+}
+
+.calendars {
+	border-radius: 8px;
+	background-color: var(--main-light-color);
+	padding: 16px 8px;
+	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+}
+.calendarsTop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.calendarsList {
+	padding-left: 8px;
+}
+
+.calendarItem {
+	padding: 4px 8px;
+	font-size: 12px;
+	transition: background-color 0.3s ease;
+	display: flex;
+	justify-content: space-between;
+	&:hover {
+		background-color: #f6f7f8;
+	}
+}
+
+.calendarsTitle {
+	font-size: 15px;
+}
+
+.btn{
+	background: transparent;
+	border: none;
+	padding: 0;
+	min-width: 0;
+}

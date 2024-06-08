@@ -8,7 +8,7 @@
 	overflow: hidden;
 	overflow-y: auto;
 	transition: opacity 0.3s ease;
-	z-index: 100;
+	z-index: 300;
 }
 
 .modalWrapper {
@@ -26,7 +26,7 @@
 	border-radius: 8px;
 	box-shadow: 0 16px 50px 0 rgba(0, 0, 0, 0.24);
 	background: var(--bg-modal);
-	padding: 16px 16px 48px 16px;
+	padding: 16px;
 	max-width: 70%;
 	transform: translateY(-50%);
 	animation-name: modalShow;
@@ -60,8 +60,7 @@
 	letter-spacing: -0.02em;
 }
 
-.modalContent{
-	
+.modalContent {
 }
 
 .modalCloseBtn {
