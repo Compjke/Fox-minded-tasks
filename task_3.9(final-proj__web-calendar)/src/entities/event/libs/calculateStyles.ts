@@ -25,5 +25,5 @@ function convertIntoMinutes(start: string, end: string) {
 		.map((i) => parseInt(i));
 	const [hoursOfEnd, minutesOfEnd] = end.split(':').map((i) => parseInt(i));
 
-	return hoursOfEnd * 60 - minutesOfEnd - (hoursOfStart * 60 + minutesOfStart);
+	return (hoursOfEnd * 60 + minutesOfEnd) - (hoursOfStart * 60 + minutesOfStart);
 }

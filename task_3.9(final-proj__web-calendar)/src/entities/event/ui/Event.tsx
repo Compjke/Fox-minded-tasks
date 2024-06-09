@@ -1,6 +1,7 @@
 import { calcStyles } from '../libs/calculateStyles';
 import { IEvent } from '../model/eventSlice';
 import style from './events.module.scss';
+
 export default function Event({
 	calendar,
 	isForAllDay,

@@ -11,7 +11,7 @@ export interface ITimeEvent {
 export interface IEvent {
 	id?: string;
 	title: string;
-	date: Dayjs;
+	date: string;
 	time: ITimeEvent;
 	isForAllDay: boolean;
 	calendar: any; //! Rewrite!
@@ -20,22 +20,24 @@ export interface IEvent {
 
 const init: IEvent[] = [
 	{
+		id: '1',
 		calendar: '#16AF6E',
-		date: dayjs().add(1, 'days'),
+		date: 'Sunday, June, 9',
 		time: {
 			start: '00:00 am',
-			end: '24:00 pm',
+			end: '01:30 am',
 		},
 		description: 'Test-2 for all day',
-		isForAllDay: true,
+		isForAllDay: false,
 		title: 'for all day',
 	},
 	{
+		id: '2',
 		calendar: '#B8C42F',
-		date: dayjs().add(2, 'days'),
+		date: 'Monday, June, 10',
 		time: {
-			start: '12:30 pm',
-			end: '22:15 pm',
+			start: '00:30 pm',
+			end: '03:15 pm',
 		},
 		description: 'Test-2 task text',
 		isForAllDay: false,
@@ -56,15 +58,25 @@ const eventSlice = createSlice({
 export const { addNewEvent } = eventSlice.actions;
 
 export const eventByDate = createSelector(
-	[(state: RootStore) => state.eventReducer, (_, date) => date],
+	[(state: RootStore) => state.eventReducer, (_, date: Dayjs) => date],
 
 	(events, date) => {
 		// console.log('memoized selector ran');
-		return events.find(
-			(event) =>
-				dayjs(event.date).toDate().toDateString() ===
-				date.toDate().toDateString()
+		const res: IEvent[] = [];
+		events.map(
+			(event) => {
+				// console.log(dayjs(event.date));
+				// console.log(date.format('dddd, MMMM, D'));
+				if (event.date === date.format('dddd, MMMM, D')) {
+					res.push(event);
+				}
+				// console.log(res);
+			}
+			// (event) =>
+			// 	dayjs(event.date).toDate().toDateString() ===
+			// 	date.toDate().toDateString()
 		);
+		return res;
 	}
 );
 

@@ -3,10 +3,9 @@ import { Button } from '@/shared/ui-kit/Button';
 import { useState } from 'react';
 import { Modal } from '@/shared/ui-kit/Modal';
 import { CreateEventForm } from '@/features/CreateEventForm';
-import style from './sidebar.module.scss';
 import { useStateSelector } from '@/app/store';
 import { Calendars } from './Calendars';
-import { ColorPicker } from '@/shared/ui-kit/ColorPicker';
+import style from './sidebar.module.scss';
 
 export const SideBar = () => {
 	const [isModalOpen, setisModalOpen] = useState(false);

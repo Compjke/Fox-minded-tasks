@@ -4,7 +4,6 @@ export const useAuth = () => {
 	const isAuthenfication = useStateSelector(
 		(s) => s.userReducer.isAuthenfication
 	);
-	console.log(isAuthenfication);
 	return { authentication: isAuthenfication };
 };
 

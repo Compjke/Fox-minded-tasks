@@ -10,23 +10,28 @@ interface TimeCelLs {
 }
 
 export const TimeCells = ({ date }: TimeCelLs) => {
-	const event = useStateSelector((s) => eventByDate(s, date));
-	
+	const eventsInDay = useStateSelector((s) => eventByDate(s, date));
+
 	return (
 		<div className={style.timeCols}>
-			{getTimesArr(60, 24).map((time) => (
-				<div key={time} className={style.timeCell}>
-					{event
-						? isEventExist(event!, time) && (
-								<Event
-									date={event.date}
-									title={event.title}
-									time={event.time}
-									calendar={event.calendar}
-									isForAllDay={event.isForAllDay}
-									description={event.description}
-								/>
-							)
+			{getTimesArr(60, 24).map((time, ind) => (
+				<div key={ind} className={style.timeCell}>
+					{eventsInDay.length
+						? eventsInDay.map((event) => {
+								if (isEventExist(event!, time)) {
+									return (
+										<Event
+											date={event.date}
+											title={event.title}
+											time={event.time}
+											calendar={event.calendar}
+											isForAllDay={event.isForAllDay}
+											description={event.description}
+											key={event.id}
+										/>
+									);
+								}
+							})
 						: null}
 				</div>
 			))}

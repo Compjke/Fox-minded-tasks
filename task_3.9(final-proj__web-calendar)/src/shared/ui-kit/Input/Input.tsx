@@ -10,7 +10,6 @@ import style from './input.module.scss';
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
 	labelText: string;
 	id: string;
-	value?: string;
 	icon?: IconName;
 	register: UseFormRegister<IFormCreateEventValues>;
 	label: Path<IFormCreateEventValues>;
@@ -25,9 +24,9 @@ export const Input = ({
 	labelText,
 	disabled,
 	id,
-	value,
 	icon,
 	label,
+	value,
 	register,
 	...props
 }: IInput) => {
@@ -36,7 +35,6 @@ export const Input = ({
 
 	const handleClick = () => {
 		const cur = currentType === 'password' ? 'text' : type;
-		console.log(currentType);
 		setType(cur);
 		setShowPassword(!showPassword);
 	};

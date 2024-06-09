@@ -5,7 +5,7 @@ import { rememberReducer, rememberEnhancer } from 'redux-remember';
 import { dateReducer } from '@/entities/date';
 import { eventReducer } from '@/entities/event';
 import { calendarReducer } from '@/entities/calendar';
-const rememberedKeys = ['userReducer'];
+const rememberedKeys = ['userReducer','eventReducer'];
 
 const reducers = {
 	userReducer,

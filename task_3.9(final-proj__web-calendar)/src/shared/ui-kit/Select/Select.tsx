@@ -32,8 +32,13 @@ export const Select = ({
 					id='select'
 					className={style.select}
 				>
-					{options.map((item) => (
-						<option style={{color: item.color}} className={style.option} value={item.color}>
+					{options.map((item, ind) => (
+						<option
+							key={ind}
+							style={{ color: item.color }}
+							className={style.option}
+							value={item.color}
+						>
 							{item.label}
 						</option>
 					))}

@@ -8,7 +8,6 @@ import style from './calendar.module.scss';
 
 export default function Calnedar() {
 	const selectedDate = useStateSelector((s) => s.dateReducer.selectedDate);
-
 	return (
 		<section className={style.calendar}>
 			<TimesCol />
