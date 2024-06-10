@@ -1,10 +1,15 @@
 import { generateDate, months } from '@/shared/libs/calendar';
 import { Icon } from '../Icon';
-import clsx from 'clsx';
-import style from './date_picker.module.scss';
+import {
+	MouseEventHandler,
+	ReactEventHandler,
+	useLayoutEffect,
+	useState,
+} from 'react';
 
 import { Dayjs } from 'dayjs';
-import { MouseEventHandler, useLayoutEffect, useState } from 'react';
+import clsx from 'clsx';
+import style from './date_picker.module.scss';
 
 const DAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
@@ -29,8 +34,8 @@ export const DatePicker = ({
 		setDateInDatePicker(selectedDate);
 	}, [selectedDate]);
 
-	const handleChangheMonth: MouseEventHandler = (e) => {
-		const action = e.currentTarget.attributes.datatype.value;
+	const handleChangheMonth: MouseEventHandler<HTMLButtonElement> = (e) => {
+		const action = e?.currentTarget?.attributes?.datatype.value;
 		if (action === 'prev') {
 			setDateInDatePicker(dateInDatePicker.month(dateInDatePicker.month() - 1));
 		} else {

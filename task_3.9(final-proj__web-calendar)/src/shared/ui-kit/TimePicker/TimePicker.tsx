@@ -34,8 +34,7 @@ export const TestTimepicker = ({
 	error,
 }: ITimePicker) => {
 	const { field } = useController(controls);
-	const { watch, setValue } =
-		useFormContext<IFormCreateEventValues>();
+	const { watch, setValue } = useFormContext<IFormCreateEventValues>();
 	const [open, setOpen] = useState(false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 	const [selectedValue, setSelectedValue] = useState(defaultValue);
@@ -69,7 +68,7 @@ export const TestTimepicker = ({
 					readOnly
 					value={selectedValue}
 					disabled={disabled || watch('isForAllDay')}
-					onMouseEnter={() => setOpen((prev) => !prev)}
+					onClick={() => setOpen((prev) => !prev)}
 					className={clsx(style.selectInput, error && style.errorBorder)}
 					ref={inputRef}
 				/>
@@ -77,10 +76,7 @@ export const TestTimepicker = ({
 			{error && <span className={style.error}>{error.message}</span>}
 			<div className={''}>
 				{open && (
-					<ul
-						className={style.selectContent}
-						onMouseLeave={() => setOpen(false)}
-					>
+					<ul className={style.selectContent}>
 						{options.map((item) => (
 							<li
 								data-testid='select-item'

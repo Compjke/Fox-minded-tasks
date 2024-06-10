@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { ReactNode, createContext, useMemo, useState } from 'react';
-import styles from './toast.module.scss';
 import { IToast, Toast, ToastType } from './Toast';
+import styles from './toast.module.scss';
 interface ToastContextValue {
 	showToast: (message: string, type: ToastType) => void;
 	hideToast: (id: number) => void;

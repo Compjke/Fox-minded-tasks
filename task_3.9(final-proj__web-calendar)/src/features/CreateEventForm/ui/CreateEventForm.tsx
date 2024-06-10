@@ -5,7 +5,7 @@ import { CheckBox } from '@/shared/ui-kit/CheckBox';
 import { TextArea } from '@/shared/ui-kit/TextArea';
 import { Select } from '@/shared/ui-kit/Select';
 import { Button } from '@/shared/ui-kit/Button';
-import { IFormCreateEventValues } from '@/shared/config/types';
+
 import {
 	Controller,
 	FormProvider,
@@ -18,16 +18,28 @@ import { schema } from '../model/yupSchema';
 import { useAppDispatch, useStateSelector } from '@/app/store';
 import { addNewEvent } from '@/entities/event/model/eventSlice';
 import { DateField } from './DateField';
+import { IFormCreateEventValues } from '@/shared/config/types';
+import { useToast } from '@/shared/ui-kit/Toast';
+
+import dayjs from 'dayjs';
 import style from './create-event-form.module.scss';
 
-export default function CreateEventForm() {
+interface Props {
+	setModalState: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function CreateEventForm({ setModalState }: Props) {
 	const dispatch = useAppDispatch();
+	const toast = useToast();
 	const methods = useForm<IFormCreateEventValues>({
 		resolver: yupResolver(schema),
 		defaultValues: {
 			startTime: '00:00 am',
 			endTime: '00:00 am',
 			isForAllDay: false,
+			description: '',
+			title: '',
+			date: dayjs(),
 		},
 	});
 	const {
@@ -37,10 +49,9 @@ export default function CreateEventForm() {
 		getValues,
 		register,
 		reset,
-		watch,
 		control,
 	} = methods;
-	console.log(errors);
+	console.log(dayjs().toDate().toDateString());
 	const calendars = useStateSelector((s) => s.calendarReducer);
 	const onSubmit: SubmitHandler<IFormCreateEventValues> = (data) => {
 		console.log(data);
@@ -57,8 +68,10 @@ export default function CreateEventForm() {
 				},
 			})
 		);
+		setModalState(false);
+		toast?.showToast(`Event ${data.title} was created`, 'success');
 	};
-	console.log(watch('date'));
+
 	useEffect(() => {
 		if (formState.isSubmitSuccessful) {
 			reset();
@@ -67,21 +80,33 @@ export default function CreateEventForm() {
 	return (
 		<FormProvider {...methods}>
 			<form className={style.form} onSubmit={handleSubmit(onSubmit)}>
-				<Input
-					register={register}
-					label='title'
-					placeholder='Type your title for event...'
-					icon='text-icon'
-					labelText='Title'
-					id='text'
-					error={errors.title}
+				<Controller
+					name='title'
+					control={control}
+					render={({ field }) => (
+						<Input
+							{...field}
+							register={register}
+							label='title'
+							placeholder='Type your title for event...'
+							icon='text-icon'
+							labelText='Title'
+							id='text'
+							error={errors.title}
+						/>
+					)}
 				/>
+
 				<div className={style.timeDate}>
-					<DateField
+					<Controller
+						name='date'
 						control={control}
-						register={register}
-						error={errors.date}
+						defaultValue={getValues().date}
+						render={({ field }) => (
+							<DateField {...field} register={register} error={errors.date} />
+						)}
 					/>
+
 					<TestTimepicker
 						controls={{ control, name: 'startTime' }}
 						required
@@ -101,7 +126,12 @@ export default function CreateEventForm() {
 					name='isForAllDay'
 					control={control}
 					render={({ field }) => (
-						<CheckBox {...field} className={style.checkbox} label='All day' />
+						<CheckBox
+							{...field}
+							ref={field.ref}
+							className={style.checkbox}
+							label='All day'
+						/>
 					)}
 				/>
 

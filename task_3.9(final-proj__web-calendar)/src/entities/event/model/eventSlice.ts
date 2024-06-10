@@ -11,7 +11,7 @@ export interface ITimeEvent {
 export interface IEvent {
 	id?: string;
 	title: string;
-	date: string;
+	date: Dayjs;
 	time: ITimeEvent;
 	isForAllDay: boolean;
 	calendar: any; //! Rewrite!
@@ -22,7 +22,7 @@ const init: IEvent[] = [
 	{
 		id: '1',
 		calendar: '#16AF6E',
-		date: 'Sunday, June, 9',
+		date: dayjs(),
 		time: {
 			start: '00:00 am',
 			end: '01:30 am',
@@ -34,7 +34,7 @@ const init: IEvent[] = [
 	{
 		id: '2',
 		calendar: '#B8C42F',
-		date: 'Monday, June, 10',
+		date: dayjs().add(1, 'days'),
 		time: {
 			start: '00:30 pm',
 			end: '03:15 pm',
@@ -67,14 +67,15 @@ export const eventByDate = createSelector(
 			(event) => {
 				// console.log(dayjs(event.date));
 				// console.log(date.format('dddd, MMMM, D'));
-				if (event.date === date.format('dddd, MMMM, D')) {
+				if (
+					dayjs(event.date).toDate().toDateString() ===
+					date.toDate().toDateString()
+				) {
 					res.push(event);
 				}
 				// console.log(res);
 			}
 			// (event) =>
-			// 	dayjs(event.date).toDate().toDateString() ===
-			// 	date.toDate().toDateString()
 		);
 		return res;
 	}

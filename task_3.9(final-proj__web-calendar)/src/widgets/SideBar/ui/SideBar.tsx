@@ -18,7 +18,7 @@ export const SideBar = () => {
 				isOpen={isModalOpen}
 				onClose={() => setisModalOpen(false)}
 			>
-				<CreateEventForm />
+				<CreateEventForm setModalState={setisModalOpen} />
 			</Modal>
 			<Button
 				label='Create event'
@@ -30,7 +30,6 @@ export const SideBar = () => {
 			<DatePickerFeature />
 
 			<Calendars calendars={calendars} />
-	
 		</aside>
 	);
 };

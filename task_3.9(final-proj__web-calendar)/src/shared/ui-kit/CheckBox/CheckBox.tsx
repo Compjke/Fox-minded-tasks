@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { LegacyRef, forwardRef, useState } from 'react';
 
 import { Icon } from '../Icon';
 import clsx from 'clsx';
@@ -16,11 +16,14 @@ interface ICheckBox {
 }
 
 export const CheckBox = forwardRef(
-	({ label, defaultState = false, className, color, ...props }: ICheckBox) => {
+	(
+		{ label, defaultState = false, className, color, ...props }: ICheckBox,
+		ref: LegacyRef<HTMLInputElement> | undefined
+	) => {
 		// const { field } = useController(controls as UseControllerProps<IFormCreateEventValues>);
 		const [isChecked, setIsChecked] = useState(defaultState);
-
-		const { onChange, ref } = props;
+		// console.log(props);
+		const { onChange } = props;
 		const handleClick = () => {
 			setIsChecked((prev) => !prev);
 
