@@ -1,4 +1,5 @@
 import { RootStore } from '@/app/store';
+import { ICalendar } from '@/entities/calendar';
 
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import dayjs, { Dayjs } from 'dayjs';
@@ -14,14 +15,19 @@ export interface IEvent {
 	date: Dayjs;
 	time: ITimeEvent;
 	isForAllDay: boolean;
-	calendar: any; //! Rewrite!
+	calendar: ICalendar; //! Rewrite!
 	description: string;
 }
 
 const init: IEvent[] = [
 	{
 		id: '1',
-		calendar: '#16AF6E',
+		calendar: {
+			label: 'Personal',
+			color: '#397e49',
+			id: '#397e49',
+			isDefault: true,
+		},
 		date: dayjs(),
 		time: {
 			start: '00:00 am',
@@ -33,7 +39,12 @@ const init: IEvent[] = [
 	},
 	{
 		id: '2',
-		calendar: '#B8C42F',
+		calendar: {
+			label: 'Calendar-2',
+			color: '#439bdf',
+			id: '#439bdf',
+			isDefault: false,
+		},
 		date: dayjs().add(1, 'days'),
 		time: {
 			start: '00:30 pm',
@@ -62,22 +73,12 @@ export const eventByDate = createSelector(
 
 	(events, date) => {
 		// console.log('memoized selector ran');
-		const res: IEvent[] = [];
-		events.map(
-			(event) => {
-				// console.log(dayjs(event.date));
-				// console.log(date.format('dddd, MMMM, D'));
-				if (
-					dayjs(event.date).toDate().toDateString() ===
-					date.toDate().toDateString()
-				) {
-					res.push(event);
-				}
-				// console.log(res);
-			}
-			// (event) =>
+
+		return events.filter(
+			(event) =>
+				dayjs(event.date).toDate().toDateString() ===
+				date.toDate().toDateString()
 		);
-		return res;
 	}
 );
 

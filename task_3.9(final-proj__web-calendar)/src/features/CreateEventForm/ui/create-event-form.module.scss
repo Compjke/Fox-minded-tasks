@@ -16,6 +16,7 @@
 	position: absolute;
 	top: 50px;
 	left: -6px;
+	z-index: 100;
 }
 
 .submitBtn {
@@ -23,6 +24,7 @@
 }
 
 .checkbox {
+	max-width: fit-content;
 	margin-block: 20px;
 	margin-left: 20px;
 }

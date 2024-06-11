@@ -3,6 +3,8 @@ import { Dayjs } from 'dayjs';
 import { useStateSelector } from '@/app/store';
 import { Event, eventByDate } from '@/entities/event';
 import { isEventExist } from '../libs/isEventExist';
+
+import { getEventsIntime, getTopForWrapperEvents } from '../libs';
 import style from './calendar.module.scss';
 
 interface TimeCelLs {
@@ -14,25 +16,40 @@ export const TimeCells = ({ date }: TimeCelLs) => {
 
 	return (
 		<div className={style.timeCols}>
-			{getTimesArr(60, 24).map((time, ind) => (
+			{getTimesArr(60, 24).map((timeOfCell, ind) => (
 				<div key={ind} className={style.timeCell}>
-					{eventsInDay.length
-						? eventsInDay.map((event) => {
-								if (isEventExist(event!, time)) {
-									return (
-										<Event
-											date={event.date}
-											title={event.title}
-											time={event.time}
-											calendar={event.calendar}
-											isForAllDay={event.isForAllDay}
-											description={event.description}
-											key={event.id}
-										/>
-									);
-								}
-							})
-						: null}
+					<div
+						key={timeOfCell}
+						className={style.eventsWrapper}
+						style={{
+							top: getTopForWrapperEvents(eventsInDay, timeOfCell) + 'px',
+						}}
+					>
+						{eventsInDay.length
+							? eventsInDay.map((event) => {
+									if (isEventExist(event!, timeOfCell)) {
+										return (
+											<Event
+												relativeTop={getTopForWrapperEvents(
+													eventsInDay,
+													timeOfCell
+												)}
+												countEvents={
+													getEventsIntime(eventsInDay, timeOfCell).length
+												}
+												key={event.id}
+												date={event.date}
+												title={event.title}
+												time={event.time}
+												calendar={event.calendar}
+												isForAllDay={event.isForAllDay}
+												description={event.description}
+											/>
+										);
+									}
+								})
+							: null}
+					</div>
 				</div>
 			))}
 		</div>

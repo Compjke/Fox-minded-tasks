@@ -1,5 +1,13 @@
-export const calcStyles = (start: string, end: string, colorHash: string) => {
-	const top = parseInt(start.split(':')[1]) + 'px';
+export const calcStyles = (
+	start: string,
+	end: string,
+	colorHash: string,
+	relativeTop: number,
+	eventsInTime: number
+) => {
+	const maxWidth = 100 / eventsInTime + '%';
+	const top = parseInt(start.split(':')[1]) - relativeTop + 'px';
+
 	const height = convertIntoMinutes(start, end) + 'px';
 
 	const opacity = '0.3';
@@ -13,6 +21,7 @@ export const calcStyles = (start: string, end: string, colorHash: string) => {
 	const rgba = ` rgba( ${r}, ${g}, ${b}, ${opacity} )`;
 
 	return {
+		maxWidth,
 		top,
 		height,
 		bgColor: rgba,
@@ -25,5 +34,5 @@ function convertIntoMinutes(start: string, end: string) {
 		.map((i) => parseInt(i));
 	const [hoursOfEnd, minutesOfEnd] = end.split(':').map((i) => parseInt(i));
 
-	return (hoursOfEnd * 60 + minutesOfEnd) - (hoursOfStart * 60 + minutesOfStart);
+	return hoursOfEnd * 60 + minutesOfEnd - (hoursOfStart * 60 + minutesOfStart);
 }

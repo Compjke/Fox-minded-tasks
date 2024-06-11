@@ -1,3 +1,4 @@
+import { ICalendar } from '@/entities/calendar';
 import { Dayjs } from 'dayjs';
 
 export interface IFormCreateEventValues {
@@ -7,5 +8,5 @@ export interface IFormCreateEventValues {
 	startTime: string;
 	endTime: string;
 	isForAllDay?: boolean;
-	calendar: string;
+	calendar: ICalendar;
 }

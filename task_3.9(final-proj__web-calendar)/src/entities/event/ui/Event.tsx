@@ -2,17 +2,26 @@ import { calcStyles } from '../libs/calculateStyles';
 import { IEvent } from '../model/eventSlice';
 import style from './events.module.scss';
 
+interface Props {
+	relativeTop: number;
+	countEvents: number;
+}
+
 export default function Event({
 	calendar,
 	isForAllDay,
 	time,
 	date,
 	title,
-}: Exclude<IEvent, 'description'>) {
-	const { top, height, bgColor } = calcStyles(
+	relativeTop,
+	countEvents,
+}: IEvent & Props) {
+	const { top, height, bgColor, maxWidth } = calcStyles(
 		time.start,
 		time.end,
-		calendar
+		calendar.color,
+		relativeTop,
+		countEvents
 	);
 
 	return (
@@ -20,9 +29,10 @@ export default function Event({
 			className={style.event}
 			style={{
 				backgroundColor: bgColor,
-				top,
 				height,
-				borderLeft: `4px solid ${calendar}`,
+				borderLeft: `4px solid ${calendar.color}`,
+				top,
+				maxWidth,
 			}}
 		>
 			<h4 className={style.title}>{title}</h4>

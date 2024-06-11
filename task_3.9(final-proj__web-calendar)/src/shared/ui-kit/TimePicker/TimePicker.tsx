@@ -72,8 +72,8 @@ export const TestTimepicker = ({
 					className={clsx(style.selectInput, error && style.errorBorder)}
 					ref={inputRef}
 				/>
+				{error && <span className={style.error}>{error.message}</span>}
 			</label>
-			{error && <span className={style.error}>{error.message}</span>}
 			<div className={''}>
 				{open && (
 					<ul className={style.selectContent}>

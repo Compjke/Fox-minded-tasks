@@ -1,9 +1,13 @@
 .event {
-	position: absolute;
-	z-index: 100;
-	width: 100%;
+	position: relative;
 	max-width: 95%;
 	border-radius: 4px;
+	min-height: fit-content;
+	overflow: hidden;
+	scrollbar-width: none;
+	&:hover {
+		overflow-y: auto;
+	}
 }
 
 .title {

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { CheckBox } from '@/shared/ui-kit/CheckBox';
 import { TextArea } from '@/shared/ui-kit/TextArea';
-import { Select } from '@/shared/ui-kit/Select';
+import { CalendarSelect, Select } from '@/shared/ui-kit/CalendarSelect';
 import { Button } from '@/shared/ui-kit/Button';
 
 import {
@@ -21,6 +21,7 @@ import { DateField } from './DateField';
 import { IFormCreateEventValues } from '@/shared/config/types';
 import { useToast } from '@/shared/ui-kit/Toast';
 
+import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
 import style from './create-event-form.module.scss';
 
@@ -31,6 +32,7 @@ interface Props {
 export default function CreateEventForm({ setModalState }: Props) {
 	const dispatch = useAppDispatch();
 	const toast = useToast();
+	const calendars = useStateSelector((s) => s.calendarReducer);
 	const methods = useForm<IFormCreateEventValues>({
 		resolver: yupResolver(schema),
 		defaultValues: {
@@ -40,6 +42,7 @@ export default function CreateEventForm({ setModalState }: Props) {
 			description: '',
 			title: '',
 			date: dayjs(),
+			calendar: calendars[0],
 		},
 	});
 	const {
@@ -51,12 +54,14 @@ export default function CreateEventForm({ setModalState }: Props) {
 		reset,
 		control,
 	} = methods;
-	console.log(dayjs().toDate().toDateString());
-	const calendars = useStateSelector((s) => s.calendarReducer);
+
+	console.log('Error : ', errors);
+
 	const onSubmit: SubmitHandler<IFormCreateEventValues> = (data) => {
 		console.log(data);
 		dispatch(
 			addNewEvent({
+				id: uuidv4(),
 				title: data.title,
 				calendar: data.calendar,
 				date: data.date,
@@ -112,13 +117,14 @@ export default function CreateEventForm({ setModalState }: Props) {
 						required
 						defaultValue={getValues().startTime}
 						labelText='Time'
-						// error={errors.startTime}
+						error={errors.startTime}
 					/>
 					{'-'}
 					<TestTimepicker
 						controls={{ control, name: 'endTime' }}
 						required
 						defaultValue={getValues().endTime}
+						error={errors.endTime}
 					/>
 				</div>
 
@@ -135,12 +141,18 @@ export default function CreateEventForm({ setModalState }: Props) {
 					)}
 				/>
 
-				<Select
-					register={register}
-					registerLabel='calendar'
-					icon='calendar'
-					label='Calendar'
-					options={calendars}
+				<Controller
+					name='calendar'
+					control={control}
+					render={({ field }) => (
+						<CalendarSelect
+							ref={field.ref}
+							icon='calendar'
+							label='Calendar'
+							options={calendars}
+							onChange={(opt) => field.onChange(opt)}
+						/>
+					)}
 				/>
 				<TextArea
 					register={register}
