@@ -9,25 +9,34 @@ import { IFormCreateEventValues } from '@/shared/config/types';
 
 interface ICheckBox {
 	label?: string;
-	defaultState?: boolean;
+	isCheckedByDefault?: boolean;
 	className?: string;
 	color?: string;
 	register?: UseFormRegister<IFormCreateEventValues>;
+	onToogleCalendarState?: (arg: boolean) => void;
 }
 
 export const CheckBox = forwardRef(
 	(
-		{ label, defaultState = false, className, color, ...props }: ICheckBox,
+		{
+			label,
+			isCheckedByDefault = false,
+			className,
+			color,
+			onToogleCalendarState,
+			...props
+		}: ICheckBox,
 		ref: LegacyRef<HTMLInputElement> | undefined
 	) => {
 		// const { field } = useController(controls as UseControllerProps<IFormCreateEventValues>);
-		const [isChecked, setIsChecked] = useState(defaultState);
+		const [isChecked, setIsChecked] = useState(isCheckedByDefault);
 		// console.log(props);
 		const { onChange } = props;
 		const handleClick = () => {
 			setIsChecked((prev) => !prev);
 
 			onChange && onChange(!isChecked);
+			onToogleCalendarState && onToogleCalendarState(!isChecked);
 		};
 
 		return (

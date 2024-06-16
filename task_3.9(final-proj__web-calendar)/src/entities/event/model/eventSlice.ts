@@ -1,5 +1,4 @@
 import { RootStore } from '@/app/store';
-import { ICalendar } from '@/entities/calendar';
 
 import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit';
 import dayjs, { Dayjs } from 'dayjs';
@@ -15,71 +14,65 @@ export interface IEvent {
 	date: Dayjs;
 	time: ITimeEvent;
 	isForAllDay: boolean;
-	calendar: ICalendar; //! Rewrite!
+	calendarId: string;
 	description: string;
 }
 
-const init: IEvent[] = [
-	{
-		id: '1',
-		calendar: {
-			label: 'Personal',
-			color: '#397e49',
-			id: '#397e49',
-			isDefault: true,
-		},
-		date: dayjs(),
-		time: {
-			start: '00:00 am',
-			end: '01:30 am',
-		},
-		description: 'Test-2 for all day',
-		isForAllDay: false,
-		title: 'for all day',
-	},
-	{
-		id: '2',
-		calendar: {
-			label: 'Calendar-2',
-			color: '#439bdf',
-			id: '#439bdf',
-			isDefault: false,
-		},
-		date: dayjs().add(1, 'days'),
-		time: {
-			start: '00:30 pm',
-			end: '03:15 pm',
-		},
-		description: 'Test-2 task text',
-		isForAllDay: false,
-		title: 'Very long very long very  long long long title',
-	},
-];
+interface EventState {
+	allEvents: IEvent[];
+	viewableEvent: null | IEvent;
+}
+
+const init: EventState = {
+	allEvents: [],
+	viewableEvent: null,
+};
 
 const eventSlice = createSlice({
 	name: 'event',
 	initialState: init,
 	reducers: {
 		addNewEvent: (state, action: PayloadAction<IEvent>) => {
-			state.push(action.payload);
+			state.allEvents.push(action.payload);
+		},
+		deleteEventsByCalendarId: (state, action: PayloadAction<string>) => {
+			state.allEvents = state.allEvents.filter(
+				(e) => e.calendarId !== action.payload
+			);
+		},
+		setWatchedEvents: (state, action: PayloadAction<IEvent | null>) => {
+			state.viewableEvent = action.payload;
 		},
 	},
 });
 
-export const { addNewEvent } = eventSlice.actions;
+export const { addNewEvent, deleteEventsByCalendarId, setWatchedEvents } =
+	eventSlice.actions;
 
 export const eventByDate = createSelector(
 	[(state: RootStore) => state.eventReducer, (_, date: Dayjs) => date],
 
 	(events, date) => {
 		// console.log('memoized selector ran');
-
-		return events.filter(
+		// console.log(events);
+		return events.allEvents.filter(
 			(event) =>
 				dayjs(event.date).toDate().toDateString() ===
 				date.toDate().toDateString()
 		);
 	}
 );
+// export const eventsByCalendar = createSelector(
+// 	[
+// 		(state: RootStore) => state.calendarReducer.allCalendars,
+// 		(state: RootStore) => state.eventReducer,
+// 	],
+
+// 	(calendars, events) => {
+// 		const calendarsIds = calendars.map((c) => c.id);
+// 		const eventsInCalendar = events.filter(e => e.id );
+// 		return calendarsIds;
+// 	}
+// );
 
 export default eventSlice.reducer;

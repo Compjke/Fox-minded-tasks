@@ -10,6 +10,7 @@
 }
 
 .calendars {
+	position: relative;
 	border-radius: 8px;
 	background-color: var(--main-light-color);
 	padding: 16px 8px;
@@ -24,16 +25,24 @@
 
 .calendarsList {
 	padding-left: 8px;
+	position: relative;
 }
 
-.calendarItem {
-	padding: 4px 8px;
-	font-size: 12px;
-	transition: background-color 0.3s ease;
+.item {
 	display: flex;
 	justify-content: space-between;
+	padding: 4px 8px;
+	font-size: 12px;
+	border-radius: 8px;
+	transition: background-color 0.3s ease;
 	&:hover {
-		background-color: #f6f7f8;
+		background-color: var(--calendar-hover);
+		& .calendarActions {
+			display: flex;
+		}
+	}
+	&:not(:last-child) {
+		margin-bottom: 8px;
 	}
 }
 
@@ -41,9 +50,19 @@
 	font-size: 15px;
 }
 
-.btn{
-	background: transparent;
-	border: none;
-	padding: 0;
-	min-width: 0;
+.modal {
+	width: 100%;
+	position: absolute;
+	min-width: 300px;
+	top: 100px;
+	z-index: 100;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.calendarActions {
+	transition: all 0.3s ease;
+	align-items: center;
+	gap: 8px;
+	display: none;
 }

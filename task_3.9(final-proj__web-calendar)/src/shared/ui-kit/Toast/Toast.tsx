@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import style from './toast.module.scss';
 import { useTimeout } from '@/shared/hooks/useTimeout';
 import { Icon } from '../Icon';
+import style from './toast.module.scss';
 
 export type ToastType = 'info' | 'success' | 'error';
 export interface IToast {

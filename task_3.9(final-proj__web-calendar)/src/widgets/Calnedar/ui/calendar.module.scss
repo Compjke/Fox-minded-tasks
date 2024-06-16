@@ -1,5 +1,6 @@
 .calendar {
-	// flex: 1 1 auto;
+	flex: 1 1 auto;
+
 	padding-right: 50px;
 	display: flex;
 	column-gap: 20px;
@@ -20,17 +21,18 @@
 
 .row {
 	display: grid;
+	flex: 1 1 auto;
+	position: relative;
 	grid-template-columns: repeat(7, minmax(150px, 1fr));
 	background-color: var(--main-light-color);
-	position: relative;
 	&::after {
 		position: absolute;
 		content: '';
 		height: 2px;
 		box-shadow: 0 1px 2px 0 #dedfe5;
 		background: #dedfe5;
-		width: 109%;
-		top: 67px;
+		width: calc(100% + 80px);
+		top: 65px;
 		right: 0;
 		z-index: 200;
 	}

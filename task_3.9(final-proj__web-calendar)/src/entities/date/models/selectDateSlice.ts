@@ -1,3 +1,4 @@
+import { DISPLAY_COUNT_DAYS } from '@/shared/config/date';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 
@@ -21,11 +22,14 @@ const selectedDateSlice = createSlice({
 			action: PayloadAction<'prevWeek' | 'nextWeek' | 'today'>
 		) => {
 			if (action.payload === 'prevWeek') {
-				state.selectedDate = state.selectedDate.subtract(7, 'days');
+				state.selectedDate = state.selectedDate.subtract(
+					DISPLAY_COUNT_DAYS,
+					'days'
+				);
 			} else if (action.payload === 'today') {
 				state.selectedDate = dayjs();
 			} else {
-				state.selectedDate = state.selectedDate.add(7, 'days');
+				state.selectedDate = state.selectedDate.add(DISPLAY_COUNT_DAYS, 'days');
 			}
 		},
 	},

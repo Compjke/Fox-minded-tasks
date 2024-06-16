@@ -1,3 +1,1 @@
-import Event from './Event.tsx'
-
-export { Event }
+export { Event } from './Event.tsx';

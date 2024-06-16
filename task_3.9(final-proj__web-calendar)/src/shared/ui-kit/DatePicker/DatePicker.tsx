@@ -1,8 +1,8 @@
 import { generateDate, months } from '@/shared/libs/calendar';
 import { Icon } from '../Icon';
 import {
+	HTMLAttributes,
 	MouseEventHandler,
-	ReactEventHandler,
 	useLayoutEffect,
 	useState,
 } from 'react';
@@ -19,6 +19,7 @@ interface IDatePicker {
 	selectedDate: Dayjs;
 	onDatePick: (date: Dayjs) => void;
 	className?: string;
+	onMouseLeave?: () => void;
 }
 
 export const DatePicker = ({
@@ -27,6 +28,7 @@ export const DatePicker = ({
 	selectedDate,
 	onDatePick,
 	className,
+	onMouseLeave,
 }: IDatePicker) => {
 	const [dateInDatePicker, setDateInDatePicker] = useState(selectedDate);
 
@@ -43,7 +45,11 @@ export const DatePicker = ({
 		}
 	};
 	return (
-		<div data-testid='date-picker' className={clsx(style.container, className)}>
+		<div
+			onMouseLeave={onMouseLeave}
+			data-testid='date-picker'
+			className={clsx(style.container, className)}
+		>
 			<div className={style.panel}>
 				<h3 className={style.yearAndMonth}>
 					{months[dateInDatePicker.month()]} {dateInDatePicker.year()}

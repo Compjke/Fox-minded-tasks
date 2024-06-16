@@ -1,29 +1,25 @@
-import { IFormCreateEventValues } from '@/shared/config/types';
 import { DatePicker } from '@/shared/ui-kit/DatePicker';
 import { Input } from '@/shared/ui-kit/Input';
 
 import { LegacyRef, forwardRef, useState } from 'react';
-import { ErrorOption, UseFormRegister } from 'react-hook-form';
+import { ErrorOption } from 'react-hook-form';
 import style from './create-event-form.module.scss';
 
 interface Props {
-	register: UseFormRegister<IFormCreateEventValues>;
 	error: ErrorOption | undefined;
 }
 
 export const DateField = forwardRef(
 	(
-		{ register, error, ...props }: Props,
+		{ error, ...props }: Props,
 		ref: LegacyRef<HTMLInputElement> | undefined
 	) => {
 		const [isDatePicking, setIsDatePicking] = useState(false);
-		
+
 		return (
 			<div className={style.date}>
 				<Input
 					ref={ref}
-					register={register}
-					label='date'
 					id='date'
 					labelText='Date'
 					icon='clock'
@@ -34,6 +30,7 @@ export const DateField = forwardRef(
 				/>
 				{isDatePicking && (
 					<DatePicker
+						onMouseLeave={() => setIsDatePicking(false)}
 						onDatePick={(date) => {
 							setIsDatePicking(false);
 							props?.onChange(date);

@@ -1,51 +1,76 @@
-import { MouseEventHandler, ReactNode } from 'react';
+import { HTMLAttributes, MouseEventHandler, ReactNode } from 'react';
 
 import { Icon } from '../Icon';
 import { createPortal } from 'react-dom';
+import clsx from 'clsx';
 import style from './modal.module.scss';
 
-interface IModal {
+interface IModal extends HTMLAttributes<HTMLDivElement> {
 	title: string;
 	children: ReactNode;
 	isOpen: boolean;
+	viewMode: 'fullScreen' | 'small';
 	onClose: () => void;
+	className?: string;
+	nodeId?: string;
+	additionalActions?: JSX.Element[];
 }
 
-export const Modal = ({ children, title, isOpen = false, onClose }: IModal) => {
+export const Modal = ({
+	children,
+	title,
+	isOpen = false,
+	onClose,
+	viewMode,
+	nodeId = 'modalFullScreen',
+	additionalActions,
+	className,
+	...props
+}: IModal) => {
 	if (!isOpen) return null;
 
-	const onWrapperClick: MouseEventHandler = (e) => {
+	const onWrapperClick: MouseEventHandler<HTMLDivElement> = (e) => {
 		const target = e.target;
-		if (target.className === style.modalWrapper) {
+		if (target.className === style.modalWrapperFullScreen || className) {
 			onClose();
 			return;
 		}
 	};
 
 	const modal = (
-		<div data-testid='modal' id='wrapper' className={style.modal}>
+		<div
+			{...props}
+			data-testid='modal'
+			id='wrapper'
+			className={style[viewMode]}
+		>
 			<div
 				data-testid='backdrop'
-				className={style.modalWrapper}
+				className={clsx(
+					viewMode === 'fullScreen' ? style.modalWrapperFullScreen : className
+				)}
 				onClick={onWrapperClick}
 			>
 				<div className={style.modalContent}>
 					<div className={style.modalTop}>
 						<h3 className={style.modaltitle}>{title}</h3>
-						<button
-							className={style.modalCloseBtn}
-							onClick={() => {
-								onClose();
-							}}
-						>
-							<Icon name='close' />
-						</button>
+						<div className={style.actions}>
+							{additionalActions && additionalActions.map((action) => action)}
+							<button
+								className={style.modalCloseBtn}
+								onClick={() => {
+									onClose();
+								}}
+							>
+								<Icon name='close' />
+							</button>
+						</div>
 					</div>
-					<div className={style.content}>{children}</div>
+					{children}
 				</div>
 			</div>
 		</div>
 	);
 
-	return createPortal(modal, document.getElementById('modal')!);
+	return createPortal(modal, document.getElementById(nodeId)!);
 };

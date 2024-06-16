@@ -5,10 +5,10 @@ export const DeleteIcon = ({ className }: { className?: string }) => {
 			width='16'
 			height='16'
 			viewBox='0 0 16 16'
-			fill='none'
+			fill='currentColor'
 			xmlns='http://www.w3.org/2000/svg'
 		>
-			<g clip-path='url(#clip0_1_461)'>
+			<g clipPath='url(#clip0_1_461)'>
 				<path
 					fillRule='evenodd'
 					clipRule='evenodd'
@@ -16,11 +16,6 @@ export const DeleteIcon = ({ className }: { className?: string }) => {
 					fill='currentColor'
 				/>
 			</g>
-			<defs>
-				<clipPath id='clip0_1_461'>
-					<rect width='16' height='16' fill='white' />
-				</clipPath>
-			</defs>
 		</svg>
 	);
 };

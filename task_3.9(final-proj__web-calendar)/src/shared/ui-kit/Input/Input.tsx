@@ -3,16 +3,19 @@ import { InputHTMLAttributes, LegacyRef, forwardRef, useState } from 'react';
 import clsx from 'clsx';
 import { Icon } from '../Icon';
 import { IconName } from '../Icon/Icon';
-import { ErrorOption, Path, UseFormRegister } from 'react-hook-form';
-import { IFormCreateEventValues } from '@/shared/config/types';
+import { ErrorOption } from 'react-hook-form';
+// import {
+// 	IFormCreateCalendarValues,
+// 	IFormCreateEventValues,
+// } from '@/shared/config/types';
 import style from './input.module.scss';
 
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
 	labelText: string;
 	id: string;
 	icon?: IconName;
-	register: UseFormRegister<IFormCreateEventValues>;
-	label: Path<IFormCreateEventValues>;
+	// register: UseFormRegister<IFormCreateEventValues> | UseFormRegister<IFormCreateCalendarValues>;
+	// label: Path<IFormCreateEventValues>;
 	error?: ErrorOption | undefined;
 }
 
@@ -27,9 +30,9 @@ export const Input = forwardRef(
 			disabled,
 			id,
 			icon,
-			label,
+			// label,
 			value,
-			register,
+			// register,
 			...props
 		}: IInput,
 		ref: LegacyRef<HTMLInputElement> | undefined
@@ -52,7 +55,7 @@ export const Input = forwardRef(
 						{required && '*'}
 					</label>
 					<input
-						{...register(label)}
+						// {...register(label)}
 						ref={ref}
 						value={value}
 						disabled={disabled}

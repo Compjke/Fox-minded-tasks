@@ -21,8 +21,6 @@
 	--bg-button-secondary-active: #e0e0e0;
 	--bg-button-secondary-disabled: #c8c8c8;
 
-	
-
 	--checkbox-border-color: #323749;
 	--checkbox-filled-color: #323749;
 
@@ -49,6 +47,7 @@
 	--current-date-bg: #dff5e2;
 
 	--border: #dedfe5;
+	--calendar-hover: #f6f7f8;
 }
 
 :root.dark {
@@ -90,6 +89,8 @@
 	--input-border-color-focus: #e5e5e5;
 
 	--current-date-bg: #66f379;
+
+	--calendar-hover: #97989a;
 }
 
 * {
@@ -103,6 +104,7 @@ body {
 	overflow-x: hidden;
 	background: var(--main-bg-color);
 	color: var(--main-color);
+	font-size: 15px;
 	transition:
 		background-color 0.2s ease,
 		color 0.3s ease;

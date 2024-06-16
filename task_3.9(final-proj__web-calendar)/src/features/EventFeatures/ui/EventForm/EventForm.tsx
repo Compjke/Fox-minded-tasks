@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { CheckBox } from '@/shared/ui-kit/CheckBox';
 import { TextArea } from '@/shared/ui-kit/TextArea';
-import { CalendarSelect, Select } from '@/shared/ui-kit/CalendarSelect';
+import { CalendarSelect } from '@/shared/ui-kit/CalendarSelect';
 import { Button } from '@/shared/ui-kit/Button';
 
 import {
@@ -14,7 +14,7 @@ import {
 } from 'react-hook-form';
 import { TestTimepicker } from '@/shared/ui-kit/TimePicker/TimePicker';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schema } from '../model/yupSchema';
+
 import { useAppDispatch, useStateSelector } from '@/app/store';
 import { addNewEvent } from '@/entities/event/model/eventSlice';
 import { DateField } from './DateField';
@@ -24,15 +24,16 @@ import { useToast } from '@/shared/ui-kit/Toast';
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
 import style from './create-event-form.module.scss';
+import { schema } from '../../model';
 
 interface Props {
 	setModalState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CreateEventForm({ setModalState }: Props) {
+export const EventForm = ({ setModalState }: Props) => {
 	const dispatch = useAppDispatch();
 	const toast = useToast();
-	const calendars = useStateSelector((s) => s.calendarReducer);
+	const calendars = useStateSelector((s) => s.calendarReducer.allCalendars);
 	const methods = useForm<IFormCreateEventValues>({
 		resolver: yupResolver(schema),
 		defaultValues: {
@@ -55,15 +56,12 @@ export default function CreateEventForm({ setModalState }: Props) {
 		control,
 	} = methods;
 
-	console.log('Error : ', errors);
-
 	const onSubmit: SubmitHandler<IFormCreateEventValues> = (data) => {
-		console.log(data);
 		dispatch(
 			addNewEvent({
 				id: uuidv4(),
 				title: data.title,
-				calendar: data.calendar,
+				calendarId: data.calendar.id,
 				date: data.date,
 				description: data.description,
 				isForAllDay: data.isForAllDay!,
@@ -91,8 +89,6 @@ export default function CreateEventForm({ setModalState }: Props) {
 					render={({ field }) => (
 						<Input
 							{...field}
-							register={register}
-							label='title'
 							placeholder='Type your title for event...'
 							icon='text-icon'
 							labelText='Title'
@@ -107,9 +103,7 @@ export default function CreateEventForm({ setModalState }: Props) {
 						name='date'
 						control={control}
 						defaultValue={getValues().date}
-						render={({ field }) => (
-							<DateField {...field} register={register} error={errors.date} />
-						)}
+						render={({ field }) => <DateField {...field} error={errors.date} />}
 					/>
 
 					<TestTimepicker
@@ -166,4 +160,4 @@ export default function CreateEventForm({ setModalState }: Props) {
 			</form>
 		</FormProvider>
 	);
-}
+};

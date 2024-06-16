@@ -1,4 +1,4 @@
-.modal {
+.fullScreen {
 	position: fixed;
 	inset: 0;
 	width: 100%;
@@ -11,23 +11,27 @@
 	z-index: 300;
 }
 
-.modalWrapper {
+.small {
+}
+
+.modalWrapperFullScreen {
 	position: absolute;
 	top: 0;
 	left: 0;
+	min-height: 100%;
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
-	min-height: 100%;
 }
 
 .modalContent {
+	// width: 60%;
+	max-width: 800px;
 	border-radius: 8px;
 	box-shadow: 0 16px 50px 0 rgba(0, 0, 0, 0.24);
 	background: var(--bg-modal);
 	padding: 16px;
-	max-width: 70%;
 	transform: translateY(-50%);
 	animation-name: modalShow;
 	animation-iteration-count: 1;
@@ -41,7 +45,7 @@
 .modalTop {
 	display: flex;
 	justify-content: space-between;
-	align-items: start;
+	align-items: center;
 	padding-bottom: 16px;
 	border-bottom: 1px solid #dedfe5;
 	h3 {
@@ -60,7 +64,10 @@
 	letter-spacing: -0.02em;
 }
 
-.modalContent {
+.actions {
+	display: flex;
+	align-items: center;
+	column-gap: 24px;
 }
 
 .modalCloseBtn {

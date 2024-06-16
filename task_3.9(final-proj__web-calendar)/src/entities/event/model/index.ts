@@ -1,1 +1,7 @@
-export { default as eventReducer , eventByDate } from './eventSlice';
+export {
+	default as eventReducer,
+	eventByDate,
+	// eventsByCalendar,
+	deleteEventsByCalendarId,
+	setWatchedEvents,
+} from './eventSlice';

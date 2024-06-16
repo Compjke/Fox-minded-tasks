@@ -1,13 +1,12 @@
 import { DISPLAY_COUNT_DAYS } from '@/shared/config/date';
 import dayjs, { Dayjs } from 'dayjs';
 
-
 export function getDaysBetweenCustom(
-	start: Dayjs = dayjs(),
+	start: string | Dayjs,
 	end: number = DISPLAY_COUNT_DAYS
 ) {
 	const range = [];
-	let current = start;
+	let current = dayjs(start);
 
 	for (let index = 0; index < end; index++) {
 		range.push(current);

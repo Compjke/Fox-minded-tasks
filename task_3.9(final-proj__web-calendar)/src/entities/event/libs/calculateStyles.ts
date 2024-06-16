@@ -1,10 +1,11 @@
 export const calcStyles = (
 	start: string,
 	end: string,
-	colorHash: string,
+	calendarColor: string,
 	relativeTop: number,
 	eventsInTime: number
 ) => {
+
 	const maxWidth = 100 / eventsInTime + '%';
 	const top = parseInt(start.split(':')[1]) - relativeTop + 'px';
 
@@ -12,7 +13,7 @@ export const calcStyles = (
 
 	const opacity = '0.3';
 
-	const values = colorHash.match(/\w\w/g)!;
+	const values = calendarColor.match(/\w\w/g)!;
 
 	// Convert the hex color values to decimal values using parseInt() and store them in r, g, and b
 	const [r, g, b] = values.map((k) => parseInt(k, 16));
