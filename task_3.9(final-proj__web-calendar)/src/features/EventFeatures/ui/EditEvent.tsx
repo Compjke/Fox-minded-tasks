@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { Button } from '@/shared/ui-kit/Button';
 
 import { IEvent } from '@/entities/event/model/eventSlice';
-import { useStateSelector } from '@/app/store';
-import { ICalendar } from '@/entities/calendar';
 
+import { ICalendar } from '@/entities/calendar';
+import styles from './event-features.module.scss';
 // interface Props {
 // 	setisModalOpen: Dispatch<SetStateAction<boolean>>;
 // 	isModalOpen: boolean;
@@ -48,7 +48,8 @@ export const EditEventFeature = ({ event, calendar }: Props) => {
 				onClick={() => {
 					setisModalOpen(true);
 				}}
-				style={{ border: 'none', padding: '5px', minWidth: 0 }}
+            className={styles.editBtn}
+				
 				icon='edit'
 				appereance='secondary'
 			/>

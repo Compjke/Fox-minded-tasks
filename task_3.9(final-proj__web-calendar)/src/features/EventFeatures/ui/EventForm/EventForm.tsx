@@ -69,7 +69,7 @@ export const EventForm = ({
 			description,
 			title,
 			date: dayjs(date),
-			calendar: calendar ? calendar : calendars[2],
+			calendar: calendar ? calendar : calendars[0],
 		},
 	});
 	console.log(dayjs(undefined));
