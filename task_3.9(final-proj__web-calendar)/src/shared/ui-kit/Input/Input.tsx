@@ -57,7 +57,7 @@ export const Input = forwardRef(
 					<input
 						// {...register(label)}
 						ref={ref}
-						value={value}
+						value={value || ''}
 						disabled={disabled}
 						placeholder={placeholder}
 						type={currentType}

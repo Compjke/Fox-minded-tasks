@@ -1,22 +1,29 @@
 import { Modal } from '@/shared/ui-kit/Modal';
 import { EventForm } from './EventForm/EventForm';
-import { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
+import { Button } from '@/shared/ui-kit/Button';
 
-interface Props {
-	setisModalOpen: Dispatch<SetStateAction<boolean>>;
-	isModalOpen: boolean;
-}
-
-export const CreateEventFeature = ({ isModalOpen, setisModalOpen }: Props) => {
+export const CreateEventFeature = () => {
+	const [isModalOpen, setisModalOpen] = useState(false);
 	return (
-		<Modal
-			nodeId='modalFullScreen'
-			viewMode='fullScreen'
-			title='Create event'
-			isOpen={isModalOpen}
-			onClose={() => setisModalOpen(false)}
-		>
-			<EventForm setModalState={setisModalOpen} />
-		</Modal>
+		<>
+			<Modal
+				nodeId='modalFullScreen'
+				viewMode='fullScreen'
+				title='Create event'
+				isOpen={isModalOpen}
+				onClose={() => setisModalOpen(false)}
+			>
+				<EventForm action='create' setModalState={setisModalOpen} />
+			</Modal>
+
+			<Button
+				label='Create event'
+				icon='plus'
+				appereance='primary'
+				style={{ width: '100%' }}
+				onClick={() => setisModalOpen(true)}
+			/>
+		</>
 	);
 };

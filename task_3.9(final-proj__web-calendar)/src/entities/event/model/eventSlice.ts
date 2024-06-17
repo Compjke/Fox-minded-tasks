@@ -9,7 +9,7 @@ export interface ITimeEvent {
 }
 
 export interface IEvent {
-	id?: string;
+	id: string;
 	title: string;
 	date: Dayjs;
 	time: ITimeEvent;
@@ -35,6 +35,19 @@ const eventSlice = createSlice({
 		addNewEvent: (state, action: PayloadAction<IEvent>) => {
 			state.allEvents.push(action.payload);
 		},
+		editEvent: (state, action: PayloadAction<IEvent>) => {
+			state.allEvents = state.allEvents.map((event) => {
+				if (event.id === action.payload.id) {
+					event = action.payload;
+				}
+				return event;
+			});
+		},
+		deleteEventById: (state, action: PayloadAction<string>) => {
+			state.allEvents = state.allEvents.filter((e) => e.id !== action.payload);
+			state.viewableEvent = null;
+		},
+
 		deleteEventsByCalendarId: (state, action: PayloadAction<string>) => {
 			state.allEvents = state.allEvents.filter(
 				(e) => e.calendarId !== action.payload
@@ -46,8 +59,13 @@ const eventSlice = createSlice({
 	},
 });
 
-export const { addNewEvent, deleteEventsByCalendarId, setWatchedEvents } =
-	eventSlice.actions;
+export const {
+	addNewEvent,
+	deleteEventsByCalendarId,
+	editEvent,
+	setWatchedEvents,
+	deleteEventById
+} = eventSlice.actions;
 
 export const eventByDate = createSelector(
 	[(state: RootStore) => state.eventReducer, (_, date: Dayjs) => date],

@@ -10,10 +10,11 @@ export const getTimesArr = (spanOfTime = 15, endPoind = 96) => {
 	let someStart = dayjs().set('h', 0).set('m', 0);
 	// console.log(someStart.format('HH:mm a'))
 	const result = [];
-	
+
 	for (let i = 0; i < endPoind; i++) {
+		// const id = uuidv4();
 		result.push(someStart.format('HH:mm a'));
-		
+
 		someStart = someStart.set('m', someStart.get('m') + spanOfTime);
 	}
 

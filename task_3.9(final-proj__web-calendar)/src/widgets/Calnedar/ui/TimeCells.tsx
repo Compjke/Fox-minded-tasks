@@ -30,9 +30,12 @@ export const TimeCells = memo(({ date }: TimeCelLs) => {
 	return (
 		<div className={style.timeCols}>
 			{getTimesArr(60, 24).map((timeOfCell, ind) => (
-				<div key={ind} className={style.timeCell}>
+				<div
+					key={timeOfCell + date.toDate().toISOString()}
+					className={style.timeCell}
+				>
 					<div
-						key={timeOfCell + date.toDate().getDate()}
+						key={ind}
 						className={style.eventsWrapper}
 						style={{
 							top: getTopForWrapperEvents(eventsInDay, timeOfCell) + 'px',
@@ -55,6 +58,7 @@ export const TimeCells = memo(({ date }: TimeCelLs) => {
 													countEvents={
 														getEventsIntime(eventsInDay, timeOfCell).length
 													}
+													id={event.id}
 													color={calendar?.color as string}
 													key={event.id}
 													date={event.date}

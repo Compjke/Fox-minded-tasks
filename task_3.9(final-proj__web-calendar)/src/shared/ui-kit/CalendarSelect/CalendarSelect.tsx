@@ -8,17 +8,19 @@ type SelectProps = {
 	label?: string;
 	options: ICalendar[];
 	onChange: (value: ICalendar | undefined) => void;
+	selectedCalendar?: ICalendar;
 };
 
 export const CalendarSelect = forwardRef(
 	(
-		{ onChange, options, icon, label }: SelectProps,
+		{ onChange, options, icon, label, selectedCalendar, ...props }: SelectProps,
 		ref: LegacyRef<HTMLSpanElement>
 	) => {
 		const [isOpen, setIsOpen] = useState(false);
 		const [highlightedIndex, setHighlightedIndex] = useState(0);
-		const [value, setValue] = useState(options[0]);
+		const [value, setValue] = useState(selectedCalendar);
 		const containerRef = useRef<HTMLDivElement>(null);
+
 		function selectOption(option: ICalendar) {
 			if (option !== value) {
 				setValue(option);
@@ -29,6 +31,8 @@ export const CalendarSelect = forwardRef(
 		function isOptionSelected(option: ICalendar) {
 			return option === value;
 		}
+
+		useEffect(() => {}, []);
 
 		useEffect(() => {
 			if (isOpen) setHighlightedIndex(0);
@@ -84,7 +88,7 @@ export const CalendarSelect = forwardRef(
 						<span className={styles.value} ref={ref}>
 							<span
 								className={styles.optionColor}
-								style={{ backgroundColor: value.color }}
+								style={{ backgroundColor: value?.color }}
 							></span>
 							{value?.label}
 						</span>

@@ -4,6 +4,7 @@ import { Input } from '@/shared/ui-kit/Input';
 import { LegacyRef, forwardRef, useState } from 'react';
 import { ErrorOption } from 'react-hook-form';
 import style from './create-event-form.module.scss';
+import dayjs from 'dayjs';
 
 interface Props {
 	error: ErrorOption | undefined;
@@ -23,7 +24,7 @@ export const DateField = forwardRef(
 					id='date'
 					labelText='Date'
 					icon='clock'
-					value={props.value.format('dddd, MMMM, D')}
+					value={dayjs(props.value).format('dddd, MMMM, D')}
 					onClick={() => setIsDatePicking(true)}
 					error={error}
 					readOnly

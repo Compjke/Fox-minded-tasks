@@ -13,7 +13,8 @@ interface IModal extends HTMLAttributes<HTMLDivElement> {
 	onClose: () => void;
 	className?: string;
 	nodeId?: string;
-	additionalActions?: JSX.Element[];
+	editBtn?: JSX.Element;
+	deleteBtn?: JSX.Element;
 }
 
 export const Modal = ({
@@ -23,7 +24,8 @@ export const Modal = ({
 	onClose,
 	viewMode,
 	nodeId = 'modalFullScreen',
-	additionalActions,
+	editBtn,
+	deleteBtn,
 	className,
 	...props
 }: IModal) => {
@@ -55,7 +57,8 @@ export const Modal = ({
 					<div className={style.modalTop}>
 						<h3 className={style.modaltitle}>{title}</h3>
 						<div className={style.actions}>
-							{additionalActions && additionalActions.map((action) => action)}
+							{editBtn}
+							{deleteBtn}
 							<button
 								className={style.modalCloseBtn}
 								onClick={() => {

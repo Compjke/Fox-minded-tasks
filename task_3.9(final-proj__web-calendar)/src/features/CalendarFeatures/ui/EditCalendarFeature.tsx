@@ -9,7 +9,7 @@ interface Props {
 	calendar: ICalendar;
 }
 
-export default function EditCalendarFeature({ calendar }: Props) {
+export default function EditCalendarFeature({ calendar  }: Props) {
 	const [isModalOpen, setisModalOpen] = useState(false);
 
 	return (

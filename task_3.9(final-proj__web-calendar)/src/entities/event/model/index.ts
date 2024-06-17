@@ -3,5 +3,7 @@ export {
 	eventByDate,
 	// eventsByCalendar,
 	deleteEventsByCalendarId,
+	editEvent,
 	setWatchedEvents,
+	deleteEventById,
 } from './eventSlice';

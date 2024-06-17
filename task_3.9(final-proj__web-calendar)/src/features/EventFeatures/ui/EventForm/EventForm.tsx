@@ -16,36 +16,64 @@ import { TestTimepicker } from '@/shared/ui-kit/TimePicker/TimePicker';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useAppDispatch, useStateSelector } from '@/app/store';
-import { addNewEvent } from '@/entities/event/model/eventSlice';
+import {
+	addNewEvent,
+	editEvent,
+	setWatchedEvents,
+} from '@/entities/event/model/eventSlice';
 import { DateField } from './DateField';
 import { IFormCreateEventValues } from '@/shared/config/types';
 import { useToast } from '@/shared/ui-kit/Toast';
 
 import { v4 as uuidv4 } from 'uuid';
-import dayjs from 'dayjs';
-import style from './create-event-form.module.scss';
+import dayjs, { Dayjs } from 'dayjs';
 import { schema } from '../../model';
+
+import { ICalendar } from '@/entities/calendar';
+import style from './create-event-form.module.scss';
 
 interface Props {
 	setModalState: React.Dispatch<React.SetStateAction<boolean>>;
+	action: 'create' | 'edit';
+	startTime?: string;
+	endTime?: string;
+	isForAllDay?: boolean;
+	description?: string;
+	title?: string;
+	date?: Dayjs;
+	calendar?: ICalendar;
+	id?: string;
 }
 
-export const EventForm = ({ setModalState }: Props) => {
+export const EventForm = ({
+	setModalState,
+	action,
+	calendar,
+	id,
+	date,
+	description,
+	endTime = '00:00 am',
+	isForAllDay = false,
+	startTime = '00:00 am',
+	title,
+}: Props) => {
 	const dispatch = useAppDispatch();
 	const toast = useToast();
 	const calendars = useStateSelector((s) => s.calendarReducer.allCalendars);
 	const methods = useForm<IFormCreateEventValues>({
 		resolver: yupResolver(schema),
 		defaultValues: {
-			startTime: '00:00 am',
-			endTime: '00:00 am',
-			isForAllDay: false,
-			description: '',
-			title: '',
-			date: dayjs(),
-			calendar: calendars[0],
+			startTime,
+			endTime,
+			isForAllDay,
+			description,
+			title,
+			date: dayjs(date),
+			calendar: calendar ? calendar : calendars[2],
 		},
 	});
+	console.log(dayjs(undefined));
+	console.log(date);
 	const {
 		handleSubmit,
 		formState: { errors },
@@ -55,11 +83,39 @@ export const EventForm = ({ setModalState }: Props) => {
 		reset,
 		control,
 	} = methods;
-
+	console.log(
+		'calendar :' + calendar,
+		'date: ' + date,
+		'desq: ' + description,
+		'start' + startTime,
+		'end: ' + endTime,
+		'isfor : ',
+		isForAllDay,
+		'title: ' + title,
+		'id : ' + id
+	);
 	const onSubmit: SubmitHandler<IFormCreateEventValues> = (data) => {
-		dispatch(
-			addNewEvent({
-				id: uuidv4(),
+		if (action === 'create') {
+			console.log(data);
+			dispatch(
+				addNewEvent({
+					id: uuidv4(),
+					title: data.title,
+					calendarId: data.calendar.id,
+					date: data.date,
+					description: data.description,
+					isForAllDay: data.isForAllDay!,
+					time: {
+						start: data.startTime,
+						end: data.endTime,
+					},
+				})
+			);
+			toast?.showToast(`Event ${data.title} was created`, 'success');
+		}
+		if (action === 'edit') {
+			const updatedEvent = {
+				id: id!,
 				title: data.title,
 				calendarId: data.calendar.id,
 				date: data.date,
@@ -69,10 +125,14 @@ export const EventForm = ({ setModalState }: Props) => {
 					start: data.startTime,
 					end: data.endTime,
 				},
-			})
-		);
+			};
+			dispatch(editEvent(updatedEvent));
+			dispatch(setWatchedEvents(updatedEvent));
+
+			toast?.showToast('Event was updated', 'info');
+		}
+
 		setModalState(false);
-		toast?.showToast(`Event ${data.title} was created`, 'success');
 	};
 
 	useEffect(() => {
@@ -89,6 +149,7 @@ export const EventForm = ({ setModalState }: Props) => {
 					render={({ field }) => (
 						<Input
 							{...field}
+							value={field.value}
 							placeholder='Type your title for event...'
 							icon='text-icon'
 							labelText='Title'
@@ -140,6 +201,8 @@ export const EventForm = ({ setModalState }: Props) => {
 					control={control}
 					render={({ field }) => (
 						<CalendarSelect
+							{...field}
+							selectedCalendar={field.value || calendars[0]}
 							ref={field.ref}
 							icon='calendar'
 							label='Calendar'

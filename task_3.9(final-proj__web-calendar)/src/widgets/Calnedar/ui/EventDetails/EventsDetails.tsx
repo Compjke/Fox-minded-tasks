@@ -8,17 +8,19 @@ import { useAppDispatch, useStateSelector } from '@/app/store';
 
 import style from './event-detail.module.scss';
 import { useMemo } from 'react';
+import { DeleteEventFeature, EditEventFeature } from '@/features/EventFeatures';
 
 export const EventsDetails = () => {
 	const viewableEvent = useStateSelector((s) => s.eventReducer.viewableEvent);
 	const allCalendars = useStateSelector((s) => s.calendarReducer.allCalendars);
+	const dispatch = useAppDispatch();
 	const calendar = useMemo(() => {
 		return allCalendars.find((c) => c.id === viewableEvent?.calendarId);
 	}, [allCalendars, viewableEvent?.calendarId]);
-	const dispatch = useAppDispatch();
-
 	const isDetailShow = Boolean(viewableEvent);
+
 	if (!viewableEvent) return null;
+
 	return (
 		<Modal
 			onClose={() => {
@@ -27,7 +29,8 @@ export const EventsDetails = () => {
 			viewMode='fullScreen'
 			title='Event information'
 			isOpen={isDetailShow}
-			additionalActions={[<div>Edit</div>, <div>Delete</div>]}
+			editBtn={<EditEventFeature calendar={calendar!} event={viewableEvent} />}
+			deleteBtn={<DeleteEventFeature event={viewableEvent} />}
 		>
 			<div className={style.inner}>
 				<div className={style.titleInfo}>
