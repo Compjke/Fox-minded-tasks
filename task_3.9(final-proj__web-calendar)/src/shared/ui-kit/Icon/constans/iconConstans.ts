@@ -28,5 +28,6 @@ export const ICONS = {
 	CLOCK: 'clock',
 	CALENDAR: 'calendar',
 	DESCRIPTION: 'description',
-	COLOR_PICKER : 'color-picker'
+	COLOR_PICKER: 'color-picker',
+	SIGN_OUT: 'sign-out',
 } as const;

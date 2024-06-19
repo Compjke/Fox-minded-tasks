@@ -27,3 +27,4 @@ export { TextIcon } from './TextIcon.tsx';
 export { default as ClockIcon } from './ClockIcon.tsx';
 export { DescriptionIcon } from './DescriptionIcon.tsx';
 export { ColorPickerIcon } from './ColorPickerIcon.tsx';
+export { SignOutIcon } from './SignOutIcon.tsx';

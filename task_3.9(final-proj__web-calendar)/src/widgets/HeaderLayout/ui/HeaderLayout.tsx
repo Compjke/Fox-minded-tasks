@@ -1,11 +1,10 @@
-import { User } from '@/entities/user';
 import { DropDownMenu } from '@/shared/ui-kit/DropDownMenu';
 import { Logo } from '@/shared/ui-kit/Logo/Logo';
+import { ToggleThemeSwitcher } from '@/shared/ui-kit/ToogleThemeSwitcher';
+import { HeaderDateSwitcher } from '@/features/HeaderDateSwitcher';
+import Profile from './Profile';
 
 import styles from './header-layout.module.scss';
-import { ToggleThemeSwitcher } from '@/shared/ui-kit/ToogleThemeSwitcher';
-
-import { HeaderDateSwitcher } from '@/features/HeaderDateSwitcher';
 
 export default function HeaderLayout() {
 	return (
@@ -17,7 +16,7 @@ export default function HeaderLayout() {
 				</div>
 				<div className={styles.left}>
 					<DropDownMenu isShown={false} items={['Week', 'Days']} />
-					<User />
+					<Profile />
 					<ToggleThemeSwitcher />
 				</div>
 			</div>

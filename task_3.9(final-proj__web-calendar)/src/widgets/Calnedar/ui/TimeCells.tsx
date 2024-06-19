@@ -41,7 +41,7 @@ export const TimeCells = memo(({ date }: TimeCelLs) => {
 							top: getTopForWrapperEvents(eventsInDay, timeOfCell) + 'px',
 						}}
 					>
-						{filteredEvents.length
+						{/* {filteredEvents.length
 							? filteredEvents.map((event) => {
 									if (isEventExist(event!, timeOfCell)) {
 										const calendar = allCalendars.find(
@@ -72,6 +72,37 @@ export const TimeCells = memo(({ date }: TimeCelLs) => {
 										);
 									}
 								})
+							: null} */}
+
+						{filteredEvents.length
+							? filteredEvents
+									.filter((event) => isEventExist(event!, timeOfCell))
+									.map((event) => {
+										const calendar = allCalendars.find(
+											(c) => c.id === event.calendarId
+										);
+
+										return (
+											<Event
+												relativeTop={getTopForWrapperEvents(
+													eventsInDay,
+													timeOfCell
+												)}
+												countEvents={
+													getEventsIntime(eventsInDay, timeOfCell).length
+												}
+												id={event.id}
+												color={calendar?.color as string}
+												key={event.id}
+												date={event.date}
+												title={event.title}
+												time={event.time}
+												calendarId={event.calendarId}
+												isForAllDay={event.isForAllDay}
+												description={event.description}
+											/>
+										);
+									})
 							: null}
 					</div>
 				</div>

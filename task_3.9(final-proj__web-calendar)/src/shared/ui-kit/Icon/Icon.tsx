@@ -29,6 +29,7 @@ import {
 	ClockIcon,
 	DescriptionIcon,
 	ColorPickerIcon,
+	SignOutIcon,
 } from '../icons';
 import { SVGAttributes } from 'react';
 import { CalendarIcon } from '../icons/CalendarIcon';
@@ -64,6 +65,7 @@ const ICON_MAP = {
 	[ICONS.CALENDAR]: CalendarIcon,
 	[ICONS.DESCRIPTION]: DescriptionIcon,
 	[ICONS.COLOR_PICKER]: ColorPickerIcon,
+	[ICONS.SIGN_OUT]: SignOutIcon,
 } as const;
 
 export type IconName = keyof typeof ICON_MAP;

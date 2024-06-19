@@ -17,7 +17,7 @@ export const Route = createFileRoute('/')({
 		new Promise((res) =>
 			setTimeout(() => {
 				res(1);
-			}, 1000)
+			}, 2000)
 		),
 	component: BaseLayout,
 

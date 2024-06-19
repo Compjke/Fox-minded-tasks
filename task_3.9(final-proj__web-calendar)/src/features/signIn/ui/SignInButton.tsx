@@ -4,7 +4,11 @@ import { auth, googleAuthProvider } from '@/shared/libs/firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { setUser } from '@/entities/user';
 
-export const SignInButton = () => {
+export const SignInButton = ({
+	text = 'Sign in with google',
+}: {
+	text?: string;
+}) => {
 	const dispatch = useAppDispatch();
 	const handleClick = () => {
 		signInWithPopup(auth, googleAuthProvider)
@@ -20,7 +24,7 @@ export const SignInButton = () => {
 			onClick={handleClick}
 			appereance='secondary'
 			icon='google'
-			label='Sign in with google'
+			label={text}
 		/>
 	);
 };

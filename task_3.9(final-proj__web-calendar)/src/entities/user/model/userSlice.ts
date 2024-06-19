@@ -22,12 +22,20 @@ const userSlice = createSlice({
 				state.email = email;
 				state.accessToken = accessToken;
 				state.isAuthenfication = true;
+			} else {
+				state.displayName = 'Hello, guest';
+				(state.email = null), (state.accessToken = null);
+				state.isAuthenfication = true;
 			}
+		},
+		setUserAsGuest: (state, action: PayloadAction<string>) => {
+			state.displayName = action.payload;
+			state.isAuthenfication = true;
 		},
 		resetUser: () => init,
 	},
 });
 
-export const { setUser, resetUser } = userSlice.actions;
+export const { setUser, resetUser, setUserAsGuest } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -9,7 +9,8 @@ import { IconName } from '../Icon/Icon';
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	label?: string;
 	appereance?: 'primary' | 'secondary';
-	onClick?: () => void;
+	onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+
 	disabled?: boolean;
 	bgColor?: string;
 	icon?: IconName;
