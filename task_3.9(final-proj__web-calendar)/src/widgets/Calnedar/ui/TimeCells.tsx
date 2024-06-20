@@ -11,9 +11,10 @@ import style from './calendar.module.scss';
 
 interface TimeCelLs {
 	date: Dayjs;
+	indDate: number;
 }
 
-export const TimeCells = memo(({ date }: TimeCelLs) => {
+export const TimeCells = memo(({ date, indDate }: TimeCelLs) => {
 	const eventsInDay = useStateSelector((s) => eventByDate(s, date));
 	const allCalendars = useStateSelector((s) => s.calendarReducer.allCalendars);
 
@@ -33,6 +34,7 @@ export const TimeCells = memo(({ date }: TimeCelLs) => {
 				<div
 					key={timeOfCell + date.toDate().toISOString()}
 					className={style.timeCell}
+					data-time={indDate === 0 && ind !== 0 ? timeOfCell : ''}
 				>
 					<div
 						key={ind}
@@ -41,7 +43,6 @@ export const TimeCells = memo(({ date }: TimeCelLs) => {
 							top: getTopForWrapperEvents(eventsInDay, timeOfCell) + 'px',
 						}}
 					>
-						
 						{filteredEvents.length
 							? filteredEvents
 									.filter((event) => isEventExist(event!, timeOfCell))
