@@ -83,20 +83,9 @@ export const EventForm = ({
 		reset,
 		control,
 	} = methods;
-	console.log(
-		'calendar :' + calendar,
-		'date: ' + date,
-		'desq: ' + description,
-		'start' + startTime,
-		'end: ' + endTime,
-		'isfor : ',
-		isForAllDay,
-		'title: ' + title,
-		'id : ' + id
-	);
+
 	const onSubmit: SubmitHandler<IFormCreateEventValues> = (data) => {
 		if (action === 'create') {
-			console.log(data);
 			dispatch(
 				addNewEvent({
 					id: uuidv4(),

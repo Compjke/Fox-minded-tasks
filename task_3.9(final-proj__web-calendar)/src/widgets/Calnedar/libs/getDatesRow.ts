@@ -1,10 +1,6 @@
-import { DISPLAY_COUNT_DAYS } from '@/shared/config/date';
 import dayjs, { Dayjs } from 'dayjs';
 
-export function getDaysBetweenCustom(
-	start: string | Dayjs,
-	end: number = DISPLAY_COUNT_DAYS
-) {
+export function getDaysBetweenCustom(start: string | Dayjs, end: number) {
 	const range = [];
 	let current = dayjs(start);
 

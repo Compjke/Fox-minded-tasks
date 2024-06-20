@@ -7,6 +7,7 @@ interface IDropDownMenu {
 	// label : string;
 	items: string[];
 	isShown: boolean;
+	onChange: (i: 'Day' | 'Week') => void;
 }
 
 const testItems = ['Week', 'Day'];
@@ -14,18 +15,27 @@ const testItems = ['Week', 'Day'];
 export const DropDownMenu = ({
 	isShown = false,
 	items = testItems,
+	onChange,
 }: IDropDownMenu) => {
 	const [isOpen, setIsOpen] = useState(isShown);
 	const [selectedItem, setSelectedItem] = useState(items[0]);
 
+	const handleChange = (i: 'Day' | 'Week') => {
+		setSelectedItem(i);
+		setIsOpen((prev) => !prev);
+		onChange(i);
+	};
+
 	return (
 		<div data-testid='drop-down' className={style.dropDownContainer}>
-			<div className={clsx(style.dropDownInput, isOpen && style.active)}>
+			<div
+				className={clsx(style.dropDownInput, isOpen && style.active)}
+				onClick={() => setIsOpen((prev) => !prev)}
+			>
 				<span>{selectedItem}</span>
 				<button
 					style={{ rotate: isOpen ? '180deg' : '' }}
 					className={style.dropDownBtn}
-					onClick={() => setIsOpen((prev) => !prev)}
 				>
 					<Icon name='drop-down-menu' />
 				</button>
@@ -34,10 +44,7 @@ export const DropDownMenu = ({
 				<ul className={style.itemsList}>
 					{items.map((i) => (
 						<li
-							onClick={() => {
-								setSelectedItem(i);
-								setIsOpen((prev) => !prev);
-							}}
+							onClick={() => handleChange(i as 'Day' | 'Week')}
 							key={i}
 							className={clsx(style.item, selectedItem === i && style.selected)}
 						>

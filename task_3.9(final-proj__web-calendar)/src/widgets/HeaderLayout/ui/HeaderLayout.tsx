@@ -1,10 +1,10 @@
-import { DropDownMenu } from '@/shared/ui-kit/DropDownMenu';
 import { Logo } from '@/shared/ui-kit/Logo/Logo';
 import { ToggleThemeSwitcher } from '@/shared/ui-kit/ToogleThemeSwitcher';
 import { HeaderDateSwitcher } from '@/features/HeaderDateSwitcher';
 import Profile from './Profile';
 
 import styles from './header-layout.module.scss';
+import { ChangeViewModeFeture } from '@/features/ChangeViewModeFeture';
 
 export default function HeaderLayout() {
 	return (
@@ -15,7 +15,7 @@ export default function HeaderLayout() {
 					<HeaderDateSwitcher />
 				</div>
 				<div className={styles.left}>
-					<DropDownMenu isShown={false} items={['Week', 'Days']} />
+					<ChangeViewModeFeture />
 					<Profile />
 					<ToggleThemeSwitcher />
 				</div>

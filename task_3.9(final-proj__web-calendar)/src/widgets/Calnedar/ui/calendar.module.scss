@@ -19,11 +19,10 @@
 	letter-spacing: -0.02em;
 }
 
-.row {
-	display: grid;
+.weekMode,
+.dayMode {
 	flex: 1 1 auto;
 	position: relative;
-	grid-template-columns: repeat(7, minmax(150px, 1fr));
 	background-color: var(--main-light-color);
 	&::after {
 		position: absolute;
@@ -37,10 +36,25 @@
 		z-index: 200;
 	}
 }
+.weekMode {
+	grid-template-columns: repeat(7, 1fr);
+	display: grid;
+}
+.dayMode {
+	width: 100%;
+	.wrapper {
+		border: none;
+		margin-bottom: 10px;
+	}
+	.dayWeek {
+		border: 1px solid var(--main-dark-color);
+	}
+}
 
 .wrapper {
 	padding: 5px 7px;
 	border-right: 1px solid #dedfe5;
+	max-width: 150px;
 }
 
 .dayWeek {
@@ -48,10 +62,10 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	border-radius: 8px;
 }
 
 .today {
-	border-radius: 8px;
 	background-color: var(--current-date-bg);
 }
 

@@ -1,20 +1,23 @@
 import { useStateSelector } from '@/app/store';
-import clsx from 'clsx';
-import dayjs from 'dayjs';
 import { getDaysBetweenCustom } from '../libs/getDatesRow';
 import { TimeCells } from './TimeCells';
-import TimesCol from './TimesCol';
-import style from './calendar.module.scss';
 import { EventsDetails } from './EventDetails/EventsDetails';
+import TimesCol from './TimesCol';
+import dayjs from 'dayjs';
+import clsx from 'clsx';
+import style from './calendar.module.scss';
 
 export default function Calnedar() {
 	const selectedDate = useStateSelector((s) => s.dateReducer.selectedDate);
+	const viewMode = useStateSelector((s) => s.viweModeReducer.viewMode);
+	const countDays = viewMode === 'Week' ? 7 : 1;
+
 	return (
 		<>
 			<section className={style.calendar}>
 				<TimesCol />
-				<div className={style.row}>
-					{getDaysBetweenCustom(selectedDate).map((date) => (
+				<div className={clsx(viewMode === 'Week' ? style.weekMode : style.dayMode)}>
+					{getDaysBetweenCustom(selectedDate, countDays).map((date) => (
 						<div key={date.toString()} className={style.col}>
 							<div className={style.wrapper} key={date.day()}>
 								<div
