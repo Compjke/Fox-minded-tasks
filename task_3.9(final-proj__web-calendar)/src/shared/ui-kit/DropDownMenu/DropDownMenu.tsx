@@ -7,6 +7,7 @@ interface IDropDownMenu {
 	// label : string;
 	items: string[];
 	isShown: boolean;
+	defautlItem: 'Day' | 'Week';
 	onChange: (i: 'Day' | 'Week') => void;
 }
 
@@ -15,10 +16,11 @@ const testItems = ['Week', 'Day'];
 export const DropDownMenu = ({
 	isShown = false,
 	items = testItems,
+	defautlItem,
 	onChange,
 }: IDropDownMenu) => {
 	const [isOpen, setIsOpen] = useState(isShown);
-	const [selectedItem, setSelectedItem] = useState(items[0]);
+	const [selectedItem, setSelectedItem] = useState(defautlItem || items[0]);
 
 	const handleChange = (i: 'Day' | 'Week') => {
 		setSelectedItem(i);
