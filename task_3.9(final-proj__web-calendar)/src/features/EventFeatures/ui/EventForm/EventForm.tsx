@@ -72,8 +72,7 @@ export const EventForm = ({
 			calendar: calendar ? calendar : calendars[0],
 		},
 	});
-	console.log(dayjs(undefined));
-	console.log(date);
+
 	const {
 		handleSubmit,
 		formState: { errors },
