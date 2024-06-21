@@ -23,7 +23,7 @@ export const TimeCell = memo(
 		const allCalendars = useStateSelector(
 			(s) => s.calendarReducer.allCalendars
 		);
-
+      // console.log(nextTimeOfCell)
 		const activeCalendars = useStateSelector(
 			(s) => s.calendarReducer.selectedCalendars
 		);
@@ -54,7 +54,11 @@ export const TimeCell = memo(
 					/>
 				</Modal>
 				<div
-					onClick={() => setIsAddNewEvetFormOpen(true)}
+					onClick={() => {
+                  // e.stopPropagation()
+                  // console.log(e.currentTarget)
+                  // console.log(e.target)
+                  setIsAddNewEvetFormOpen(true)}}
 					key={timeOfCell + date.toDate().toISOString()}
 					className={style.timeCell}
 					data-time={indDate === 0 && ind !== 0 ? timeOfCell : ''}
