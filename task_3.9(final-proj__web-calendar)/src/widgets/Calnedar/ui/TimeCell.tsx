@@ -40,7 +40,7 @@ export const TimeCell = memo(
 				<Modal
 					nodeId='modalFullScreen'
 					viewMode='fullScreen'
-					title='Edit event'
+					title='Create event'
 					isOpen={isAddNewEvetFormOpen}
 					onClose={() => setIsAddNewEvetFormOpen(false)}
 				>
